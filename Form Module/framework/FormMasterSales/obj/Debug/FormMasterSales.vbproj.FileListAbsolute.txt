@@ -1,0 +1,12 @@
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterSales\bin\Debug\FormMasterSales.dll.config
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterSales\bin\Debug\FormMasterSales.dll
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterSales\bin\Debug\FormMasterSales.pdb
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterSales\bin\Debug\FormMasterSales.xml
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterSales\obj\Debug\FormMasterSales.vbproj.AssemblyReference.cache
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterSales\obj\Debug\FormMasterSales.FormMasterSales.resources
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterSales\obj\Debug\FormMasterSales.Resources.resources
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterSales\obj\Debug\FormMasterSales.vbproj.GenerateResource.cache
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterSales\obj\Debug\FormMasterSales.vbproj.CoreCompileInputs.cache
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterSales\obj\Debug\FormMasterSales.dll
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterSales\obj\Debug\FormMasterSales.xml
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterSales\obj\Debug\FormMasterSales.pdb

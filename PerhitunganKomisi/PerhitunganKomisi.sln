@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32510.428
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "PerhitunganKomisi", "PerhitunganKomisi\PerhitunganKomisi.vbproj", "{A44ACF24-20D4-42F5-A7E7-5D9C12BF4F7F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FD62FF03-EAF6-4C03-84BF-A354E3329B10} = {FD62FF03-EAF6-4C03-84BF-A354E3329B10}
+		{7C1CC23C-BBDA-4D56-92EE-7AA954A4BB24} = {7C1CC23C-BBDA-4D56-92EE-7AA954A4BB24}
+		{51F11153-EA5F-4BC9-BB08-3C4B55B82550} = {51F11153-EA5F-4BC9-BB08-3C4B55B82550}
+		{E9C7B6BE-ACDF-4096-A20B-C86D59F474BE} = {E9C7B6BE-ACDF-4096-A20B-C86D59F474BE}
+	EndProjectSection
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FormMasterGeneral", "..\Form Module\framework\FormMasterGeneral\FormMasterGeneral.vbproj", "{51F11153-EA5F-4BC9-BB08-3C4B55B82550}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FormDisplayReport", "..\Form Module\framework\FormDisplayReport\FormDisplayReport\FormDisplayReport.vbproj", "{FD62FF03-EAF6-4C03-84BF-A354E3329B10}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FormMasterSales", "..\Form Module\framework\FormMasterSales\FormMasterSales.vbproj", "{7C1CC23C-BBDA-4D56-92EE-7AA954A4BB24}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FormMasterTarget", "..\Form Module\framework\FormMasterTarget\FormMasterTarget.vbproj", "{E9C7B6BE-ACDF-4096-A20B-C86D59F474BE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A44ACF24-20D4-42F5-A7E7-5D9C12BF4F7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A44ACF24-20D4-42F5-A7E7-5D9C12BF4F7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A44ACF24-20D4-42F5-A7E7-5D9C12BF4F7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A44ACF24-20D4-42F5-A7E7-5D9C12BF4F7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51F11153-EA5F-4BC9-BB08-3C4B55B82550}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51F11153-EA5F-4BC9-BB08-3C4B55B82550}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51F11153-EA5F-4BC9-BB08-3C4B55B82550}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51F11153-EA5F-4BC9-BB08-3C4B55B82550}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD62FF03-EAF6-4C03-84BF-A354E3329B10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD62FF03-EAF6-4C03-84BF-A354E3329B10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD62FF03-EAF6-4C03-84BF-A354E3329B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD62FF03-EAF6-4C03-84BF-A354E3329B10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C1CC23C-BBDA-4D56-92EE-7AA954A4BB24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C1CC23C-BBDA-4D56-92EE-7AA954A4BB24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C1CC23C-BBDA-4D56-92EE-7AA954A4BB24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C1CC23C-BBDA-4D56-92EE-7AA954A4BB24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9C7B6BE-ACDF-4096-A20B-C86D59F474BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9C7B6BE-ACDF-4096-A20B-C86D59F474BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9C7B6BE-ACDF-4096-A20B-C86D59F474BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9C7B6BE-ACDF-4096-A20B-C86D59F474BE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AAEB1991-AC05-40D7-A699-9CAEFB3CBE3C}
+	EndGlobalSection
+EndGlobal
