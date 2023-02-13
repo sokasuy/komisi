@@ -86,3 +86,7 @@ G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\Perh
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.exe
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.xml
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.pdb
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormMasterOmzet.dll
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormMasterOmzet.pdb
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormMasterOmzet.xml
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormMasterOmzet.dll.config

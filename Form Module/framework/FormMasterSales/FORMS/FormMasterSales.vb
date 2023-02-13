@@ -94,6 +94,14 @@
         End Try
     End Sub
 
+    Private Sub FormMasterSales_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        Try
+            Call myCDataGridViewManipulation.AutoNumberRowsForGridViewWithoutPaging(dgvView, dgvView.RowCount)
+        Catch ex As Exception
+            Call myCShowMessage.ShowErrMsg("Pesan Error: " & ex.Message, "FormMasterSales_Activated Error")
+        End Try
+    End Sub
+
     Private Sub FormMasterSales_KeyDown(sender As Object, e As KeyEventArgs) Handles cboWilayah.KeyDown, tbKode.KeyDown, tbNama.KeyDown, btnSimpan.KeyDown, btnKeluar.KeyDown, btnAddNew.KeyDown, tbCari.KeyDown, btnTampilkan.KeyDown
         Try
             If (e.KeyCode = Keys.Enter) Then
@@ -109,7 +117,7 @@
                 sender.DroppedDown = False
             End If
         Catch ex As Exception
-            Call myCShowMessage.ShowErrMsg("Pesan Error: " & ex.Message, "FormMasterGeneral_KeyDown Error")
+            Call myCShowMessage.ShowErrMsg("Pesan Error: " & ex.Message, "FormMasterSales_KeyDown Error")
         End Try
     End Sub
 
@@ -134,7 +142,6 @@
 
             If (gantiKriteria) Then
                 Dim tempSisa As Integer
-                'Dim tampTotalRecords As Integer
                 banyakPages = 0
                 mKriteria = IIf(IsNothing(mKriteria), "", mKriteria)
 
@@ -447,7 +454,7 @@
                         Call myCShowMessage.ShowDeletedMsg("Data di master sales " & dgvView.CurrentRow.Cells("kode_sales").Value & " - " & dgvView.CurrentRow.Cells("nama_sales").Value)
                         Call SetDGV(CONN_.dbMain, CONN_.comm, CONN_.reader, 10, myDataTableDGV, myBindingTableDGV, mCari, True, IIf(cboSortingCriteria.SelectedIndex = -1, Nothing, cboSortingCriteria.SelectedValue), cboSortingType.SelectedItem)
                     Else
-                        Call myCShowMessage.ShowInfo("Penghapusan data di master sales " & dgvView.CurrentRow.Cells("kode_sales").Value & " - " & dgvView.CurrentRow.Cells("nama_sales").Value)
+                        Call myCShowMessage.ShowInfo("Penghapusan data di master sales " & dgvView.CurrentRow.Cells("kode_sales").Value & " - " & dgvView.CurrentRow.Cells("nama_sales").Value & " dibatalkan oleh user")
                     End If
                 ElseIf (e.ColumnIndex = dgvView.Columns("edit").Index) Then
                     isNew = False

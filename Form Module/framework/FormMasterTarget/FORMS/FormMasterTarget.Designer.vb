@@ -91,7 +91,7 @@ Partial Class FormMasterTarget
         Me.lblTitle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.lblTitle.Location = New System.Drawing.Point(0, 0)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(824, 25)
+        Me.lblTitle.Size = New System.Drawing.Size(984, 25)
         Me.lblTitle.TabIndex = 181
         Me.lblTitle.Text = "MASTER TARGET"
         Me.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -169,7 +169,7 @@ Partial Class FormMasterTarget
         Me.clbUserRight.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.clbUserRight.FormattingEnabled = True
         Me.clbUserRight.Items.AddRange(New Object() {"Melihat", "Menambah", "Memperbaharui", "Menghapus"})
-        Me.clbUserRight.Location = New System.Drawing.Point(715, 37)
+        Me.clbUserRight.Location = New System.Drawing.Point(872, 34)
         Me.clbUserRight.Name = "clbUserRight"
         Me.clbUserRight.Size = New System.Drawing.Size(100, 64)
         Me.clbUserRight.TabIndex = 225
@@ -196,6 +196,7 @@ Partial Class FormMasterTarget
         Me.gbDataEntry.Controls.Add(Me.lblSales)
         Me.gbDataEntry.Controls.Add(Me.btnCreateNew)
         Me.gbDataEntry.Controls.Add(Me.btnSimpan)
+        Me.gbDataEntry.Enabled = False
         Me.gbDataEntry.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.gbDataEntry.Location = New System.Drawing.Point(12, 34)
         Me.gbDataEntry.Name = "gbDataEntry"
@@ -430,7 +431,7 @@ Partial Class FormMasterTarget
         Me.gbView.Controls.Add(Me.dgvView)
         Me.gbView.Location = New System.Drawing.Point(12, 254)
         Me.gbView.Name = "gbView"
-        Me.gbView.Size = New System.Drawing.Size(800, 370)
+        Me.gbView.Size = New System.Drawing.Size(960, 370)
         Me.gbView.TabIndex = 223
         Me.gbView.TabStop = False
         Me.gbView.Text = "VIEW"
@@ -624,7 +625,7 @@ Partial Class FormMasterTarget
         Me.dgvView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvView.Location = New System.Drawing.Point(6, 67)
         Me.dgvView.Name = "dgvView"
-        Me.dgvView.Size = New System.Drawing.Size(788, 263)
+        Me.dgvView.Size = New System.Drawing.Size(948, 263)
         Me.dgvView.TabIndex = 130
         '
         'btnKeluar
@@ -632,7 +633,7 @@ Partial Class FormMasterTarget
         Me.btnKeluar.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnKeluar.Image = CType(resources.GetObject("btnKeluar.Image"), System.Drawing.Image)
         Me.btnKeluar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnKeluar.Location = New System.Drawing.Point(695, 125)
+        Me.btnKeluar.Location = New System.Drawing.Point(852, 122)
         Me.btnKeluar.Name = "btnKeluar"
         Me.btnKeluar.Size = New System.Drawing.Size(120, 54)
         Me.btnKeluar.TabIndex = 222
@@ -669,7 +670,7 @@ Partial Class FormMasterTarget
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(824, 691)
+        Me.ClientSize = New System.Drawing.Size(984, 691)
         Me.Controls.Add(Me.cboPeriodeImport)
         Me.Controls.Add(Me.lblPeriodeImport)
         Me.Controls.Add(Me.lblEntryType)

@@ -135,4 +135,9 @@
         Dim frmMasterTarget As New FormMasterTarget.FormMasterTarget(CONN_.dbType, CONN_.schemaTmp, CONN_.schemaKomisi, CONN_.dbMain, USER_.username, USER_.isSuperuser, USER_.T_USER_RIGHT, ADD_INFO_.newValues, ADD_INFO_.newFields, ADD_INFO_.updateString)
         Call myCFormManipulation.GoToForm(Me, frmMasterTarget)
     End Sub
+
+    Private Sub mnOmzet_Click(sender As Object, e As EventArgs) Handles mnOmzet.Click
+        Dim frmMasterOmzet As New FormMasterOmzet.FormMasterPenjualan(CONN_.dbType, CONN_.schemaTmp, CONN_.schemaKomisi, CONN_.dbMain, USER_.username, USER_.isSuperuser, USER_.T_USER_RIGHT, ADD_INFO_.newValues, ADD_INFO_.newFields, ADD_INFO_.updateString)
+        Call myCFormManipulation.GoToForm(Me, frmMasterOmzet)
+    End Sub
 End Class

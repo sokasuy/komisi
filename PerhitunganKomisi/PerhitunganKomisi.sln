@@ -9,6 +9,7 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "PerhitunganKomisi", "Perhit
 		{7C1CC23C-BBDA-4D56-92EE-7AA954A4BB24} = {7C1CC23C-BBDA-4D56-92EE-7AA954A4BB24}
 		{51F11153-EA5F-4BC9-BB08-3C4B55B82550} = {51F11153-EA5F-4BC9-BB08-3C4B55B82550}
 		{E9C7B6BE-ACDF-4096-A20B-C86D59F474BE} = {E9C7B6BE-ACDF-4096-A20B-C86D59F474BE}
+		{548D7EF7-D6D2-43DD-A514-D07BDBF408C9} = {548D7EF7-D6D2-43DD-A514-D07BDBF408C9}
 	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FormMasterGeneral", "..\Form Module\framework\FormMasterGeneral\FormMasterGeneral.vbproj", "{51F11153-EA5F-4BC9-BB08-3C4B55B82550}"
@@ -18,6 +19,8 @@ EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FormMasterSales", "..\Form Module\framework\FormMasterSales\FormMasterSales.vbproj", "{7C1CC23C-BBDA-4D56-92EE-7AA954A4BB24}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FormMasterTarget", "..\Form Module\framework\FormMasterTarget\FormMasterTarget.vbproj", "{E9C7B6BE-ACDF-4096-A20B-C86D59F474BE}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FormMasterOmzet", "..\Form Module\framework\FormMasterOmzet\FormMasterOmzet.vbproj", "{548D7EF7-D6D2-43DD-A514-D07BDBF408C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +48,10 @@ Global
 		{E9C7B6BE-ACDF-4096-A20B-C86D59F474BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9C7B6BE-ACDF-4096-A20B-C86D59F474BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9C7B6BE-ACDF-4096-A20B-C86D59F474BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{548D7EF7-D6D2-43DD-A514-D07BDBF408C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{548D7EF7-D6D2-43DD-A514-D07BDBF408C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{548D7EF7-D6D2-43DD-A514-D07BDBF408C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{548D7EF7-D6D2-43DD-A514-D07BDBF408C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

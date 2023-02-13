@@ -86,6 +86,9 @@
     <Reference Include="FormMasterGeneral">
       <HintPath>..\..\Form Module\framework\FormMasterGeneral\bin\Debug\FormMasterGeneral.dll</HintPath>
     </Reference>
+    <Reference Include="FormMasterOmzet">
+      <HintPath>..\..\Form Module\framework\FormMasterOmzet\bin\Debug\FormMasterOmzet.dll</HintPath>
+    </Reference>
     <Reference Include="FormMasterSales">
       <HintPath>..\..\Form Module\framework\FormMasterSales\bin\Debug\FormMasterSales.dll</HintPath>
     </Reference>

@@ -30,7 +30,7 @@ Partial Class FormUtama
         Me.mnMasterSales = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnMasterTarget = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnSales = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnProses = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnOmzet = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnLogout = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnStripUtama.SuspendLayout()
@@ -78,16 +78,16 @@ Partial Class FormUtama
         '
         'mnSales
         '
-        Me.mnSales.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnProses})
+        Me.mnSales.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnOmzet})
         Me.mnSales.Name = "mnSales"
         Me.mnSales.Size = New System.Drawing.Size(51, 20)
         Me.mnSales.Text = "SALES"
         '
-        'mnProses
+        'mnOmzet
         '
-        Me.mnProses.Name = "mnProses"
-        Me.mnProses.Size = New System.Drawing.Size(108, 22)
-        Me.mnProses.Text = "Proses"
+        Me.mnOmzet.Name = "mnOmzet"
+        Me.mnOmzet.Size = New System.Drawing.Size(180, 22)
+        Me.mnOmzet.Text = "Omzet"
         '
         'mnLogout
         '
@@ -123,7 +123,7 @@ Partial Class FormUtama
     Friend WithEvents mnGroupMaster As ToolStripMenuItem
     Friend WithEvents mnImportData As ToolStripMenuItem
     Friend WithEvents mnSales As ToolStripMenuItem
-    Friend WithEvents mnProses As ToolStripMenuItem
+    Friend WithEvents mnOmzet As ToolStripMenuItem
     Friend WithEvents mnLogout As ToolStripMenuItem
     Friend WithEvents mnExit As ToolStripMenuItem
     Friend WithEvents msMasterGeneral As ToolStripMenuItem
