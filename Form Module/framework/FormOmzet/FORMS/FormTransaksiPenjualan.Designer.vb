@@ -37,6 +37,16 @@ Partial Class FormTransaksiPenjualan
         Me.rbPiutang = New System.Windows.Forms.RadioButton()
         Me.rbPenjualanPerOutlet = New System.Windows.Forms.RadioButton()
         Me.gbView = New System.Windows.Forms.GroupBox()
+        Me.pnlNavigasi = New System.Windows.Forms.Panel()
+        Me.btnAddNew = New System.Windows.Forms.Button()
+        Me.btnFFBack = New System.Windows.Forms.Button()
+        Me.lblRecord = New System.Windows.Forms.Label()
+        Me.btnForward = New System.Windows.Forms.Button()
+        Me.lblOfPages = New System.Windows.Forms.Label()
+        Me.tbRecordPage = New System.Windows.Forms.TextBox()
+        Me.btnFFForward = New System.Windows.Forms.Button()
+        Me.btnBack = New System.Windows.Forms.Button()
+        Me.dgvView = New System.Windows.Forms.DataGridView()
         Me.pnlTanggal = New System.Windows.Forms.Panel()
         Me.lblSD = New System.Windows.Forms.Label()
         Me.dtpAkhir = New System.Windows.Forms.DateTimePicker()
@@ -49,28 +59,20 @@ Partial Class FormTransaksiPenjualan
         Me.cboSortingCriteria = New System.Windows.Forms.ComboBox()
         Me.lblCariSales = New System.Windows.Forms.Label()
         Me.cboCariSales = New System.Windows.Forms.ComboBox()
-        Me.pnlNavigasi = New System.Windows.Forms.Panel()
-        Me.btnAddNew = New System.Windows.Forms.Button()
-        Me.btnFFBack = New System.Windows.Forms.Button()
-        Me.lblRecord = New System.Windows.Forms.Label()
-        Me.btnForward = New System.Windows.Forms.Button()
-        Me.lblOfPages = New System.Windows.Forms.Label()
-        Me.tbRecordPage = New System.Windows.Forms.TextBox()
-        Me.btnFFForward = New System.Windows.Forms.Button()
-        Me.btnBack = New System.Windows.Forms.Button()
         Me.tbCari = New System.Windows.Forms.TextBox()
         Me.btnTampilkan = New System.Windows.Forms.Button()
         Me.lblCari = New System.Windows.Forms.Label()
         Me.cboKriteria = New System.Windows.Forms.ComboBox()
-        Me.dgvView = New System.Windows.Forms.DataGridView()
         Me.clbUserRight = New System.Windows.Forms.CheckedListBox()
         Me.btnKeluar = New System.Windows.Forms.Button()
         Me.ofd1 = New System.Windows.Forms.OpenFileDialog()
+        Me.rbTOPKhususDalamKota = New System.Windows.Forms.RadioButton()
+        Me.rbTOPKhususLuarKota = New System.Windows.Forms.RadioButton()
         Me.Panel1.SuspendLayout()
         Me.gbView.SuspendLayout()
-        Me.pnlTanggal.SuspendLayout()
         Me.pnlNavigasi.SuspendLayout()
         CType(Me.dgvView, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlTanggal.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblTitle
@@ -100,7 +102,7 @@ Partial Class FormTransaksiPenjualan
         Me.btnProsesImport.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnProsesImport.Image = CType(resources.GetObject("btnProsesImport.Image"), System.Drawing.Image)
         Me.btnProsesImport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnProsesImport.Location = New System.Drawing.Point(837, 3)
+        Me.btnProsesImport.Location = New System.Drawing.Point(1060, 5)
         Me.btnProsesImport.Name = "btnProsesImport"
         Me.btnProsesImport.Size = New System.Drawing.Size(120, 54)
         Me.btnProsesImport.TabIndex = 246
@@ -143,6 +145,8 @@ Partial Class FormTransaksiPenjualan
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.rbTOPKhususLuarKota)
+        Me.Panel1.Controls.Add(Me.rbTOPKhususDalamKota)
         Me.Panel1.Controls.Add(Me.cboPeriodeImport)
         Me.Panel1.Controls.Add(Me.lblPeriodeImport)
         Me.Panel1.Controls.Add(Me.rbPenjualanPerItem)
@@ -156,7 +160,7 @@ Partial Class FormTransaksiPenjualan
         Me.Panel1.Controls.Add(Me.btnProsesImport)
         Me.Panel1.Location = New System.Drawing.Point(12, 427)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(960, 62)
+        Me.Panel1.Size = New System.Drawing.Size(1185, 62)
         Me.Panel1.TabIndex = 250
         '
         'cboPeriodeImport
@@ -183,7 +187,7 @@ Partial Class FormTransaksiPenjualan
         'rbPenjualanPerItem
         '
         Me.rbPenjualanPerItem.AutoSize = True
-        Me.rbPenjualanPerItem.Location = New System.Drawing.Point(715, 40)
+        Me.rbPenjualanPerItem.Location = New System.Drawing.Point(715, 24)
         Me.rbPenjualanPerItem.Name = "rbPenjualanPerItem"
         Me.rbPenjualanPerItem.Size = New System.Drawing.Size(113, 17)
         Me.rbPenjualanPerItem.TabIndex = 252
@@ -193,7 +197,7 @@ Partial Class FormTransaksiPenjualan
         'rbPiutang
         '
         Me.rbPiutang.AutoSize = True
-        Me.rbPiutang.Location = New System.Drawing.Point(715, 22)
+        Me.rbPiutang.Location = New System.Drawing.Point(715, 42)
         Me.rbPiutang.Name = "rbPiutang"
         Me.rbPiutang.Size = New System.Drawing.Size(61, 17)
         Me.rbPiutang.TabIndex = 251
@@ -208,7 +212,6 @@ Partial Class FormTransaksiPenjualan
         Me.rbPenjualanPerOutlet.Name = "rbPenjualanPerOutlet"
         Me.rbPenjualanPerOutlet.Size = New System.Drawing.Size(122, 17)
         Me.rbPenjualanPerOutlet.TabIndex = 250
-        Me.rbPenjualanPerOutlet.TabStop = True
         Me.rbPenjualanPerOutlet.Text = "Penjualan Per Outlet"
         Me.rbPenjualanPerOutlet.UseVisualStyleBackColor = True
         '
@@ -224,6 +227,106 @@ Partial Class FormTransaksiPenjualan
         Me.gbView.TabIndex = 251
         Me.gbView.TabStop = False
         Me.gbView.Text = "VIEW"
+        '
+        'pnlNavigasi
+        '
+        Me.pnlNavigasi.Controls.Add(Me.btnAddNew)
+        Me.pnlNavigasi.Controls.Add(Me.btnFFBack)
+        Me.pnlNavigasi.Controls.Add(Me.lblRecord)
+        Me.pnlNavigasi.Controls.Add(Me.btnForward)
+        Me.pnlNavigasi.Controls.Add(Me.lblOfPages)
+        Me.pnlNavigasi.Controls.Add(Me.tbRecordPage)
+        Me.pnlNavigasi.Controls.Add(Me.btnFFForward)
+        Me.pnlNavigasi.Controls.Add(Me.btnBack)
+        Me.pnlNavigasi.Location = New System.Drawing.Point(7, 288)
+        Me.pnlNavigasi.Name = "pnlNavigasi"
+        Me.pnlNavigasi.Size = New System.Drawing.Size(425, 29)
+        Me.pnlNavigasi.TabIndex = 172
+        '
+        'btnAddNew
+        '
+        Me.btnAddNew.Enabled = False
+        Me.btnAddNew.Location = New System.Drawing.Point(280, 3)
+        Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(31, 23)
+        Me.btnAddNew.TabIndex = 169
+        Me.btnAddNew.Text = ">*"
+        Me.btnAddNew.UseVisualStyleBackColor = True
+        '
+        'btnFFBack
+        '
+        Me.btnFFBack.Location = New System.Drawing.Point(56, 3)
+        Me.btnFFBack.Name = "btnFFBack"
+        Me.btnFFBack.Size = New System.Drawing.Size(31, 23)
+        Me.btnFFBack.TabIndex = 164
+        Me.btnFFBack.Text = "<<"
+        Me.btnFFBack.UseVisualStyleBackColor = True
+        '
+        'lblRecord
+        '
+        Me.lblRecord.AutoSize = True
+        Me.lblRecord.Location = New System.Drawing.Point(2, 8)
+        Me.lblRecord.Name = "lblRecord"
+        Me.lblRecord.Size = New System.Drawing.Size(38, 13)
+        Me.lblRecord.TabIndex = 163
+        Me.lblRecord.Text = "Page :"
+        '
+        'btnForward
+        '
+        Me.btnForward.Location = New System.Drawing.Point(206, 3)
+        Me.btnForward.Name = "btnForward"
+        Me.btnForward.Size = New System.Drawing.Size(31, 23)
+        Me.btnForward.TabIndex = 167
+        Me.btnForward.Text = ">"
+        Me.btnForward.UseVisualStyleBackColor = True
+        '
+        'lblOfPages
+        '
+        Me.lblOfPages.AutoSize = True
+        Me.lblOfPages.Location = New System.Drawing.Point(317, 8)
+        Me.lblOfPages.Name = "lblOfPages"
+        Me.lblOfPages.Size = New System.Drawing.Size(65, 13)
+        Me.lblOfPages.TabIndex = 170
+        Me.lblOfPages.Text = "Of : x Pages"
+        '
+        'tbRecordPage
+        '
+        Me.tbRecordPage.Location = New System.Drawing.Point(130, 5)
+        Me.tbRecordPage.Name = "tbRecordPage"
+        Me.tbRecordPage.Size = New System.Drawing.Size(70, 20)
+        Me.tbRecordPage.TabIndex = 166
+        Me.tbRecordPage.Text = "1"
+        Me.tbRecordPage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'btnFFForward
+        '
+        Me.btnFFForward.Location = New System.Drawing.Point(243, 3)
+        Me.btnFFForward.Name = "btnFFForward"
+        Me.btnFFForward.Size = New System.Drawing.Size(31, 23)
+        Me.btnFFForward.TabIndex = 168
+        Me.btnFFForward.Text = ">>"
+        Me.btnFFForward.UseVisualStyleBackColor = True
+        '
+        'btnBack
+        '
+        Me.btnBack.Location = New System.Drawing.Point(93, 3)
+        Me.btnBack.Name = "btnBack"
+        Me.btnBack.Size = New System.Drawing.Size(31, 23)
+        Me.btnBack.TabIndex = 165
+        Me.btnBack.Text = "<"
+        Me.btnBack.UseVisualStyleBackColor = True
+        '
+        'dgvView
+        '
+        Me.dgvView.AllowUserToAddRows = False
+        Me.dgvView.AllowUserToDeleteRows = False
+        Me.dgvView.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvView.Location = New System.Drawing.Point(7, 19)
+        Me.dgvView.Name = "dgvView"
+        Me.dgvView.Size = New System.Drawing.Size(1173, 263)
+        Me.dgvView.TabIndex = 130
         '
         'pnlTanggal
         '
@@ -346,94 +449,6 @@ Partial Class FormTransaksiPenjualan
         Me.cboCariSales.Size = New System.Drawing.Size(109, 21)
         Me.cboCariSales.TabIndex = 5
         '
-        'pnlNavigasi
-        '
-        Me.pnlNavigasi.Controls.Add(Me.btnAddNew)
-        Me.pnlNavigasi.Controls.Add(Me.btnFFBack)
-        Me.pnlNavigasi.Controls.Add(Me.lblRecord)
-        Me.pnlNavigasi.Controls.Add(Me.btnForward)
-        Me.pnlNavigasi.Controls.Add(Me.lblOfPages)
-        Me.pnlNavigasi.Controls.Add(Me.tbRecordPage)
-        Me.pnlNavigasi.Controls.Add(Me.btnFFForward)
-        Me.pnlNavigasi.Controls.Add(Me.btnBack)
-        Me.pnlNavigasi.Location = New System.Drawing.Point(7, 288)
-        Me.pnlNavigasi.Name = "pnlNavigasi"
-        Me.pnlNavigasi.Size = New System.Drawing.Size(425, 29)
-        Me.pnlNavigasi.TabIndex = 172
-        '
-        'btnAddNew
-        '
-        Me.btnAddNew.Enabled = False
-        Me.btnAddNew.Location = New System.Drawing.Point(280, 3)
-        Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(31, 23)
-        Me.btnAddNew.TabIndex = 169
-        Me.btnAddNew.Text = ">*"
-        Me.btnAddNew.UseVisualStyleBackColor = True
-        '
-        'btnFFBack
-        '
-        Me.btnFFBack.Location = New System.Drawing.Point(56, 3)
-        Me.btnFFBack.Name = "btnFFBack"
-        Me.btnFFBack.Size = New System.Drawing.Size(31, 23)
-        Me.btnFFBack.TabIndex = 164
-        Me.btnFFBack.Text = "<<"
-        Me.btnFFBack.UseVisualStyleBackColor = True
-        '
-        'lblRecord
-        '
-        Me.lblRecord.AutoSize = True
-        Me.lblRecord.Location = New System.Drawing.Point(2, 8)
-        Me.lblRecord.Name = "lblRecord"
-        Me.lblRecord.Size = New System.Drawing.Size(38, 13)
-        Me.lblRecord.TabIndex = 163
-        Me.lblRecord.Text = "Page :"
-        '
-        'btnForward
-        '
-        Me.btnForward.Location = New System.Drawing.Point(206, 3)
-        Me.btnForward.Name = "btnForward"
-        Me.btnForward.Size = New System.Drawing.Size(31, 23)
-        Me.btnForward.TabIndex = 167
-        Me.btnForward.Text = ">"
-        Me.btnForward.UseVisualStyleBackColor = True
-        '
-        'lblOfPages
-        '
-        Me.lblOfPages.AutoSize = True
-        Me.lblOfPages.Location = New System.Drawing.Point(317, 8)
-        Me.lblOfPages.Name = "lblOfPages"
-        Me.lblOfPages.Size = New System.Drawing.Size(65, 13)
-        Me.lblOfPages.TabIndex = 170
-        Me.lblOfPages.Text = "Of : x Pages"
-        '
-        'tbRecordPage
-        '
-        Me.tbRecordPage.Location = New System.Drawing.Point(130, 5)
-        Me.tbRecordPage.Name = "tbRecordPage"
-        Me.tbRecordPage.Size = New System.Drawing.Size(70, 20)
-        Me.tbRecordPage.TabIndex = 166
-        Me.tbRecordPage.Text = "1"
-        Me.tbRecordPage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'btnFFForward
-        '
-        Me.btnFFForward.Location = New System.Drawing.Point(243, 3)
-        Me.btnFFForward.Name = "btnFFForward"
-        Me.btnFFForward.Size = New System.Drawing.Size(31, 23)
-        Me.btnFFForward.TabIndex = 168
-        Me.btnFFForward.Text = ">>"
-        Me.btnFFForward.UseVisualStyleBackColor = True
-        '
-        'btnBack
-        '
-        Me.btnBack.Location = New System.Drawing.Point(93, 3)
-        Me.btnBack.Name = "btnBack"
-        Me.btnBack.Size = New System.Drawing.Size(31, 23)
-        Me.btnBack.TabIndex = 165
-        Me.btnBack.Text = "<"
-        Me.btnBack.UseVisualStyleBackColor = True
-        '
         'tbCari
         '
         Me.tbCari.Location = New System.Drawing.Point(258, 57)
@@ -475,18 +490,6 @@ Partial Class FormTransaksiPenjualan
         Me.cboKriteria.Size = New System.Drawing.Size(116, 21)
         Me.cboKriteria.TabIndex = 6
         '
-        'dgvView
-        '
-        Me.dgvView.AllowUserToAddRows = False
-        Me.dgvView.AllowUserToDeleteRows = False
-        Me.dgvView.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgvView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvView.Location = New System.Drawing.Point(7, 19)
-        Me.dgvView.Name = "dgvView"
-        Me.dgvView.Size = New System.Drawing.Size(1173, 263)
-        Me.dgvView.TabIndex = 130
-        '
         'clbUserRight
         '
         Me.clbUserRight.BackColor = System.Drawing.SystemColors.Info
@@ -514,6 +517,26 @@ Partial Class FormTransaksiPenjualan
         '
         'ofd1
         '
+        '
+        'rbTOPKhususDalamKota
+        '
+        Me.rbTOPKhususDalamKota.AutoSize = True
+        Me.rbTOPKhususDalamKota.Location = New System.Drawing.Point(843, 4)
+        Me.rbTOPKhususDalamKota.Name = "rbTOPKhususDalamKota"
+        Me.rbTOPKhususDalamKota.Size = New System.Drawing.Size(143, 17)
+        Me.rbTOPKhususDalamKota.TabIndex = 255
+        Me.rbTOPKhususDalamKota.Text = "TOP Khusus Dalam Kota"
+        Me.rbTOPKhususDalamKota.UseVisualStyleBackColor = True
+        '
+        'rbTOPKhususLuarKota
+        '
+        Me.rbTOPKhususLuarKota.AutoSize = True
+        Me.rbTOPKhususLuarKota.Location = New System.Drawing.Point(843, 24)
+        Me.rbTOPKhususLuarKota.Name = "rbTOPKhususLuarKota"
+        Me.rbTOPKhususLuarKota.Size = New System.Drawing.Size(134, 17)
+        Me.rbTOPKhususLuarKota.TabIndex = 256
+        Me.rbTOPKhususLuarKota.Text = "TOP Khusus Luar Kota"
+        Me.rbTOPKhususLuarKota.UseVisualStyleBackColor = True
         '
         'FormTransaksiPenjualan
         '
@@ -545,11 +568,11 @@ Partial Class FormTransaksiPenjualan
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.gbView.ResumeLayout(False)
-        Me.pnlTanggal.ResumeLayout(False)
-        Me.pnlTanggal.PerformLayout()
         Me.pnlNavigasi.ResumeLayout(False)
         Me.pnlNavigasi.PerformLayout()
         CType(Me.dgvView, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlTanggal.ResumeLayout(False)
+        Me.pnlTanggal.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -598,4 +621,6 @@ Partial Class FormTransaksiPenjualan
     Friend WithEvents cboPeriodeImport As ComboBox
     Friend WithEvents lblPeriodeImport As Label
     Friend WithEvents cboCariPeriode As ComboBox
+    Friend WithEvents rbTOPKhususDalamKota As RadioButton
+    Friend WithEvents rbTOPKhususLuarKota As RadioButton
 End Class

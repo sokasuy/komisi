@@ -610,6 +610,7 @@
         Try
             If (Trim(tbNamaSheet.Text).Length > 0) And (Trim(tbNamaFile.Text).Length > 0 And cboPeriodeImport.SelectedIndex <> -1) Then
                 If (isDataPrepared) Then
+                    Me.Cursor = Cursors.WaitCursor
                     If (myCFileIO.SheetExists(tbNamaSheet.Text, fileAttachment.path)) Then
                         CONN_.excelPrvdrType = myCFileIO.ReadIniFile("EXCEL", "PRVDRTYPE", Application.StartupPath & "\SETTING.ini")
 

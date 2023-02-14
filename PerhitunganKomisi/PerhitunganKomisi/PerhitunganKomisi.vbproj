@@ -86,14 +86,14 @@
     <Reference Include="FormMasterGeneral">
       <HintPath>..\..\Form Module\framework\FormMasterGeneral\bin\Debug\FormMasterGeneral.dll</HintPath>
     </Reference>
-    <Reference Include="FormMasterOmzet">
-      <HintPath>..\..\Form Module\framework\FormMasterOmzet\bin\Debug\FormMasterOmzet.dll</HintPath>
-    </Reference>
     <Reference Include="FormMasterSales">
       <HintPath>..\..\Form Module\framework\FormMasterSales\bin\Debug\FormMasterSales.dll</HintPath>
     </Reference>
     <Reference Include="FormMasterTarget">
       <HintPath>..\..\Form Module\framework\FormMasterTarget\bin\Debug\FormMasterTarget.dll</HintPath>
+    </Reference>
+    <Reference Include="FormOmzet">
+      <HintPath>..\..\Form Module\framework\FormOmzet\bin\Debug\FormOmzet.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
