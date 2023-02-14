@@ -7,7 +7,7 @@
 
         ' Add any initialization after the InitializeComponent() call.
         Try
-            Call myCStartup.StartUp("MAIN", COMPANY_.name, PROGRAM_.name, PROGRAM_.type, CONN_.dbMain, CONN_.dbLokal, CONN_.dbType, CONN_.schemaTmp, CONN_.schemaKomisi)
+            Call myCStartup.StartUp("MAIN", COMPANY_.name, PROGRAM_.name, PROGRAM_.type, CONN_.dbMain, CONN_.dbSQL, CONN_.dbType, CONN_.schemaTmp, CONN_.schemaKomisi)
 
             CONN_.dbType = CONN_.dbType.ToLower
 

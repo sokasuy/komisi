@@ -1,25 +1,27 @@
 ﻿Module ModExtension
 
-    Public myCStartup As New CStartup
     Public myCDBConnection As New CDBConnection.CDBConnection
     Public myCDBOperation As New CDBOperation.CDBOperation
     Public myCFileIO As New CFileIO.CFileIO
     Public myCFormManipulation As New CFormManipulation.CFormManipulation
-    Public myCMiscFunction As New CMiscFunction.CMiscFunction
+    'Public myCMiscFunction As New CMiscFunction.CMiscFunction
     Public myCShowMessage As New CShowMessage.CShowMessage
+    'Public myCStartup As New CStartup.CStartup
     Public myCStringManipulation As New CStringManipulation.CStringManipulation
-    Public myCNetworkOperation As New CNetworkOperation.CNetworkOperation
+    'Public myCNetworkOperation As New CNetworkOperation
     Public myCDataGridViewManipulation As New CDataGridViewManipulation.CDataGridViewManipulation
-    Public myCManagementSystem As New CManagementSystem.CManagementSystem
+    'Public myCManagementSystem As New CManagementSystem.CManagementSystem
 
     Public Structure DBConn
         Public dbMain As Object
         Public dbLokal As Object
+        Public dbExcel As Object
         Public dbSQL As Object
 
         Public dbType As String
         Public schemaTmp As String
         Public schemaKomisi As String
+        Public excelPrvdrType As String
 
         Public comm As Object
         Public adapter As Object
@@ -30,7 +32,6 @@
     Public Structure UserInfo
         Dim username As String
         Dim name As String
-        Dim lokasi As String
         Dim kodePegawai As String
         Dim isLogin As Boolean
         Dim isFirstAccount As Boolean

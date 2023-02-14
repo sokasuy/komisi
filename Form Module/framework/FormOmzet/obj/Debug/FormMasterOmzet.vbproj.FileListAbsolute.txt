@@ -1,0 +1,15 @@
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterPenjualan\obj\Debug\FormMasterOmzet.FormMasterPenjualan.resources
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterPenjualan\obj\Debug\FormMasterOmzet.Resources.resources
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterPenjualan\obj\Debug\FormMasterOmzet.vbproj.GenerateResource.cache
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterPenjualan\obj\Debug\FormMasterOmzet.vbproj.CoreCompileInputs.cache
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterOmzet\bin\Debug\FormMasterOmzet.dll.config
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterOmzet\bin\Debug\FormMasterOmzet.dll
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterOmzet\bin\Debug\FormMasterOmzet.pdb
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterOmzet\bin\Debug\FormMasterOmzet.xml
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterOmzet\obj\Debug\FormMasterOmzet.FormTransaksiPenjualan.resources
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterOmzet\obj\Debug\FormMasterOmzet.Resources.resources
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterOmzet\obj\Debug\FormMasterOmzet.vbproj.GenerateResource.cache
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterOmzet\obj\Debug\FormMasterOmzet.vbproj.CoreCompileInputs.cache
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterOmzet\obj\Debug\FormMasterOmzet.dll
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterOmzet\obj\Debug\FormMasterOmzet.xml
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterOmzet\obj\Debug\FormMasterOmzet.pdb

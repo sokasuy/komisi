@@ -20,7 +20,7 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FormMasterSales", "..\Form 
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FormMasterTarget", "..\Form Module\framework\FormMasterTarget\FormMasterTarget.vbproj", "{E9C7B6BE-ACDF-4096-A20B-C86D59F474BE}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FormMasterOmzet", "..\Form Module\framework\FormMasterOmzet\FormMasterOmzet.vbproj", "{548D7EF7-D6D2-43DD-A514-D07BDBF408C9}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FormOmzet", "..\Form Module\framework\FormOmzet\FormOmzet.vbproj", "{548D7EF7-D6D2-43DD-A514-D07BDBF408C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
