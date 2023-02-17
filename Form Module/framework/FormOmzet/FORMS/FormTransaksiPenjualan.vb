@@ -46,7 +46,27 @@
         Dim extension As String
     End Structure
 
+    Private Structure rekapSales
+        Dim target As String
+        Dim omzet As String
+        Dim omzetlm As String
+        Dim omzetbr As String
+        Dim persenpencapaiansales As String
+        Dim sppending As String
+        Dim persensppending As String
+        Dim overdue As String
+        Dim hitomzet As String
+        Dim totalpersen As String
+        Dim komisireg As String
+        Dim targetpimt As String
+        Dim realpimt As String
+        Dim persenpimt As String
+        Dim kmspimt As String
+        Dim totalkms As String
+    End Structure
+
     Private fileAttachment As fileTempel
+    Private T_rekapSales As rekapSales
 
     Public Sub New(_dbType As String, _schemaTmp As String, _schemaKomisi As String, _connMain As Object, _connSQL As Object, _username As String, _superuser As Boolean, _dtTableUserRights As DataTable, _addNewValues As String, _addNewFields As String, _addUpdateString As String)
         Try
@@ -1057,71 +1077,104 @@
     Private Sub btnProsesRekap_Click(sender As Object, e As EventArgs) Handles btnProsesRekap.Click
         Try
             If (cboPeriode.SelectedIndex <> -1) Then
-                Dim lanjut As Boolean
+                'Dim lanjut As Boolean
                 Dim myDataTableSales As New DataTable
-                Dim target As String
+
+
                 Me.Cursor = Cursors.WaitCursor
                 Call myCDBConnection.OpenConn(CONN_.dbMain)
 
-                isExist = myCDBOperation.IsExistRecords(CONN_.dbMain, CONN_.comm, CONN_.reader, "rid", CONN_.schemaKomisi & ".trrekapsales", "periode='" & cboPeriode.SelectedValue & "'")
+                'isExist = myCDBOperation.IsExistRecords(CONN_.dbMain, CONN_.comm, CONN_.reader, "rid", CONN_.schemaKomisi & ".trrekapsales", "periode='" & cboPeriode.SelectedValue & "' and kodesales='" &  & "'")
 
-                If (isExist) Then
-                    Dim isConfirm = myCShowMessage.GetUserResponse("apakah mau memproses ulang data rekap sales untuk periode " & cboPeriode.SelectedValue & "?")
-                    If (isConfirm = DialogResult.Yes) Then
-                        Call myCDBOperation.DelDbRecords(CONN_.dbMain, CONN_.comm, CONN_.schemaKomisi & ".trrekapsales", "periode='" & cboPeriode.SelectedValue & "'", CONN_.dbType)
-                        lanjut = True
+                'If (isExist) Then
+                '    Dim isConfirm = myCShowMessage.GetUserResponse("apakah mau memproses ulang data rekap sales untuk periode " & cboPeriode.SelectedValue & "?")
+                '    If (isConfirm = DialogResult.Yes) Then
+                '        Call myCDBOperation.DelDbRecords(CONN_.dbMain, CONN_.comm, CONN_.schemaKomisi & ".trrekapsales", "periode='" & cboPeriode.SelectedValue & "'", CONN_.dbType)
+                '        lanjut = True
+                '    Else
+                '        lanjut = False
+                '    End If
+                'Else
+                '    lanjut = True
+                'End If
+
+                'If (lanjut) Then
+                stSQL = "SELECT kodesales,namasales,'" & cboPeriode.SelectedValue & "' as periode, '" & USER_.username & "' as userid FROM " & CONN_.schemaKomisi & ".mssales WHERE company='SRF' ORDER BY namasales;"
+                myDataTableSales = myCDBOperation.GetDataTableUsingReader(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, "T_Sales")
+                myDataTableSales.Columns.Add("target", GetType(Double))
+                myDataTableSales.Columns.Add("omzet", GetType(Double))
+                myDataTableSales.Columns.Add("omzetlm", GetType(Double))
+                myDataTableSales.Columns.Add("omzetbr", GetType(Double))
+                myDataTableSales.Columns.Add("persenpencapaiansales", GetType(Double))
+                myDataTableSales.Columns.Add("sppending", GetType(Double))
+                myDataTableSales.Columns.Add("persensppending", GetType(Double))
+                myDataTableSales.Columns.Add("overdue", GetType(Double))
+                myDataTableSales.Columns.Add("hitomzet", GetType(Double))
+                myDataTableSales.Columns.Add("totalpersen", GetType(Double))
+                myDataTableSales.Columns.Add("komisireg", GetType(Double))
+                myDataTableSales.Columns.Add("targetpimt", GetType(Double))
+                myDataTableSales.Columns.Add("realpimt", GetType(Double))
+                myDataTableSales.Columns.Add("persenpimt", GetType(Double))
+                myDataTableSales.Columns.Add("kmspimt", GetType(Double))
+                myDataTableSales.Columns.Add("totalkms", GetType(Double))
+
+                For i As Integer = 0 To myDataTableSales.Rows.Count - 1
+                    isExist = myCDBOperation.IsExistRecords(CONN_.dbMain, CONN_.comm, CONN_.reader, "rid", CONN_.schemaKomisi & ".trrekapsales", "periode='" & cboPeriode.SelectedValue & "' and kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "'")
+                    T_rekapSales.target = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "nominal", CONN_.schemaKomisi & ".mstargetsales", "Sum", "kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and periode='" & cboPeriode.SelectedValue & "'")
+                    T_rekapSales.omzet = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "jumlah", CONN_.schemaKomisi & ".trpenjualanperoutlet", "Sum", "kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and periode='" & cboPeriode.SelectedValue & "'")
+                    T_rekapSales.omzetlm = 0
+                    T_rekapSales.omzetbr = IIf(IsNothing(T_rekapSales.omzet), 0, T_rekapSales.omzet) - T_rekapSales.omzetlm
+                    If Not IsNothing(T_rekapSales.target) Then
+                        T_rekapSales.persenpencapaiansales = (T_rekapSales.omzetbr / T_rekapSales.target) * 100
                     Else
-                        lanjut = False
+                        T_rekapSales.persenpencapaiansales = -1
                     End If
-                Else
-                    lanjut = True
-                End If
+                    T_rekapSales.sppending = 0
+                    If Not IsNothing(T_rekapSales.target) Then
+                        T_rekapSales.persensppending = (T_rekapSales.sppending / T_rekapSales.target) * 100
+                    Else
+                        T_rekapSales.persensppending = -1
+                    End If
+                    T_rekapSales.overdue = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "jumlah", CONN_.schemaKomisi & ".trpenjualanperoutlet", "Sum", "kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and periode='" & cboPeriode.SelectedValue & "' and overdue>3 and ignoreoverdue=False")
+                    T_rekapSales.hitomzet = IIf(IsNothing(T_rekapSales.omzet), 0, T_rekapSales.omzet) - IIf(IsNothing(T_rekapSales.overdue), 0, T_rekapSales.overdue)
+                    T_rekapSales.totalpersen = IIf(T_rekapSales.persenpencapaiansales = -1, 0, T_rekapSales.persenpencapaiansales) + IIf(T_rekapSales.persensppending = -1, 0, T_rekapSales.persensppending)
+                    T_rekapSales.komisireg = 0
+                    T_rekapSales.targetpimt = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "qty", CONN_.schemaKomisi & ".mstargetsales", "Sum", "kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and periode='" & cboPeriode.SelectedValue & "' and kodeitem in('OJ0121','OJ0121A')")
+                    T_rekapSales.realpimt = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "(qtyub-bonus)", CONN_.schemaKomisi & ".trpenjualanperitem", "Sum", "kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and periode='" & cboPeriode.SelectedValue & "' and kodeitem in('OJ0121','OJ0121A')")
+                    If Not IsNothing(T_rekapSales.targetpimt) Then
+                        T_rekapSales.persenpimt = (myDataTableSales.Rows(i).Item("realpimt") / myDataTableSales.Rows(i).Item("targetpimt")) * 100
+                    Else
+                        T_rekapSales.persenpimt = -1
+                    End If
 
-                If (lanjut) Then
-                    stSQL = "SELECT kodesales,namasales,'" & cboPeriode.SelectedValue & "' as periode, '" & USER_.username & "' as userid FROM " & CONN_.schemaKomisi & ".mssales WHERE company='SRF' ORDER BY namasales;"
-                    myDataTableSales = myCDBOperation.GetDataTableUsingReader(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, "T_Sales")
-                    myDataTableSales.Columns.Add("target", GetType(Double))
-                    myDataTableSales.Columns.Add("omzet", GetType(Double))
-                    myDataTableSales.Columns.Add("omzetlm", GetType(Double))
-                    myDataTableSales.Columns.Add("omzetbr", GetType(Double))
-                    myDataTableSales.Columns.Add("persenpencapaiansales", GetType(Double))
-                    myDataTableSales.Columns.Add("sppending", GetType(Double))
-                    myDataTableSales.Columns.Add("persensppending", GetType(Double))
-                    myDataTableSales.Columns.Add("overdue", GetType(Double))
-                    myDataTableSales.Columns.Add("hitomzet", GetType(Double))
-                    myDataTableSales.Columns.Add("totalpersen", GetType(Double))
-                    myDataTableSales.Columns.Add("komisireg", GetType(Double))
-                    myDataTableSales.Columns.Add("targetpimt", GetType(Double))
-                    myDataTableSales.Columns.Add("realpimt", GetType(Double))
-                    myDataTableSales.Columns.Add("persenpimt", GetType(Double))
-                    myDataTableSales.Columns.Add("kmspimt", GetType(Double))
-                    myDataTableSales.Columns.Add("totalkms", GetType(Double))
-
-                    For i As Integer = 0 To myDataTableSales.Rows.Count - 1
-                        target = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "nominal", CONN_.schemaKomisi & ".mstargetsales", "Sum", "kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and periode='" & cboPeriode.SelectedValue & "'")
-                        If Not IsNothing(target) Then
-                            myDataTableSales.Rows(i).Item("target") = target
-                            myDataTableSales.Rows(i).Item("omzet") = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "jumlah", CONN_.schemaKomisi & ".trpenjualanperoutlet", "Sum", "kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and periode='" & cboPeriode.SelectedValue & "'")
-                            myDataTableSales.Rows(i).Item("omzetlm") = 0
-                            myDataTableSales.Rows(i).Item("omzetbr") = myDataTableSales.Rows(i).Item("omzet") - myDataTableSales.Rows(i).Item("omzetlm")
-                            myDataTableSales.Rows(i).Item("persenpencapaiansales") = (myDataTableSales.Rows(i).Item("omzetbr") / myDataTableSales.Rows(i).Item("target")) * 100
-                            myDataTableSales.Rows(i).Item("sppending") = 0
-                            myDataTableSales.Rows(i).Item("persensppending") = (myDataTableSales.Rows(i).Item("sppending") / myDataTableSales.Rows(i).Item("target")) * 100
-                            myDataTableSales.Rows(i).Item("overdue") = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "jumlah", CONN_.schemaKomisi & ".trpenjualanperoutlet", "Sum", "kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and periode='" & cboPeriode.SelectedValue & "' and overdue>3 and ignoreoverdue=False")
-                            myDataTableSales.Rows(i).Item("hitomzet") = myDataTableSales.Rows(i).Item("omzet") - IIf(IsDBNull(myDataTableSales.Rows(i).Item("overdue")), 0, myDataTableSales.Rows(i).Item("overdue"))
-                            myDataTableSales.Rows(i).Item("totalpersen") = myDataTableSales.Rows(i).Item("persenpencapaiansales") + myDataTableSales.Rows(i).Item("persensppending")
-                            myDataTableSales.Rows(i).Item("komisireg") = 0
-                            myDataTableSales.Rows(i).Item("targetpimt") = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "qty", CONN_.schemaKomisi & ".mstargetsales", "Sum", "kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and periode='" & cboPeriode.SelectedValue & "' and kodeitem in('OJ0121','OJ0121A')")
-                            myDataTableSales.Rows(i).Item("realpimt") = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "(qtyub-bonus)", CONN_.schemaKomisi & ".trpenjualanperitem", "Sum", "kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and periode='" & cboPeriode.SelectedValue & "' and kodeitem in('OJ0121','OJ0121A')")
-                            myDataTableSales.Rows(i).Item("persenpimt") = (myDataTableSales.Rows(i).Item("realpimt") / myDataTableSales.Rows(i).Item("targetpimt")) * 100
-                        End If
-                    Next
+                    If Not isExist Then
+                        'kalau masih belum ada
+                        myDataTableSales.Rows(i).Item("target") = IIf(IsNothing(T_rekapSales.target), 0, T_rekapSales.target)
+                        myDataTableSales.Rows(i).Item("omzet") = IIf(IsNothing(T_rekapSales.omzet), 0, T_rekapSales.omzet)
+                        myDataTableSales.Rows(i).Item("omzetlm") = T_rekapSales.omzetlm
+                        myDataTableSales.Rows(i).Item("omzetbr") = T_rekapSales.omzetbr
+                        myDataTableSales.Rows(i).Item("persenpencapaiansales") = IIf(T_rekapSales.persenpencapaiansales = -1, 0, T_rekapSales.persenpencapaiansales)
+                        myDataTableSales.Rows(i).Item("sppending") = T_rekapSales.sppending
+                        myDataTableSales.Rows(i).Item("persensppending") = IIf(T_rekapSales.persensppending = -1, 0, T_rekapSales.persensppending)
+                        myDataTableSales.Rows(i).Item("overdue") = IIf(IsNothing(T_rekapSales.overdue), 0, T_rekapSales.overdue)
+                        myDataTableSales.Rows(i).Item("hitomzet") = T_rekapSales.hitomzet
+                        myDataTableSales.Rows(i).Item("totalpersen") = T_rekapSales.totalpersen
+                        myDataTableSales.Rows(i).Item("komisireg") = 0
+                        myDataTableSales.Rows(i).Item("targetpimt") = IIf(IsNothing(T_rekapSales.targetpimt), 0, T_rekapSales.targetpimt)
+                        myDataTableSales.Rows(i).Item("realpimt") = IIf(IsNothing(T_rekapSales.realpimt), 0, T_rekapSales.realpimt)
+                        myDataTableSales.Rows(i).Item("persenpimt") = IIf(T_rekapSales.persenpimt = -1, 0, T_rekapSales.persenpimt)
+                    Else
+                        'Kalau sudah ada
+                    End If
+                Next
+                If Not isExist Then
                     Call myCDBOperation.ConstructorInsertData(CONN_.dbMain, CONN_.comm, CONN_.reader, myDataTableSales, CONN_.schemaKomisi & ".trrekapsales")
-
-                    Call myCShowMessage.ShowInfo("DONE!!")
-                Else
-                    Call myCShowMessage.ShowInfo("Proses rekap sales dibatalkan!")
                 End If
+
+                Call myCShowMessage.ShowInfo("DONE!!")
+                'Else
+                '    Call myCShowMessage.ShowInfo("Proses rekap sales dibatalkan!")
+                'End If
             Else
                 Call myCShowMessage.ShowWarning("Silahkan tentukan periodenya terlebih dahulu!!")
                 cboPeriode.Focus()
