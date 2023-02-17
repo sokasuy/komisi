@@ -176,11 +176,11 @@
                 batas = 10
             End If
 
-            stSQL = "SELECT rid,kodesales as kode_sales,namasales as nama_sales,wilayah,created_at,updated_at " &
+            stSQL = "SELECT rid,kodesales as kode_sales,namasales as nama_sales,wilayah,company,created_at,updated_at " &
                     "FROM ( " &
-                        "SELECT sub.rid,sub.kodesales,sub.namasales,sub.wilayah,sub.created_at,sub.updated_at " &
+                        "SELECT sub.rid,sub.kodesales,sub.namasales,sub.wilayah,sub.company,sub.created_at,sub.updated_at " &
                         "FROM ( " &
-                            "SELECT tbl.rid,tbl.kodesales,tbl.namasales,tbl.wilayah,tbl.created_at,tbl.updated_at " &
+                            "SELECT tbl.rid,tbl.kodesales,tbl.namasales,tbl.wilayah,tbl.company,tbl.created_at,tbl.updated_at " &
                             "FROM " & tableName(0) & " as tbl " &
                             "WHERE ((upper(tbl." & mSelectedCriteria & ") LIKE '%" & mKriteria.ToUpper & "%')) " & mGroupCriteria & " " &
                             "ORDER BY " & IIf(IsNothing(sortingCols), "(case when tbl.updated_at is null then tbl.created_at else tbl.updated_at end) DESC, tbl.rid DESC ", sortingCols & " " & sortingType) & " " &
@@ -198,6 +198,7 @@
                 .ReadOnly = True
 
                 .Columns("rid").Visible = False
+                .Columns("kode_sales").Visible = False
 
                 .Columns("rid").Frozen = True
                 .Columns("kode_sales").Frozen = True
@@ -211,7 +212,8 @@
                 Next
 
                 .Columns("nama_sales").Width = 200
-                .Columns("kode_sales").Width = 70
+                .Columns("wilayah").Width = 120
+                .Columns("company").Width = 70
 
                 For a As Integer = 0 To myDataTable.Columns.Count - 1
                     .Columns(myDataTable.Columns(a).ColumnName).HeaderText = myDataTable.Columns(a).ColumnName.ToUpper

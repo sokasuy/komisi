@@ -9,3 +9,4 @@ G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterSales\obj\Debug\Fo
 G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterSales\obj\Debug\FormMasterSales.dll
 G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterSales\obj\Debug\FormMasterSales.xml
 G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterSales\obj\Debug\FormMasterSales.pdb
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterSales\obj\Debug\FormMasterSales.vbproj.AssemblyReference.cache

@@ -34,7 +34,11 @@
     Private myBindingColumnNames As New BindingSource
 
     Private isCboPrepared As Boolean
-    Private mViewData As String
+    Private contentView As String
+    Private mySumJumlah As Double
+    Private initialValue As String
+    Private isPartialChanged As Boolean
+    Private isValueChanged As Boolean
 
     Private Structure fileTempel
         Dim name As String
@@ -89,7 +93,7 @@
             Call myCDBConnection.OpenConn(CONN_.dbMain)
 
             stSQL = "SELECT kode,keterangan FROM " & CONN_.schemaKomisi & ".msgeneral WHERE kategori='periode' ORDER BY kode;"
-            Call myCDBOperation.SetCbo_(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, myDataTableCboPeriode, myBindingPeriode, cboPeriodeImport, "T_" & cboPeriodeImport.Name, "keterangan", "keterangan", isCboPrepared)
+            Call myCDBOperation.SetCbo_(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, myDataTableCboPeriode, myBindingPeriode, cboPeriode, "T_" & cboPeriode.Name, "keterangan", "keterangan", isCboPrepared)
             Call myCDBOperation.SetCbo_(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, myDataTableCboCariPeriode, myBindingCariPeriode, cboCariPeriode, "T_" & cboCariPeriode.Name, "keterangan", "keterangan", isCboPrepared, True)
 
             stSQL = "SELECT kodesales,namasales,area FROM " & CONN_.schemaKomisi & ".mssales ORDER BY namasales;"
@@ -129,11 +133,8 @@
         Try
             If (e.KeyCode = Keys.Enter) Then
                 Me.SelectNextControl(Me.ActiveControl, True, True, True, True)
-                'If (sender Is tbNominal) Then
-                'Call btnSimpan_Click(btnSimpan, e)
-                'End If
                 If (sender Is tbCari) Then
-                    'Call btnTampilkan_Click(btnTampilkan, e)
+                    Call btnTampilkan_Click(btnTampilkan, e)
                 End If
             End If
             If (TypeOf sender Is ComboBox) Then
@@ -168,6 +169,8 @@
             'dgvView.DataSource = Nothing
             'dgvView.Refresh()
 
+            isDataPrepared = False
+
             mSelectedCriteria = cboKriteria.SelectedItem.ToString.Replace(" ", "")
             mKriteria = IIf(IsNothing(mKriteria), "", mKriteria)
             If (cboCariSales.SelectedIndex <> -1) Then
@@ -188,8 +191,12 @@
 
                 If (rbCariPenjualanPerOutlet.Checked) Then
                     stSQL = "SELECT count(*) FROM " & tableName(0) & " as tbl WHERE " & mWhereString & " " & mGroupCriteria & ";"
+
+                    mySumJumlah = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "jumlah", tableName(0) & " as tbl", "Sum", mWhereString & " " & mGroupCriteria, CONN_.dbType)
                 ElseIf (rbCariPenjualanPerItem.Checked) Then
                     stSQL = "SELECT count(*) FROM " & tableName(1) & " as tbl WHERE " & mWhereString & " " & mGroupCriteria & ";"
+
+                    mySumJumlah = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "(qtyub-bonus)", tableName(1) & " as tbl", "Sum", mWhereString & " " & mGroupCriteria, CONN_.dbType)
                 End If
                 mJumlah = Integer.Parse(myCDBOperation.GetDataIndividual(myConn, myComm, myReader, stSQL))
 
@@ -221,8 +228,10 @@
                 batas = 10
             End If
 
+            dgvView.Columns.Clear()
+
             If (rbCariPenjualanPerOutlet.Checked) Then
-                mViewData = "PENJUALAN PER OUTLET"
+                contentView = "PENJUALAN PER OUTLET"
                 stSQL = "SELECT rid,kodesales as kode_sales,namasales as nama_sales,periode,nonota as no_nota,tglnota as tgl_nota,kodecustomer as kode_customer,namacustomer as nama_customer,tgljatuhtempo as tgl_jatuh_tempo,nilai,pot1,pot2,dpp,ppn,pph,jumlah,lunas,jmlharilunas as jml_hari_lunas,top,overdue,topkhusus as top_khusus,ignoreoverdue as ignore_overdue,created_at,updated_at " &
                     "FROM ( " &
                         "SELECT sub.rid,sub.kodesales,sub.namasales,sub.periode,sub.kodecustomer,sub.namacustomer,sub.tglnota,sub.tgljatuhtempo,sub.nonota,sub.nilai,sub.pot1,sub.pot2,sub.dpp,sub.ppn,sub.pph,sub.jumlah,sub.lunas,sub.jmlharilunas,sub.top,sub.overdue,sub.topkhusus,sub.ignoreoverdue,sub.created_at,sub.updated_at " &
@@ -245,6 +254,8 @@
                     '.ReadOnly = True
 
                     .Columns("rid").Visible = False
+                    .Columns("kode_sales").Visible = False
+                    .Columns("kode_customer").Visible = False
 
                     .Columns("rid").Frozen = True
                     .Columns("kode_sales").Frozen = True
@@ -255,18 +266,41 @@
 
                     .EnableHeadersVisualStyles = False
                     For i As Integer = 0 To .Columns.Count - 1
+                        .Columns(i).ReadOnly = True
                         If (.Columns(i).Frozen) Then
                             .Columns(i).HeaderCell.Style.BackColor = Color.Moccasin
                         End If
                     Next
-
-                    .Columns("kode_sales").Width = 70
-                    .Columns("nama_sales").Width = 100
+                    .Columns("ignore_overdue").ReadOnly = False
 
                     For a As Integer = 0 To myDataTable.Columns.Count - 1
                         .Columns(myDataTable.Columns(a).ColumnName).HeaderText = myDataTable.Columns(a).ColumnName.ToUpper
                         .Columns(myDataTable.Columns(a).ColumnName).HeaderText = .Columns(myDataTable.Columns(a).ColumnName).HeaderText.Replace("_", " ")
                     Next
+
+                    .Columns("nama_sales").HeaderText = "SALES"
+                    .Columns("nama_customer").HeaderText = "CUSTOMER"
+                    .Columns("tgl_jatuh_tempo").HeaderText = "JATUH TEMPO"
+
+                    .Columns("nama_sales").Width = 120
+                    .Columns("periode").Width = 100
+                    .Columns("no_nota").Width = 110
+                    .Columns("tgl_nota").Width = 80
+                    .Columns("nama_customer").Width = 150
+                    .Columns("tgl_jatuh_tempo").Width = 90
+                    .Columns("nilai").Width = 70
+                    .Columns("pot1").Width = 50
+                    .Columns("pot2").Width = 50
+                    .Columns("dpp").Width = 50
+                    .Columns("dpp").Width = 50
+                    .Columns("ppn").Width = 50
+                    .Columns("pph").Width = 50
+                    .Columns("jumlah").Width = 70
+                    .Columns("lunas").Width = 80
+                    .Columns("jml_hari_lunas").Width = 70
+                    .Columns("top").Width = 50
+                    .Columns("overdue").Width = 70
+                    .Columns("ignore_overdue").Width = 90
 
                     .Columns("created_at").DefaultCellStyle.Format = "dd-MMM-yyyy HH:mm:ss"
                     .Columns("updated_at").DefaultCellStyle.Format = "dd-MMM-yyyy HH:mm:ss"
@@ -294,12 +328,12 @@
                     .ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False
                 End With
             ElseIf (rbCariPenjualanPerItem.Checked) Then
-                mViewData = "PENJUALAN PER ITEM"
-                stSQL = "SELECT rid,kodesales as kode_sales,namasales as nama_sales,periode,kodebarang as kode_barang,namabarang as nama_barang,qtyub as qty_ub,qtyuk as qty_uk,bonus,discount,netto,created_at,updated_at " &
+                contentView = "PENJUALAN PER ITEM"
+                stSQL = "SELECT rid,kodesales as kode_sales,namasales as nama_sales,periode,kodeitem as kode_item,namabarang as nama_item,qtyub as qty_ub,qtyuk as qty_uk,bonus,jumlah,discount,netto,created_at,updated_at " &
                     "FROM ( " &
-                        "SELECT sub.rid,sub.kodesales,sub.namasales,sub.periode,sub.kodebarang,sub.namabarang,sub.qtyub,sub.qtyuk,sub.bonus,sub.discount,sub.netto,sub.created_at,sub.updated_at " &
+                        "SELECT sub.rid,sub.kodesales,sub.namasales,sub.periode,sub.kodeitem,sub.namabarang,sub.qtyub,sub.qtyuk,sub.bonus,sub.jumlah,sub.discount,sub.netto,sub.created_at,sub.updated_at " &
                         "FROM ( " &
-                            "SELECT tbl.rid,tbl.kodesales,tbl.namasales,tbl.periode,tbl.kodebarang,tbl.namabarang,tbl.qtyub,tbl.qtyuk,tbl.bonus,tbl.discount,tbl.netto,tbl.created_at,tbl.updated_at " &
+                            "SELECT tbl.rid,tbl.kodesales,tbl.namasales,tbl.periode,tbl.kodeitem,tbl.namabarang,tbl.qtyub,tbl.qtyuk,tbl.bonus,(tbl.qtyub-tbl.bonus) as jumlah,tbl.discount,tbl.netto,tbl.created_at,tbl.updated_at " &
                             "FROM " & tableName(1) & " as tbl " &
                             "WHERE (" & mWhereString & " ) " & mGroupCriteria & " " &
                             "ORDER BY " & IIf(IsNothing(sortingCols), "(case when tbl.updated_at is null then tbl.created_at else tbl.updated_at end) DESC, tbl.rid DESC ", sortingCols & " " & sortingType) & " " &
@@ -317,13 +351,15 @@
                     .ReadOnly = True
 
                     .Columns("rid").Visible = False
+                    .Columns("kode_sales").Visible = False
+                    .Columns("kode_item").Visible = False
 
                     .Columns("rid").Frozen = True
                     .Columns("kode_sales").Frozen = True
                     .Columns("nama_sales").Frozen = True
                     .Columns("periode").Frozen = True
-                    .Columns("kode_barang").Frozen = True
-                    .Columns("nama_barang").Frozen = True
+                    .Columns("kode_item").Frozen = True
+                    .Columns("nama_item").Frozen = True
 
                     .EnableHeadersVisualStyles = False
                     For i As Integer = 0 To .Columns.Count - 1
@@ -333,7 +369,15 @@
                     Next
 
                     .Columns("kode_sales").Width = 70
-                    .Columns("nama_sales").Width = 100
+                    .Columns("nama_sales").Width = 120
+                    .Columns("periode").Width = 100
+                    .Columns("nama_item").Width = 300
+                    .Columns("qty_ub").Width = 60
+                    .Columns("qty_uk").Width = 60
+                    .Columns("bonus").Width = 60
+                    .Columns("jumlah").Width = 60
+                    .Columns("discount").Width = 70
+                    .Columns("netto").Width = 70
 
                     For a As Integer = 0 To myDataTable.Columns.Count - 1
                         .Columns(myDataTable.Columns(a).ColumnName).HeaderText = myDataTable.Columns(a).ColumnName.ToUpper
@@ -345,12 +389,14 @@
                     .Columns("qty_ub").DefaultCellStyle.Format = "#,##0;(#,##0)"
                     .Columns("qty_uk").DefaultCellStyle.Format = "#,##0;(#,##0)"
                     .Columns("bonus").DefaultCellStyle.Format = "#,##0;(#,##0)"
+                    .Columns("jumlah").DefaultCellStyle.Format = "#,##0;(#,##0)"
                     .Columns("discount").DefaultCellStyle.Format = "#,##0;(#,##0)"
                     .Columns("netto").DefaultCellStyle.Format = "#,##0;(#,##0)"
 
                     .Columns("qty_ub").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     .Columns("qty_uk").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     .Columns("bonus").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                    .Columns("jumlah").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     .Columns("discount").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     .Columns("netto").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
@@ -360,47 +406,58 @@
                 End With
             End If
 
-            With cmbDgvEditButton
-                If Not (cekTambahButton(0)) Then
-                    .HeaderText = "EDIT"
-                    .Name = "edit"
-                    .Text = "Edit"
-                    .UseColumnTextForButtonValue = True
-                    If (rbCariPenjualanPerOutlet.Checked) Then
-                        .DisplayIndex = dgvView.Columns("tgl_nota").Index + 1
-                    ElseIf (rbCariPenjualanPerItem.Checked) Then
-                        .DisplayIndex = dgvView.Columns("nama_barang").Index + 1
-                    End If
-                    dgvView.Columns.Add(cmbDgvEditButton)
-                    dgvView.Columns("edit").Width = 70
-                    cekTambahButton(0) = True
-                    .Visible = clbUserRight.GetItemChecked(clbUserRight.Items.IndexOf("Memperbaharui"))
-                    .Frozen = True
-                End If
-                .HeaderCell.Style.BackColor = Color.Lime
-            End With
+            tbSumJumlah.Text = mySumJumlah
+            If (rbCariPenjualanPerOutlet.Checked) Then
+                myCStringManipulation.ValidateTextBox(tbSumJumlah, tbSumJumlah.Name)
+            ElseIf (rbCariPenjualanPerItem.Checked) Then
+                myCStringManipulation.ValidateTextBoxNumber(tbSumJumlah, tbSumJumlah.Name)
+            End If
 
-            With cmbDgvHapusButton
-                If Not (cekTambahButton(1)) Then
-                    .HeaderText = "HAPUS"
-                    .Name = "delete"
-                    .Text = "Hapus Record"
-                    .UseColumnTextForButtonValue = True
-                    .DisplayIndex = dgvView.ColumnCount
-                    dgvView.Columns.Add(cmbDgvHapusButton)
-                    dgvView.Columns("delete").Width = 100
-                    cekTambahButton(1) = True
-                    .Visible = clbUserRight.GetItemChecked(clbUserRight.Items.IndexOf("Menghapus"))
-                End If
-                .HeaderCell.Style.BackColor = Color.LightSalmon
-            End With
+            'With cmbDgvEditButton
+            '    If Not (cekTambahButton(0)) Then
+            '        .HeaderText = "EDIT"
+            '        .Name = "edit"
+            '        .Text = "Edit"
+            '        .UseColumnTextForButtonValue = True
+            '        If (rbCariPenjualanPerOutlet.Checked) Then
+            '            .DisplayIndex = dgvView.Columns("tgl_nota").Index + 1
+            '        ElseIf (rbCariPenjualanPerItem.Checked) Then
+            '            .DisplayIndex = dgvView.Columns("nama_item").Index + 1
+            '        End If
+            '        dgvView.Columns.Add(cmbDgvEditButton)
+            '        dgvView.Columns("edit").Width = 70
+            '        cekTambahButton(0) = True
+            '        .Visible = clbUserRight.GetItemChecked(clbUserRight.Items.IndexOf("Memperbaharui"))
+            '        .Frozen = True
+            '    End If
+            '    .HeaderCell.Style.BackColor = Color.Lime
+            'End With
+
+            'With cmbDgvHapusButton
+            '    If Not (cekTambahButton(1)) Then
+            '        .HeaderText = "HAPUS"
+            '        .Name = "delete"
+            '        .Text = "Hapus Record"
+            '        .UseColumnTextForButtonValue = True
+            '        .DisplayIndex = dgvView.ColumnCount
+            '        dgvView.Columns.Add(cmbDgvHapusButton)
+            '        dgvView.Columns("delete").Width = 100
+            '        cekTambahButton(1) = True
+            '        .Visible = clbUserRight.GetItemChecked(clbUserRight.Items.IndexOf("Menghapus"))
+            '    End If
+            '    .HeaderCell.Style.BackColor = Color.LightSalmon
+            'End With
 
             ''untuk menampilkan auto number pada rowHeaders
+
+
             Call myCDataGridViewManipulation.AutoNumberRowsForGridViewWithPaging(dgvView, (Integer.Parse(tbRecordPage.Text) - 1) * 10)
             dgvView.RowHeadersWidth = 70
 
             'atur warna selang seling datagrid
             Call myCDataGridViewManipulation.SetDGVColour(dgvView)
+
+            isDataPrepared = True
 
             'ATUR PANEL NAVIGASI
             If (tbRecordPage.Text = 1) Then
@@ -586,30 +643,95 @@
                     Exit Sub
                 End If
 
-                If (e.ColumnIndex = dgvView.Columns("delete").Index) Then
-                    Me.Cursor = Cursors.WaitCursor
-                    Call myCDBConnection.OpenConn(CONN_.dbMain)
+                'If (e.ColumnIndex = dgvView.Columns("delete").Index) Then
+                '    Me.Cursor = Cursors.WaitCursor
+                '    Call myCDBConnection.OpenConn(CONN_.dbMain)
 
-                    If (mViewData = "PENJUALAN PER OUTLET") Then
-                        Dim isConfirm = myCShowMessage.GetUserResponse("Apakah mau menghapus data di master penjualan " & dgvView.CurrentRow.Cells("nama_sales").Value & " - " & dgvView.CurrentRow.Cells("no_nota").Value & " untuk outlet " & dgvView.CurrentRow.Cells("nama_customer").Value & "?" & ControlChars.NewLine & "Data yang sudah dihapus tidak dapat dikembalikan lagi!")
-                        If (isConfirm = DialogResult.Yes) Then
-                            Call myCDBOperation.DelDbRecords(CONN_.dbMain, CONN_.comm, tableName(0), "rid=" & dgvView.CurrentRow.Cells("rid").Value, CONN_.dbType)
-                            Call myCShowMessage.ShowDeletedMsg("Data di master penjualan " & dgvView.CurrentRow.Cells("nama_sales").Value & " - " & dgvView.CurrentRow.Cells("no_nota").Value & " untuk outlet " & dgvView.CurrentRow.Cells("nama_customer").Value)
-                            Call SetDGV(CONN_.dbMain, CONN_.comm, CONN_.reader, 10, myDataTableDGV, myBindingTableDGV, mCari, True, IIf(cboSortingCriteria.SelectedIndex = -1, Nothing, cboSortingCriteria.SelectedValue), cboSortingType.SelectedItem)
-                        Else
-                            Call myCShowMessage.ShowInfo("Penghapusan data di master penjualan " & dgvView.CurrentRow.Cells("nama_sales").Value & " - " & dgvView.CurrentRow.Cells("no_nota").Value & " untuk outlet " & dgvView.CurrentRow.Cells("nama_customer").Value & " dibatalkan oleh user")
-                        End If
-                    ElseIf (mViewData = "PENJUALAN PER ITEM") Then
+                '    If (mViewData = "PENJUALAN PER OUTLET") Then
+                '        Dim isConfirm = myCShowMessage.GetUserResponse("Apakah mau menghapus data di master penjualan " & dgvView.CurrentRow.Cells("nama_sales").Value & " - " & dgvView.CurrentRow.Cells("no_nota").Value & " untuk outlet " & dgvView.CurrentRow.Cells("nama_customer").Value & "?" & ControlChars.NewLine & "Data yang sudah dihapus tidak dapat dikembalikan lagi!")
+                '        If (isConfirm = DialogResult.Yes) Then
+                '            Call myCDBOperation.DelDbRecords(CONN_.dbMain, CONN_.comm, tableName(0), "rid=" & dgvView.CurrentRow.Cells("rid").Value, CONN_.dbType)
+                '            Call myCShowMessage.ShowDeletedMsg("Data di master penjualan " & dgvView.CurrentRow.Cells("nama_sales").Value & " - " & dgvView.CurrentRow.Cells("no_nota").Value & " untuk outlet " & dgvView.CurrentRow.Cells("nama_customer").Value)
+                '            Call SetDGV(CONN_.dbMain, CONN_.comm, CONN_.reader, 10, myDataTableDGV, myBindingTableDGV, mCari, True, IIf(cboSortingCriteria.SelectedIndex = -1, Nothing, cboSortingCriteria.SelectedValue), cboSortingType.SelectedItem)
+                '        Else
+                '            Call myCShowMessage.ShowInfo("Penghapusan data di master penjualan " & dgvView.CurrentRow.Cells("nama_sales").Value & " - " & dgvView.CurrentRow.Cells("no_nota").Value & " untuk outlet " & dgvView.CurrentRow.Cells("nama_customer").Value & " dibatalkan oleh user")
+                '        End If
+                '    ElseIf (mViewData = "PENJUALAN PER ITEM") Then
 
-                    End If
-                ElseIf (e.ColumnIndex = dgvView.Columns("edit").Index) Then
-                End If
+                '    End If
+                'ElseIf (e.ColumnIndex = dgvView.Columns("edit").Index) Then
+                'End If
             End If
         Catch ex As Exception
             Call myCShowMessage.ShowErrMsg("Pesan Error: " & ex.Message, "dgvView_CellContentClick Error")
         Finally
             Me.Cursor = Cursors.Default
             Call myCDBConnection.CloseConn(CONN_.dbMain, -1)
+        End Try
+    End Sub
+
+    Private Sub dgvView_CellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles dgvView.CellBeginEdit
+        Try
+            If (isDataPrepared) Then
+                If (contentView = "PENJUALAN PER OUTLET") Then
+                    If Not IsDBNull(dgvView.CurrentCell.Value) Then
+                        initialValue = Trim(dgvView.CurrentCell.Value.ToString)
+                    Else
+                        initialValue = Nothing
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            Call myCShowMessage.ShowErrMsg("Pesan Error: " & ex.Message, "dgvView_CellBeginEdit Error")
+        End Try
+    End Sub
+
+    Private Sub dgvView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvView.CellValueChanged
+        Try
+            If (isDataPrepared) Then
+                If (contentView = "PENJUALAN PER OUTLET") Then
+                    If Not isPartialChanged Then
+                        If Not IsDBNull(dgvView.CurrentCell.Value) Then
+                            'kalau tidak null isinya
+                            If (initialValue <> (dgvView.CurrentCell.Value.ToString)) Then
+                                If (e.ColumnIndex = dgvView.Columns("ignore_overdue").Index) Then
+                                    isPartialChanged = True
+                                    isValueChanged = True
+                                    isPartialChanged = False
+                                End If
+                            End If
+                        End If
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            Call myCShowMessage.ShowErrMsg("Pesan Error: " & ex.Message, "dgvView_CellValueChanged Error")
+        End Try
+    End Sub
+
+    Private Sub dgvView_CellValidated(sender As Object, e As DataGridViewCellEventArgs) Handles dgvView.CellValidated
+        Try
+            If (isValueChanged) And Not (isPartialChanged) Then
+                If (contentView = "PENJUALAN PER OUTLET") Then
+                    Me.Cursor = Cursors.WaitCursor
+                    Call myCDBConnection.OpenConn(CONN_.dbMain)
+                    Select Case dgvView.Columns(e.ColumnIndex).DataPropertyName
+                        Case "ignore_overdue"
+                            Call myCDBOperation.UpdateData(CONN_.dbMain, CONN_.comm, tableName(0), "" & dgvView.Columns(e.ColumnIndex).DataPropertyName.Replace("_", "") & "='" & dgvView.CurrentCell.Value & "',userid='" & USER_.username & "',updated_at=clock_timestamp()", "rid='" & myCStringManipulation.SafeSqlLiteral(dgvView.CurrentRow.Cells("rid").Value) & "'")
+                    End Select
+                End If
+            End If
+        Catch ex As Exception
+            Call myCShowMessage.ShowErrMsg("Pesan Error: " & ex.Message, "dgvView_CellValidated Error")
+        Finally
+            If (isValueChanged) And Not (isPartialChanged) Then
+                If (contentView = "PENJUALAN PER OUTLET") Then
+                    Me.Cursor = Cursors.Default
+                    Call myCDBConnection.CloseConn(CONN_.dbMain, -1)
+                    isValueChanged = False
+                    isPartialChanged = False
+                End If
+            End If
         End Try
     End Sub
 
@@ -655,7 +777,7 @@
 
     Private Sub btnProsesImport_Click(sender As Object, e As EventArgs) Handles btnProsesImport.Click
         Try
-            If (Trim(tbNamaSheet.Text).Length > 0) And (Trim(tbNamaFile.Text).Length > 0 And cboPeriodeImport.SelectedIndex <> -1) Then
+            If (Trim(tbNamaSheet.Text).Length > 0) And (Trim(tbNamaFile.Text).Length > 0 And cboPeriode.SelectedIndex <> -1) Then
                 If (isDataPrepared) Then
                     Me.Cursor = Cursors.WaitCursor
                     If (myCFileIO.SheetExists(tbNamaSheet.Text, fileAttachment.path)) Then
@@ -672,8 +794,8 @@
                             'Dim kodeCust As String
                             Dim tblName As String
                             Dim myDataTableInfoNota As New DataTable
-                            stSQL = "SELECT KodeSales,NamaSales,'' as KodeCustomer,NamaCust as namacustomer,Tanggal as tglnota,NoNota,Nilai,Pot1,Pot2,DPP,PPN,PPH,JUMLAH,'" & cboPeriodeImport.SelectedValue & "' as PERIODE, '" & USER_.username & "' as userid FROM [" & myCStringManipulation.SafeSqlLiteral(tbNamaSheet.Text, 1) & "$] WHERE NoNota is not null ORDER BY NamaSales,NoNota;"
-                            myDataTableExcel = myCDBOperation.GetDataTableUsingReader(CONN_.dbExcel, CONN_.comm, CONN_.reader, stSQL, "tbl_omzet_" & cboPeriodeImport.SelectedValue)
+                            stSQL = "SELECT KodeSales,NamaSales,'' as KodeCustomer,NamaCust as namacustomer,Tanggal as tglnota,NoNota,Nilai,Pot1,Pot2,DPP,PPN,PPH,JUMLAH,'" & cboPeriode.SelectedValue & "' as PERIODE, '" & USER_.username & "' as userid FROM [" & myCStringManipulation.SafeSqlLiteral(tbNamaSheet.Text, 1) & "$] WHERE NoNota is not null ORDER BY NamaSales,NoNota;"
+                            myDataTableExcel = myCDBOperation.GetDataTableUsingReader(CONN_.dbExcel, CONN_.comm, CONN_.reader, stSQL, "tbl_omzet_" & cboPeriode.SelectedValue)
                             myDataTableExcel.Columns("KodeCustomer").ReadOnly = False
                             myDataTableExcel.Columns.Add("tgljatuhtempo", GetType(Date))
                             myDataTableExcel.Columns.Add("top", GetType(Short))
@@ -697,7 +819,7 @@
                                         GC.Collect()
                                     End If
                                 Next
-                                stSQL = "SELECT KodeSales,'" & cboPeriodeImport.SelectedValue & "' as PERIODE FROM [" & myCStringManipulation.SafeSqlLiteral(tbNamaSheet.Text, 1) & "$] WHERE KodeSales is not null GROUP BY KodeSales,'" & cboPeriodeImport.SelectedValue & "';"
+                                stSQL = "SELECT KodeSales,'" & cboPeriode.SelectedValue & "' as PERIODE FROM [" & myCStringManipulation.SafeSqlLiteral(tbNamaSheet.Text, 1) & "$] WHERE KodeSales is not null GROUP BY KodeSales,'" & cboPeriode.SelectedValue & "';"
                                 myDataListPeriode = myCDBOperation.GetDataTableUsingReader(CONN_.dbExcel, CONN_.comm, CONN_.reader, stSQL, "T_ListExcel")
                                 For i As UShort = 0 To myDataListPeriode.Rows.Count - 1
                                     Call myCDBOperation.DelDbRecords(CONN_.dbMain, CONN_.comm, tableName(0), "kodesales='" & myDataListPeriode.Rows(i).Item("kodesales") & "' AND periode='" & myDataListPeriode.Rows(i).Item("periode") & "'", CONN_.dbType)
@@ -706,13 +828,13 @@
 
                                 Call myCShowMessage.ShowInfo("IMPORT SELESAI!!")
                             Else
-                                Call myCShowMessage.ShowWarning("Tidak ada data target penjualan per outlet untuk periode " & cboPeriodeImport.SelectedValue & " pada excel yang diimport tersebut")
+                                Call myCShowMessage.ShowWarning("Tidak ada data target penjualan per outlet untuk periode " & cboPeriode.SelectedValue & " pada excel yang diimport tersebut")
                             End If
                         ElseIf (rbPenjualanPerItem.Checked) Then
                             Dim kodeSales As String = Nothing
                             Dim namaSales As String = Nothing
-                            stSQL = "SELECT '' as KodeSales,NamaSales,KodeBrg as kodebarang,NamaBrg as namabarang,QtyUB,QtyUK,Bonus,Discount,Netto, '" & cboPeriodeImport.SelectedValue & "' as PERIODE, '" & USER_.username & "' as userid FROM [" & myCStringManipulation.SafeSqlLiteral(tbNamaSheet.Text, 1) & "$] WHERE KodeBrg is not null ORDER BY NamaSales,NamaBrg;"
-                            myDataTableExcel = myCDBOperation.GetDataTableUsingReader(CONN_.dbExcel, CONN_.comm, CONN_.reader, stSQL, "tbl_omzet_" & cboPeriodeImport.SelectedValue)
+                            stSQL = "SELECT '' as KodeSales,NamaSales,KodeBrg as kodeitem,NamaBrg as namaitem,QtyUB,QtyUK,Bonus,Discount,Netto, '" & cboPeriode.SelectedValue & "' as PERIODE, '" & USER_.username & "' as userid FROM [" & myCStringManipulation.SafeSqlLiteral(tbNamaSheet.Text, 1) & "$] WHERE KodeBrg is not null ORDER BY NamaSales,NamaBrg;"
+                            myDataTableExcel = myCDBOperation.GetDataTableUsingReader(CONN_.dbExcel, CONN_.comm, CONN_.reader, stSQL, "tbl_omzet_" & cboPeriode.SelectedValue)
                             myDataTableExcel.Columns("KodeSales").ReadOnly = False
                             If (myDataTableExcel.Rows.Count > 0) Then
                                 For i As Integer = 0 To myDataTableExcel.Rows.Count - 1
@@ -726,7 +848,7 @@
                                         GC.Collect()
                                     End If
                                 Next
-                                stSQL = "SELECT '' as KodeSales,NamaSales,'" & cboPeriodeImport.SelectedValue & "' as PERIODE FROM [" & myCStringManipulation.SafeSqlLiteral(tbNamaSheet.Text, 1) & "$] WHERE NamaSales is not null GROUP BY '',NamaSales,'" & cboPeriodeImport.SelectedValue & "';"
+                                stSQL = "SELECT '' as KodeSales,NamaSales,'" & cboPeriode.SelectedValue & "' as PERIODE FROM [" & myCStringManipulation.SafeSqlLiteral(tbNamaSheet.Text, 1) & "$] WHERE NamaSales is not null GROUP BY '',NamaSales,'" & cboPeriode.SelectedValue & "';"
                                 myDataListPeriode = myCDBOperation.GetDataTableUsingReader(CONN_.dbExcel, CONN_.comm, CONN_.reader, stSQL, "T_ListExcel")
                                 myDataListPeriode.Columns("KodeSales").ReadOnly = False
                                 For i As UShort = 0 To myDataListPeriode.Rows.Count - 1
@@ -738,12 +860,11 @@
 
                                 Call myCShowMessage.ShowInfo("IMPORT SELESAI!!")
                             Else
-                                Call myCShowMessage.ShowWarning("Tidak ada data target penjualan per item untuk periode " & cboPeriodeImport.SelectedValue & " pada excel yang diimport tersebut")
+                                Call myCShowMessage.ShowWarning("Tidak ada data target penjualan per item untuk periode " & cboPeriode.SelectedValue & " pada excel yang diimport tersebut")
                             End If
-                        ElseIf (rbPiutang.Checked) Then
                         ElseIf (rbTOPKhususDalamKota.Checked) Or (rbTOPKhususLuarKota.Checked) Then
                             stSQL = "SELECT KodeCust,NamaCust,[JT Tempo Khusus] as TopKhusus, '" & USER_.username & "' as userid FROM [" & myCStringManipulation.SafeSqlLiteral(tbNamaSheet.Text, 1) & "$] WHERE KodeCust is not null and [JT Tempo Khusus] is not null GROUP BY KodeCust,NamaCust,[JT Tempo Khusus];"
-                            myDataTableExcel = myCDBOperation.GetDataTableUsingReader(CONN_.dbExcel, CONN_.comm, CONN_.reader, stSQL, "tbl_top_" & cboPeriodeImport.SelectedValue)
+                            myDataTableExcel = myCDBOperation.GetDataTableUsingReader(CONN_.dbExcel, CONN_.comm, CONN_.reader, stSQL, "tbl_top_" & cboPeriode.SelectedValue)
                             If (myDataTableExcel.Rows.Count > 0) Then
                                 Dim topKhusus As Short
                                 For i As Integer = 0 To myDataTableExcel.Rows.Count - 1
@@ -762,17 +883,74 @@
                                         newFields = "kodecustomer,namacustomer,topkhusus,userid"
                                         Call myCDBOperation.InsertData(CONN_.dbMain, CONN_.comm, CONN_.schemaKomisi & ".mstopkhusus", newValues, newFields)
                                     End If
-                                    'Call myCDBOperation.UpdateData(CONN_.dbMain, CONN_.comm, tableName(0), "topkhusus=" & myCStringManipulation.SafeSqlLiteral(myDataTableExcel.Rows(i).Item("TopKhusus")), "periode='" & cboPeriodeImport.SelectedValue & "' and kodecustomer='" & myCStringManipulation.SafeSqlLiteral(myDataTableExcel.Rows(i).Item("KodeCust")) & "'")
+
+                                    If (i Mod 200 = 0) Then
+                                        GC.Collect()
+                                    End If
+                                    'Call myCDBOperation.UpdateData(CONN_.dbMain, CONN_.comm, tableName(0), "topkhusus=" & myCStringManipulation.SafeSqlLiteral(myDataTableExcel.Rows(i).Item("TopKhusus")), "periode='" & cboPeriode.SelectedValue & "' and kodecustomer='" & myCStringManipulation.SafeSqlLiteral(myDataTableExcel.Rows(i).Item("KodeCust")) & "'")
                                 Next
-                                stSQL = "UPDATE " & CONN_.schemaKomisi & ".trpenjualanperoutlet as penj set topkhusus=penj.topkhusus from " & CONN_.schemaKomisi & ".mstopkhusus as topk where penj.periode='" & cboPeriodeImport.SelectedValue & "' and penj.kodecustomer=topk.kodecustomer;"
+                                stSQL = "UPDATE " & CONN_.schemaKomisi & ".trpenjualanperoutlet as penj set topkhusus=topk.topkhusus,updated_at=clock_timestamp() from " & CONN_.schemaKomisi & ".mstopkhusus as topk where penj.periode='" & cboPeriode.SelectedValue & "' and penj.kodecustomer=topk.kodecustomer;"
                                 Call myCDBOperation.ExecuteCmd(CONN_.dbMain, CONN_.comm, stSQL)
 
                                 Call myCShowMessage.ShowInfo("IMPORT SELESAI!!")
                             Else
                                 Call myCShowMessage.ShowWarning("Tidak ada data TOP Khusus pada excel yang diimport tersebut")
                             End If
+                        ElseIf (rbDataPelunasan.Checked) Then
+                            stSQL = "SELECT NoNota,TglNota,TglJurnal,JtGiro FROM [" & myCStringManipulation.SafeSqlLiteral(tbNamaSheet.Text, 1) & "$] WHERE [Sisa Piutang]=0 ORDER BY NoNota;"
+                            myDataTableExcel = myCDBOperation.GetDataTableUsingReader(CONN_.dbExcel, CONN_.comm, CONN_.reader, stSQL, "tbl_top_" & cboPeriode.SelectedValue)
+                            If (myDataTableExcel.Rows.Count > 0) Then
+                                Dim tglLunas As Date
+                                Dim tglNota As Date
+                                Dim jmlHariLunas As Short
+                                For i As Integer = 0 To myDataTableExcel.Rows.Count - 1
+                                    If (IsDate(myDataTableExcel.Rows(i).Item("TglJurnal"))) Then
+                                        If (myDataTableExcel.Rows(i).Item("TglJurnal") > DateSerial(Now.Year - 5, Now.Month, Now.Day)) Then
+                                            tglLunas = myDataTableExcel.Rows(i).Item("TglJurnal")
+                                        End If
+                                    Else
+                                        tglLunas = myDataTableExcel.Rows(i).Item("TglNota")
+                                    End If
+                                    If Not IsDBNull(myDataTableExcel.Rows(i).Item("JtGiro")) And Not IsNothing(myDataTableExcel.Rows(i).Item("JtGiro")) Then
+                                        If (myDataTableExcel.Rows(i).Item("JtGiro") <> "") Then
+                                            If (myDataTableExcel.Rows(i).Item("JtGiro") > tglLunas) Then
+                                                tglLunas = myDataTableExcel.Rows(i).Item("JtGiro")
+                                            End If
+                                        End If
+                                    End If
+                                    If Not IsNothing(tglLunas) Then
+                                        tglNota = myCDBOperation.GetSpecificRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "tglnota", tableName(0),, "nonota='" & myCStringManipulation.SafeSqlLiteral(myDataTableExcel.Rows(i).Item("NoNota")) & "'", CONN_.dbType)
+                                        jmlHariLunas = (tglLunas - tglNota).TotalDays
+                                        Call myCDBOperation.UpdateData(CONN_.dbMain, CONN_.comm, tableName(0), "lunas='" & Format(tglLunas, "dd-MMM-yyyy") & "',jmlharilunas=" & jmlHariLunas & ",updated_at=clock_timestamp()", "nonota='" & myCStringManipulation.SafeSqlLiteral(myDataTableExcel.Rows(i).Item("NoNota")) & "'")
+                                    End If
+
+                                    If (i Mod 200 = 0) Then
+                                        GC.Collect()
+                                    End If
+                                Next
+
+                                Call myCShowMessage.ShowInfo("IMPORT SELESAI!!")
+                            Else
+                                Call myCShowMessage.ShowWarning("Tidak ada data pelunasan piutang pada excel yang diimport tersebut")
+                            End If
+                        ElseIf (rbTmpTopKhusus.Checked) Then
+                            stSQL = "SELECT NamaCust,[TOP KHUSUS] as topkhusus FROM [" & myCStringManipulation.SafeSqlLiteral(tbNamaSheet.Text, 1) & "$];"
+                            myDataTableExcel = myCDBOperation.GetDataTableUsingReader(CONN_.dbExcel, CONN_.comm, CONN_.reader, stSQL, "tbl_top_" & cboPeriode.SelectedValue)
+                            If (myDataTableExcel.Rows.Count > 0) Then
+                                For i As Integer = 0 To myDataTableExcel.Rows.Count - 1
+                                    Call myCDBOperation.UpdateData(CONN_.dbMain, CONN_.comm, tableName(0), "topkhusus=" & myDataTableExcel.Rows(i).Item("topkhusus") & ",updated_at=clock_timestamp()", "namacustomer='" & myCStringManipulation.SafeSqlLiteral(myDataTableExcel.Rows(i).Item("NamaCust")) & "' and periode='" & cboPeriode.SelectedValue & "'")
+
+                                    If (i Mod 200 = 0) Then
+                                        GC.Collect()
+                                    End If
+                                Next
+
+                                Call myCShowMessage.ShowInfo("IMPORT SELESAI!!")
+                            Else
+                                Call myCShowMessage.ShowWarning("Tidak ada data top khusus pada excel yang diimport tersebut")
+                            End If
                         End If
-                        Call myCDBConnection.CloseConn(CONN_.dbExcel, -1)
+                            Call myCDBConnection.CloseConn(CONN_.dbExcel, -1)
                     Else
                         Call myCShowMessage.ShowWarning("Sheet " & tbNamaSheet.Text & " tidak ada di file excel " & fileAttachment.path & "!")
                     End If
@@ -825,6 +1003,136 @@
             End If
         Catch ex As Exception
             Call myCShowMessage.ShowErrMsg("Pesan Error: " & ex.Message, "cboKriteria_SelectedIndexChanged Error")
+        End Try
+    End Sub
+
+    Private Sub btnProsesTOPKhusus_Click(sender As Object, e As EventArgs) Handles btnProsesTOPKhusus.Click
+        Try
+            If (cboPeriode.SelectedIndex <> -1) Then
+                Me.Cursor = Cursors.WaitCursor
+                Call myCDBConnection.OpenConn(CONN_.dbMain)
+
+                stSQL = "UPDATE " & CONN_.schemaKomisi & ".trpenjualanperoutlet as penj set topkhusus=topk.topkhusus,updated_at=clock_timestamp() from " & CONN_.schemaKomisi & ".mstopkhusus as topk where penj.periode='" & cboPeriode.SelectedValue & "' and penj.kodecustomer=topk.kodecustomer;"
+                Call myCDBOperation.ExecuteCmd(CONN_.dbMain, CONN_.comm, stSQL)
+
+                Call myCShowMessage.ShowInfo("DONE!!")
+            Else
+                Call myCShowMessage.ShowWarning("Silahkan tentukan periodenya terlebih dahulu!!")
+                cboPeriode.Focus()
+            End If
+        Catch ex As Exception
+            Call myCShowMessage.ShowErrMsg("Pesan Error: " & ex.Message, "btnProsesTOPKhusus_Click Error")
+        Finally
+            If (cboPeriode.SelectedIndex <> -1) Then
+                Call myCDBConnection.CloseConn(CONN_.dbMain, -1)
+                Me.Cursor = Cursors.Default
+            End If
+        End Try
+    End Sub
+
+    Private Sub btnProsesOverdue_Click(sender As Object, e As EventArgs) Handles btnProsesOverdue.Click
+        Try
+            If (cboPeriode.SelectedIndex <> -1) Then
+                Me.Cursor = Cursors.WaitCursor
+                Call myCDBConnection.OpenConn(CONN_.dbMain)
+
+                stSQL = "UPDATE " & CONN_.schemaKomisi & ".trpenjualanperoutlet set overdue=jmlharilunas-topkhusus,updated_at=clock_timestamp() where periode='" & cboPeriode.SelectedValue & "' and jmlharilunas is not null and topkhusus is not null;"
+                Call myCDBOperation.ExecuteCmd(CONN_.dbMain, CONN_.comm, stSQL)
+
+                Call myCShowMessage.ShowInfo("DONE!!")
+            Else
+                Call myCShowMessage.ShowWarning("Silahkan tentukan periodenya terlebih dahulu!!")
+                cboPeriode.Focus()
+            End If
+        Catch ex As Exception
+            Call myCShowMessage.ShowErrMsg("Pesan Error: " & ex.Message, "btnProsesOverdue_Click Error")
+        Finally
+            If (cboPeriode.SelectedIndex <> -1) Then
+                Call myCDBConnection.CloseConn(CONN_.dbMain, -1)
+                Me.Cursor = Cursors.Default
+            End If
+        End Try
+    End Sub
+
+    Private Sub btnProsesRekap_Click(sender As Object, e As EventArgs) Handles btnProsesRekap.Click
+        Try
+            If (cboPeriode.SelectedIndex <> -1) Then
+                Dim lanjut As Boolean
+                Dim myDataTableSales As New DataTable
+                Dim target As String
+                Me.Cursor = Cursors.WaitCursor
+                Call myCDBConnection.OpenConn(CONN_.dbMain)
+
+                isExist = myCDBOperation.IsExistRecords(CONN_.dbMain, CONN_.comm, CONN_.reader, "rid", CONN_.schemaKomisi & ".trrekapsales", "periode='" & cboPeriode.SelectedValue & "'")
+
+                If (isExist) Then
+                    Dim isConfirm = myCShowMessage.GetUserResponse("apakah mau memproses ulang data rekap sales untuk periode " & cboPeriode.SelectedValue & "?")
+                    If (isConfirm = DialogResult.Yes) Then
+                        Call myCDBOperation.DelDbRecords(CONN_.dbMain, CONN_.comm, CONN_.schemaKomisi & ".trrekapsales", "periode='" & cboPeriode.SelectedValue & "'", CONN_.dbType)
+                        lanjut = True
+                    Else
+                        lanjut = False
+                    End If
+                Else
+                    lanjut = True
+                End If
+
+                If (lanjut) Then
+                    stSQL = "SELECT kodesales,namasales,'" & cboPeriode.SelectedValue & "' as periode, '" & USER_.username & "' as userid FROM " & CONN_.schemaKomisi & ".mssales WHERE company='SRF' ORDER BY namasales;"
+                    myDataTableSales = myCDBOperation.GetDataTableUsingReader(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, "T_Sales")
+                    myDataTableSales.Columns.Add("target", GetType(Double))
+                    myDataTableSales.Columns.Add("omzet", GetType(Double))
+                    myDataTableSales.Columns.Add("omzetlm", GetType(Double))
+                    myDataTableSales.Columns.Add("omzetbr", GetType(Double))
+                    myDataTableSales.Columns.Add("persenpencapaiansales", GetType(Double))
+                    myDataTableSales.Columns.Add("sppending", GetType(Double))
+                    myDataTableSales.Columns.Add("persensppending", GetType(Double))
+                    myDataTableSales.Columns.Add("overdue", GetType(Double))
+                    myDataTableSales.Columns.Add("hitomzet", GetType(Double))
+                    myDataTableSales.Columns.Add("totalpersen", GetType(Double))
+                    myDataTableSales.Columns.Add("komisireg", GetType(Double))
+                    myDataTableSales.Columns.Add("targetpimt", GetType(Double))
+                    myDataTableSales.Columns.Add("realpimt", GetType(Double))
+                    myDataTableSales.Columns.Add("persenpimt", GetType(Double))
+                    myDataTableSales.Columns.Add("kmspimt", GetType(Double))
+                    myDataTableSales.Columns.Add("totalkms", GetType(Double))
+
+                    For i As Integer = 0 To myDataTableSales.Rows.Count - 1
+                        target = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "nominal", CONN_.schemaKomisi & ".mstargetsales", "Sum", "kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and periode='" & cboPeriode.SelectedValue & "'")
+                        If Not IsNothing(target) Then
+                            myDataTableSales.Rows(i).Item("target") = target
+                            myDataTableSales.Rows(i).Item("omzet") = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "jumlah", CONN_.schemaKomisi & ".trpenjualanperoutlet", "Sum", "kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and periode='" & cboPeriode.SelectedValue & "'")
+                            myDataTableSales.Rows(i).Item("omzetlm") = 0
+                            myDataTableSales.Rows(i).Item("omzetbr") = myDataTableSales.Rows(i).Item("omzet") - myDataTableSales.Rows(i).Item("omzetlm")
+                            myDataTableSales.Rows(i).Item("persenpencapaiansales") = (myDataTableSales.Rows(i).Item("omzetbr") / myDataTableSales.Rows(i).Item("target")) * 100
+                            myDataTableSales.Rows(i).Item("sppending") = 0
+                            myDataTableSales.Rows(i).Item("persensppending") = (myDataTableSales.Rows(i).Item("sppending") / myDataTableSales.Rows(i).Item("target")) * 100
+                            myDataTableSales.Rows(i).Item("overdue") = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "jumlah", CONN_.schemaKomisi & ".trpenjualanperoutlet", "Sum", "kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and periode='" & cboPeriode.SelectedValue & "' and overdue>3 and ignoreoverdue=False")
+                            myDataTableSales.Rows(i).Item("hitomzet") = myDataTableSales.Rows(i).Item("omzet") - IIf(IsDBNull(myDataTableSales.Rows(i).Item("overdue")), 0, myDataTableSales.Rows(i).Item("overdue"))
+                            myDataTableSales.Rows(i).Item("totalpersen") = myDataTableSales.Rows(i).Item("persenpencapaiansales") + myDataTableSales.Rows(i).Item("persensppending")
+                            myDataTableSales.Rows(i).Item("komisireg") = 0
+                            myDataTableSales.Rows(i).Item("targetpimt") = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "qty", CONN_.schemaKomisi & ".mstargetsales", "Sum", "kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and periode='" & cboPeriode.SelectedValue & "' and kodeitem in('OJ0121','OJ0121A')")
+                            myDataTableSales.Rows(i).Item("realpimt") = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "(qtyub-bonus)", CONN_.schemaKomisi & ".trpenjualanperitem", "Sum", "kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and periode='" & cboPeriode.SelectedValue & "' and kodeitem in('OJ0121','OJ0121A')")
+                            myDataTableSales.Rows(i).Item("persenpimt") = (myDataTableSales.Rows(i).Item("realpimt") / myDataTableSales.Rows(i).Item("targetpimt")) * 100
+                        End If
+                    Next
+                    Call myCDBOperation.ConstructorInsertData(CONN_.dbMain, CONN_.comm, CONN_.reader, myDataTableSales, CONN_.schemaKomisi & ".trrekapsales")
+
+                    Call myCShowMessage.ShowInfo("DONE!!")
+                Else
+                    Call myCShowMessage.ShowInfo("Proses rekap sales dibatalkan!")
+                End If
+            Else
+                Call myCShowMessage.ShowWarning("Silahkan tentukan periodenya terlebih dahulu!!")
+                cboPeriode.Focus()
+            End If
+        Catch ex As Exception
+            Call myCShowMessage.ShowErrMsg("Pesan Error: " & ex.Message, "btnProsesRekap_Click Error")
+        Finally
+            If (cboPeriode.SelectedIndex <> -1) Then
+                Call myCDBConnection.CloseConn(CONN_.dbMain, -1)
+                Me.Cursor = Cursors.Default
+            End If
         End Try
     End Sub
 End Class

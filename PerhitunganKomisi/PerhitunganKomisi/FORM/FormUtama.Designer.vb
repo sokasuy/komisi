@@ -25,7 +25,6 @@ Partial Class FormUtama
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormUtama))
         Me.mnStripUtama = New System.Windows.Forms.MenuStrip()
         Me.mnGroupMaster = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnImportData = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMasterGeneral = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnMasterSales = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnMasterTarget = New System.Windows.Forms.ToolStripMenuItem()
@@ -47,16 +46,10 @@ Partial Class FormUtama
         '
         'mnGroupMaster
         '
-        Me.mnGroupMaster.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnImportData, Me.msMasterGeneral, Me.mnMasterSales, Me.mnMasterTarget})
+        Me.mnGroupMaster.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.msMasterGeneral, Me.mnMasterSales, Me.mnMasterTarget})
         Me.mnGroupMaster.Name = "mnGroupMaster"
         Me.mnGroupMaster.Size = New System.Drawing.Size(63, 20)
         Me.mnGroupMaster.Text = "MASTER"
-        '
-        'mnImportData
-        '
-        Me.mnImportData.Name = "mnImportData"
-        Me.mnImportData.Size = New System.Drawing.Size(180, 22)
-        Me.mnImportData.Text = "Import Data"
         '
         'msMasterGeneral
         '
@@ -86,7 +79,7 @@ Partial Class FormUtama
         'mnOmzet
         '
         Me.mnOmzet.Name = "mnOmzet"
-        Me.mnOmzet.Size = New System.Drawing.Size(180, 22)
+        Me.mnOmzet.Size = New System.Drawing.Size(109, 22)
         Me.mnOmzet.Text = "Omzet"
         '
         'mnLogout
@@ -121,7 +114,6 @@ Partial Class FormUtama
 
     Friend WithEvents mnStripUtama As MenuStrip
     Friend WithEvents mnGroupMaster As ToolStripMenuItem
-    Friend WithEvents mnImportData As ToolStripMenuItem
     Friend WithEvents mnSales As ToolStripMenuItem
     Friend WithEvents mnOmzet As ToolStripMenuItem
     Friend WithEvents mnLogout As ToolStripMenuItem

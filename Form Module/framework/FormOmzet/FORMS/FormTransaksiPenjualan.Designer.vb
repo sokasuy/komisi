@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormTransaksiPenjualan
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FormTransaksiPenjualan
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormTransaksiPenjualan))
         Me.lblTitle = New System.Windows.Forms.Label()
@@ -31,12 +31,16 @@ Partial Class FormTransaksiPenjualan
         Me.lblNamaSheet = New System.Windows.Forms.Label()
         Me.tbNamaSheet = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.cboPeriodeImport = New System.Windows.Forms.ComboBox()
+        Me.rbDataPelunasan = New System.Windows.Forms.RadioButton()
+        Me.rbTOPKhususLuarKota = New System.Windows.Forms.RadioButton()
+        Me.rbTOPKhususDalamKota = New System.Windows.Forms.RadioButton()
+        Me.cboPeriode = New System.Windows.Forms.ComboBox()
         Me.lblPeriodeImport = New System.Windows.Forms.Label()
         Me.rbPenjualanPerItem = New System.Windows.Forms.RadioButton()
-        Me.rbPiutang = New System.Windows.Forms.RadioButton()
         Me.rbPenjualanPerOutlet = New System.Windows.Forms.RadioButton()
         Me.gbView = New System.Windows.Forms.GroupBox()
+        Me.tbSumJumlah = New System.Windows.Forms.TextBox()
+        Me.lblSum = New System.Windows.Forms.Label()
         Me.pnlNavigasi = New System.Windows.Forms.Panel()
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.btnFFBack = New System.Windows.Forms.Button()
@@ -66,8 +70,13 @@ Partial Class FormTransaksiPenjualan
         Me.clbUserRight = New System.Windows.Forms.CheckedListBox()
         Me.btnKeluar = New System.Windows.Forms.Button()
         Me.ofd1 = New System.Windows.Forms.OpenFileDialog()
-        Me.rbTOPKhususDalamKota = New System.Windows.Forms.RadioButton()
-        Me.rbTOPKhususLuarKota = New System.Windows.Forms.RadioButton()
+        Me.lblProsesTOPKhusus = New System.Windows.Forms.Label()
+        Me.btnProsesTOPKhusus = New System.Windows.Forms.Button()
+        Me.btnProsesOverdue = New System.Windows.Forms.Button()
+        Me.lblProsesOverdue = New System.Windows.Forms.Label()
+        Me.rbTmpTopKhusus = New System.Windows.Forms.RadioButton()
+        Me.btnProsesRekap = New System.Windows.Forms.Button()
+        Me.lblProsesRekap = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.gbView.SuspendLayout()
         Me.pnlNavigasi.SuspendLayout()
@@ -102,7 +111,7 @@ Partial Class FormTransaksiPenjualan
         Me.btnProsesImport.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnProsesImport.Image = CType(resources.GetObject("btnProsesImport.Image"), System.Drawing.Image)
         Me.btnProsesImport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnProsesImport.Location = New System.Drawing.Point(1060, 5)
+        Me.btnProsesImport.Location = New System.Drawing.Point(913, 5)
         Me.btnProsesImport.Name = "btnProsesImport"
         Me.btnProsesImport.Size = New System.Drawing.Size(120, 54)
         Me.btnProsesImport.TabIndex = 246
@@ -145,12 +154,11 @@ Partial Class FormTransaksiPenjualan
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.rbTmpTopKhusus)
+        Me.Panel1.Controls.Add(Me.rbDataPelunasan)
         Me.Panel1.Controls.Add(Me.rbTOPKhususLuarKota)
         Me.Panel1.Controls.Add(Me.rbTOPKhususDalamKota)
-        Me.Panel1.Controls.Add(Me.cboPeriodeImport)
-        Me.Panel1.Controls.Add(Me.lblPeriodeImport)
         Me.Panel1.Controls.Add(Me.rbPenjualanPerItem)
-        Me.Panel1.Controls.Add(Me.rbPiutang)
         Me.Panel1.Controls.Add(Me.rbPenjualanPerOutlet)
         Me.Panel1.Controls.Add(Me.tbNamaFile)
         Me.Panel1.Controls.Add(Me.tbNamaSheet)
@@ -158,27 +166,57 @@ Partial Class FormTransaksiPenjualan
         Me.Panel1.Controls.Add(Me.btnBrowse)
         Me.Panel1.Controls.Add(Me.lblNamaFile)
         Me.Panel1.Controls.Add(Me.btnProsesImport)
-        Me.Panel1.Location = New System.Drawing.Point(12, 427)
+        Me.Panel1.Location = New System.Drawing.Point(12, 449)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1185, 62)
+        Me.Panel1.Size = New System.Drawing.Size(1189, 62)
         Me.Panel1.TabIndex = 250
         '
-        'cboPeriodeImport
+        'rbDataPelunasan
         '
-        Me.cboPeriodeImport.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cboPeriodeImport.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cboPeriodeImport.FormattingEnabled = True
-        Me.cboPeriodeImport.IntegralHeight = False
-        Me.cboPeriodeImport.Location = New System.Drawing.Point(557, 28)
-        Me.cboPeriodeImport.Name = "cboPeriodeImport"
-        Me.cboPeriodeImport.Size = New System.Drawing.Size(131, 21)
-        Me.cboPeriodeImport.TabIndex = 253
+        Me.rbDataPelunasan.AutoSize = True
+        Me.rbDataPelunasan.Location = New System.Drawing.Point(647, 42)
+        Me.rbDataPelunasan.Name = "rbDataPelunasan"
+        Me.rbDataPelunasan.Size = New System.Drawing.Size(101, 17)
+        Me.rbDataPelunasan.TabIndex = 257
+        Me.rbDataPelunasan.Text = "Data Pelunasan"
+        Me.rbDataPelunasan.UseVisualStyleBackColor = True
+        '
+        'rbTOPKhususLuarKota
+        '
+        Me.rbTOPKhususLuarKota.AutoSize = True
+        Me.rbTOPKhususLuarKota.Location = New System.Drawing.Point(647, 24)
+        Me.rbTOPKhususLuarKota.Name = "rbTOPKhususLuarKota"
+        Me.rbTOPKhususLuarKota.Size = New System.Drawing.Size(134, 17)
+        Me.rbTOPKhususLuarKota.TabIndex = 256
+        Me.rbTOPKhususLuarKota.Text = "TOP Khusus Luar Kota"
+        Me.rbTOPKhususLuarKota.UseVisualStyleBackColor = True
+        '
+        'rbTOPKhususDalamKota
+        '
+        Me.rbTOPKhususDalamKota.AutoSize = True
+        Me.rbTOPKhususDalamKota.Location = New System.Drawing.Point(647, 4)
+        Me.rbTOPKhususDalamKota.Name = "rbTOPKhususDalamKota"
+        Me.rbTOPKhususDalamKota.Size = New System.Drawing.Size(143, 17)
+        Me.rbTOPKhususDalamKota.TabIndex = 255
+        Me.rbTOPKhususDalamKota.Text = "TOP Khusus Dalam Kota"
+        Me.rbTOPKhususDalamKota.UseVisualStyleBackColor = True
+        '
+        'cboPeriode
+        '
+        Me.cboPeriode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cboPeriode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cboPeriode.FormattingEnabled = True
+        Me.cboPeriode.IntegralHeight = False
+        Me.cboPeriode.Location = New System.Drawing.Point(70, 422)
+        Me.cboPeriode.Name = "cboPeriode"
+        Me.cboPeriode.Size = New System.Drawing.Size(131, 21)
+        Me.cboPeriode.TabIndex = 253
         '
         'lblPeriodeImport
         '
         Me.lblPeriodeImport.AutoSize = True
         Me.lblPeriodeImport.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.lblPeriodeImport.Location = New System.Drawing.Point(554, 10)
+        Me.lblPeriodeImport.Location = New System.Drawing.Point(11, 424)
         Me.lblPeriodeImport.Name = "lblPeriodeImport"
         Me.lblPeriodeImport.Size = New System.Drawing.Size(53, 15)
         Me.lblPeriodeImport.TabIndex = 254
@@ -187,31 +225,22 @@ Partial Class FormTransaksiPenjualan
         'rbPenjualanPerItem
         '
         Me.rbPenjualanPerItem.AutoSize = True
-        Me.rbPenjualanPerItem.Location = New System.Drawing.Point(715, 24)
+        Me.rbPenjualanPerItem.Location = New System.Drawing.Point(519, 24)
         Me.rbPenjualanPerItem.Name = "rbPenjualanPerItem"
         Me.rbPenjualanPerItem.Size = New System.Drawing.Size(113, 17)
         Me.rbPenjualanPerItem.TabIndex = 252
         Me.rbPenjualanPerItem.Text = "Penjualan per Item"
         Me.rbPenjualanPerItem.UseVisualStyleBackColor = True
         '
-        'rbPiutang
-        '
-        Me.rbPiutang.AutoSize = True
-        Me.rbPiutang.Location = New System.Drawing.Point(715, 42)
-        Me.rbPiutang.Name = "rbPiutang"
-        Me.rbPiutang.Size = New System.Drawing.Size(61, 17)
-        Me.rbPiutang.TabIndex = 251
-        Me.rbPiutang.Text = "Piutang"
-        Me.rbPiutang.UseVisualStyleBackColor = True
-        '
         'rbPenjualanPerOutlet
         '
         Me.rbPenjualanPerOutlet.AutoSize = True
         Me.rbPenjualanPerOutlet.Checked = True
-        Me.rbPenjualanPerOutlet.Location = New System.Drawing.Point(715, 6)
+        Me.rbPenjualanPerOutlet.Location = New System.Drawing.Point(519, 6)
         Me.rbPenjualanPerOutlet.Name = "rbPenjualanPerOutlet"
         Me.rbPenjualanPerOutlet.Size = New System.Drawing.Size(122, 17)
         Me.rbPenjualanPerOutlet.TabIndex = 250
+        Me.rbPenjualanPerOutlet.TabStop = True
         Me.rbPenjualanPerOutlet.Text = "Penjualan Per Outlet"
         Me.rbPenjualanPerOutlet.UseVisualStyleBackColor = True
         '
@@ -219,6 +248,8 @@ Partial Class FormTransaksiPenjualan
         '
         Me.gbView.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.gbView.Controls.Add(Me.tbSumJumlah)
+        Me.gbView.Controls.Add(Me.lblSum)
         Me.gbView.Controls.Add(Me.pnlNavigasi)
         Me.gbView.Controls.Add(Me.dgvView)
         Me.gbView.Location = New System.Drawing.Point(12, 98)
@@ -227,6 +258,25 @@ Partial Class FormTransaksiPenjualan
         Me.gbView.TabIndex = 251
         Me.gbView.TabStop = False
         Me.gbView.Text = "VIEW"
+        '
+        'tbSumJumlah
+        '
+        Me.tbSumJumlah.BackColor = System.Drawing.Color.LemonChiffon
+        Me.tbSumJumlah.Location = New System.Drawing.Point(1023, 288)
+        Me.tbSumJumlah.Name = "tbSumJumlah"
+        Me.tbSumJumlah.ReadOnly = True
+        Me.tbSumJumlah.Size = New System.Drawing.Size(156, 20)
+        Me.tbSumJumlah.TabIndex = 174
+        Me.tbSumJumlah.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'lblSum
+        '
+        Me.lblSum.AutoSize = True
+        Me.lblSum.Location = New System.Drawing.Point(934, 291)
+        Me.lblSum.Name = "lblSum"
+        Me.lblSum.Size = New System.Drawing.Size(83, 13)
+        Me.lblSum.TabIndex = 173
+        Me.lblSum.Text = "SUM JUMLAH :"
         '
         'pnlNavigasi
         '
@@ -507,7 +557,7 @@ Partial Class FormTransaksiPenjualan
         Me.btnKeluar.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnKeluar.Image = CType(resources.GetObject("btnKeluar.Image"), System.Drawing.Image)
         Me.btnKeluar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnKeluar.Location = New System.Drawing.Point(975, 28)
+        Me.btnKeluar.Location = New System.Drawing.Point(1081, 522)
         Me.btnKeluar.Name = "btnKeluar"
         Me.btnKeluar.Size = New System.Drawing.Size(120, 54)
         Me.btnKeluar.TabIndex = 252
@@ -518,32 +568,84 @@ Partial Class FormTransaksiPenjualan
         'ofd1
         '
         '
-        'rbTOPKhususDalamKota
+        'lblProsesTOPKhusus
         '
-        Me.rbTOPKhususDalamKota.AutoSize = True
-        Me.rbTOPKhususDalamKota.Location = New System.Drawing.Point(843, 4)
-        Me.rbTOPKhususDalamKota.Name = "rbTOPKhususDalamKota"
-        Me.rbTOPKhususDalamKota.Size = New System.Drawing.Size(143, 17)
-        Me.rbTOPKhususDalamKota.TabIndex = 255
-        Me.rbTOPKhususDalamKota.Text = "TOP Khusus Dalam Kota"
-        Me.rbTOPKhususDalamKota.UseVisualStyleBackColor = True
+        Me.lblProsesTOPKhusus.AutoSize = True
+        Me.lblProsesTOPKhusus.Location = New System.Drawing.Point(16, 522)
+        Me.lblProsesTOPKhusus.Name = "lblProsesTOPKhusus"
+        Me.lblProsesTOPKhusus.Size = New System.Drawing.Size(114, 13)
+        Me.lblProsesTOPKhusus.TabIndex = 259
+        Me.lblProsesTOPKhusus.Text = "1. Proses TOP Khusus"
         '
-        'rbTOPKhususLuarKota
+        'btnProsesTOPKhusus
         '
-        Me.rbTOPKhususLuarKota.AutoSize = True
-        Me.rbTOPKhususLuarKota.Location = New System.Drawing.Point(843, 24)
-        Me.rbTOPKhususLuarKota.Name = "rbTOPKhususLuarKota"
-        Me.rbTOPKhususLuarKota.Size = New System.Drawing.Size(134, 17)
-        Me.rbTOPKhususLuarKota.TabIndex = 256
-        Me.rbTOPKhususLuarKota.Text = "TOP Khusus Luar Kota"
-        Me.rbTOPKhususLuarKota.UseVisualStyleBackColor = True
+        Me.btnProsesTOPKhusus.Location = New System.Drawing.Point(136, 517)
+        Me.btnProsesTOPKhusus.Name = "btnProsesTOPKhusus"
+        Me.btnProsesTOPKhusus.Size = New System.Drawing.Size(90, 23)
+        Me.btnProsesTOPKhusus.TabIndex = 260
+        Me.btnProsesTOPKhusus.Text = "1. PROSES"
+        Me.btnProsesTOPKhusus.UseVisualStyleBackColor = True
+        '
+        'btnProsesOverdue
+        '
+        Me.btnProsesOverdue.Location = New System.Drawing.Point(136, 546)
+        Me.btnProsesOverdue.Name = "btnProsesOverdue"
+        Me.btnProsesOverdue.Size = New System.Drawing.Size(90, 23)
+        Me.btnProsesOverdue.TabIndex = 262
+        Me.btnProsesOverdue.Text = "2. PROSES"
+        Me.btnProsesOverdue.UseVisualStyleBackColor = True
+        '
+        'lblProsesOverdue
+        '
+        Me.lblProsesOverdue.AutoSize = True
+        Me.lblProsesOverdue.Location = New System.Drawing.Point(16, 551)
+        Me.lblProsesOverdue.Name = "lblProsesOverdue"
+        Me.lblProsesOverdue.Size = New System.Drawing.Size(95, 13)
+        Me.lblProsesOverdue.TabIndex = 261
+        Me.lblProsesOverdue.Text = "2. Proses Overdue"
+        '
+        'rbTmpTopKhusus
+        '
+        Me.rbTmpTopKhusus.AutoSize = True
+        Me.rbTmpTopKhusus.Location = New System.Drawing.Point(796, 7)
+        Me.rbTmpTopKhusus.Name = "rbTmpTopKhusus"
+        Me.rbTmpTopKhusus.Size = New System.Drawing.Size(111, 17)
+        Me.rbTmpTopKhusus.TabIndex = 258
+        Me.rbTmpTopKhusus.Text = "TMP TOP Khusus"
+        Me.rbTmpTopKhusus.UseVisualStyleBackColor = True
+        '
+        'btnProsesRekap
+        '
+        Me.btnProsesRekap.Location = New System.Drawing.Point(380, 517)
+        Me.btnProsesRekap.Name = "btnProsesRekap"
+        Me.btnProsesRekap.Size = New System.Drawing.Size(90, 23)
+        Me.btnProsesRekap.TabIndex = 264
+        Me.btnProsesRekap.Text = "3. PROSES"
+        Me.btnProsesRekap.UseVisualStyleBackColor = True
+        '
+        'lblProsesRekap
+        '
+        Me.lblProsesRekap.AutoSize = True
+        Me.lblProsesRekap.Location = New System.Drawing.Point(260, 522)
+        Me.lblProsesRekap.Name = "lblProsesRekap"
+        Me.lblProsesRekap.Size = New System.Drawing.Size(86, 13)
+        Me.lblProsesRekap.TabIndex = 263
+        Me.lblProsesRekap.Text = "3. Proses Rekap"
         '
         'FormTransaksiPenjualan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(1209, 496)
+        Me.ClientSize = New System.Drawing.Size(1209, 576)
+        Me.Controls.Add(Me.btnProsesRekap)
+        Me.Controls.Add(Me.lblProsesRekap)
+        Me.Controls.Add(Me.btnProsesOverdue)
+        Me.Controls.Add(Me.lblProsesOverdue)
+        Me.Controls.Add(Me.btnProsesTOPKhusus)
+        Me.Controls.Add(Me.cboPeriode)
+        Me.Controls.Add(Me.lblPeriodeImport)
+        Me.Controls.Add(Me.lblProsesTOPKhusus)
         Me.Controls.Add(Me.pnlTanggal)
         Me.Controls.Add(Me.clbUserRight)
         Me.Controls.Add(Me.cboCariPeriode)
@@ -568,6 +670,7 @@ Partial Class FormTransaksiPenjualan
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.gbView.ResumeLayout(False)
+        Me.gbView.PerformLayout()
         Me.pnlNavigasi.ResumeLayout(False)
         Me.pnlNavigasi.PerformLayout()
         CType(Me.dgvView, System.ComponentModel.ISupportInitialize).EndInit()
@@ -610,7 +713,6 @@ Partial Class FormTransaksiPenjualan
     Friend WithEvents btnKeluar As Button
     Friend WithEvents ofd1 As OpenFileDialog
     Friend WithEvents rbPenjualanPerOutlet As RadioButton
-    Friend WithEvents rbPiutang As RadioButton
     Friend WithEvents rbPenjualanPerItem As RadioButton
     Friend WithEvents rbCariPenjualanPerOutlet As RadioButton
     Friend WithEvents rbCariPenjualanPerItem As RadioButton
@@ -618,9 +720,19 @@ Partial Class FormTransaksiPenjualan
     Friend WithEvents lblSD As Label
     Friend WithEvents dtpAkhir As DateTimePicker
     Friend WithEvents dtpAwal As DateTimePicker
-    Friend WithEvents cboPeriodeImport As ComboBox
-    Friend WithEvents lblPeriodeImport As Label
     Friend WithEvents cboCariPeriode As ComboBox
     Friend WithEvents rbTOPKhususDalamKota As RadioButton
     Friend WithEvents rbTOPKhususLuarKota As RadioButton
+    Friend WithEvents lblSum As Label
+    Friend WithEvents tbSumJumlah As TextBox
+    Friend WithEvents lblProsesTOPKhusus As Label
+    Friend WithEvents btnProsesTOPKhusus As Button
+    Friend WithEvents btnProsesOverdue As Button
+    Friend WithEvents lblProsesOverdue As Label
+    Friend WithEvents rbDataPelunasan As RadioButton
+    Friend WithEvents cboPeriode As ComboBox
+    Friend WithEvents lblPeriodeImport As Label
+    Friend WithEvents rbTmpTopKhusus As RadioButton
+    Friend WithEvents btnProsesRekap As Button
+    Friend WithEvents lblProsesRekap As Label
 End Class
