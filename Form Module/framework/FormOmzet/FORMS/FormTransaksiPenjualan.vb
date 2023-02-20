@@ -28,6 +28,8 @@
     Private myBindingPeriode As New BindingSource
     Private myDataTableCboCariSales As New DataTable
     Private myBindingCariSales As New BindingSource
+    Private myDataTableCboSalesCetak As New DataTable
+    Private myBindingSalesCetak As New BindingSource
     Private myDataTableCboPeriodeImport As New DataTable
     Private myBindingPeriodeImport As New BindingSource
     Private myDataTableColumnNames As New DataTable
@@ -68,7 +70,7 @@
     Private fileAttachment As fileTempel
     Private T_rekapSales As rekapSales
 
-    Public Sub New(_dbType As String, _schemaTmp As String, _schemaKomisi As String, _connMain As Object, _connSQL As Object, _username As String, _superuser As Boolean, _dtTableUserRights As DataTable, _addNewValues As String, _addNewFields As String, _addUpdateString As String)
+    Public Sub New(_dbType As String, _schemaTmp As String, _schemaKomisi As String, _connMain As Object, _connSQL As Object, _username As String, _superuser As Boolean, _dtTableUserRights As DataTable, _addNewValues As String, _addNewFields As String, _addUpdateString As String, _company As String)
         Try
             ' This call is required by the designer.
             InitializeComponent()
@@ -85,6 +87,7 @@
             With USER_
                 .username = _username
                 .isSuperuser = _superuser
+                .company = _company
                 .T_USER_RIGHT = _dtTableUserRights
             End With
             With ADD_INFO_
@@ -116,8 +119,9 @@
             Call myCDBOperation.SetCbo_(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, myDataTableCboPeriode, myBindingPeriode, cboPeriode, "T_" & cboPeriode.Name, "keterangan", "keterangan", isCboPrepared)
             Call myCDBOperation.SetCbo_(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, myDataTableCboCariPeriode, myBindingCariPeriode, cboCariPeriode, "T_" & cboCariPeriode.Name, "keterangan", "keterangan", isCboPrepared, True)
 
-            stSQL = "SELECT kodesales,namasales,area FROM " & CONN_.schemaKomisi & ".mssales ORDER BY namasales;"
+            stSQL = "SELECT kodesales,namasales,area FROM " & CONN_.schemaKomisi & ".mssales WHERE company='" & USER_.company & "' ORDER BY namasales;"
             Call myCDBOperation.SetCbo_(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, myDataTableCboCariSales, myBindingCariSales, cboCariSales, "T_" & cboCariSales.Name, "kodesales", "namasales", isCboPrepared)
+            Call myCDBOperation.SetCbo_(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, myDataTableCboSalesCetak, myBindingSalesCetak, cboSalesCetak, "T_" & cboSalesCetak.Name, "kodesales", "namasales", isCboPrepared, True)
 
             Call myCFormManipulation.SetCheckListBoxUserRights(clbUserRight, USER_.isSuperuser, Me.Name, USER_.T_USER_RIGHT)
             'Call myCFormManipulation.SetButtonSimpanAvailabilty(btnSimpan, clbUserRight, "load")
@@ -197,7 +201,7 @@
                 mGroupCriteria = " AND (tbl.kodesales='" & myCStringManipulation.SafeSqlLiteral(cboCariSales.SelectedValue) & "')"
             End If
 
-            If (mSelectedCriteria = "NAMACUSTOMER" Or mSelectedCriteria = "NONOTA" Or mSelectedCriteria = "NAMABARANG" Or mSelectedCriteria = "KODEBARANG") Then
+            If (mSelectedCriteria = "NAMACUSTOMER" Or mSelectedCriteria = "NONOTA" Or mSelectedCriteria = "NAMAITEM" Or mSelectedCriteria = "KODEITEM") Then
                 mWhereString = "(upper(tbl." & mSelectedCriteria & ") LIKE '%" & mKriteria.ToUpper & "%') "
             ElseIf (mSelectedCriteria = "PERIODE") Then
                 mWhereString = "(upper(tbl." & mSelectedCriteria & ") = '" & myCStringManipulation.SafeSqlLiteral(cboCariPeriode.SelectedValue) & "') "
@@ -349,11 +353,11 @@
                 End With
             ElseIf (rbCariPenjualanPerItem.Checked) Then
                 contentView = "PENJUALAN PER ITEM"
-                stSQL = "SELECT rid,kodesales as kode_sales,namasales as nama_sales,periode,kodeitem as kode_item,namabarang as nama_item,qtyub as qty_ub,qtyuk as qty_uk,bonus,jumlah,discount,netto,created_at,updated_at " &
+                stSQL = "SELECT rid,kodesales as kode_sales,namasales as nama_sales,periode,kodeitem as kode_item,namaitem as nama_item,qtyub as qty_ub,qtyuk as qty_uk,bonus,jumlah,discount,netto,created_at,updated_at " &
                     "FROM ( " &
-                        "SELECT sub.rid,sub.kodesales,sub.namasales,sub.periode,sub.kodeitem,sub.namabarang,sub.qtyub,sub.qtyuk,sub.bonus,sub.jumlah,sub.discount,sub.netto,sub.created_at,sub.updated_at " &
+                        "SELECT sub.rid,sub.kodesales,sub.namasales,sub.periode,sub.kodeitem,sub.namaitem,sub.qtyub,sub.qtyuk,sub.bonus,sub.jumlah,sub.discount,sub.netto,sub.created_at,sub.updated_at " &
                         "FROM ( " &
-                            "SELECT tbl.rid,tbl.kodesales,tbl.namasales,tbl.periode,tbl.kodeitem,tbl.namabarang,tbl.qtyub,tbl.qtyuk,tbl.bonus,(tbl.qtyub-tbl.bonus) as jumlah,tbl.discount,tbl.netto,tbl.created_at,tbl.updated_at " &
+                            "SELECT tbl.rid,tbl.kodesales,tbl.namasales,tbl.periode,tbl.kodeitem,tbl.namaitem,tbl.qtyub,tbl.qtyuk,tbl.bonus,(tbl.qtyub-tbl.bonus) as jumlah,tbl.discount,tbl.netto,tbl.created_at,tbl.updated_at " &
                             "FROM " & tableName(1) & " as tbl " &
                             "WHERE (" & mWhereString & " ) " & mGroupCriteria & " " &
                             "ORDER BY " & IIf(IsNothing(sortingCols), "(case when tbl.updated_at is null then tbl.created_at else tbl.updated_at end) DESC, tbl.rid DESC ", sortingCols & " " & sortingType) & " " &
@@ -814,7 +818,7 @@
                             'Dim kodeCust As String
                             Dim tblName As String
                             Dim myDataTableInfoNota As New DataTable
-                            stSQL = "SELECT KodeSales,NamaSales,'' as KodeCustomer,NamaCust as namacustomer,Tanggal as tglnota,NoNota,Nilai,Pot1,Pot2,DPP,PPN,PPH,JUMLAH,'" & cboPeriode.SelectedValue & "' as PERIODE, '" & USER_.username & "' as userid FROM [" & myCStringManipulation.SafeSqlLiteral(tbNamaSheet.Text, 1) & "$] WHERE NoNota is not null ORDER BY NamaSales,NoNota;"
+                            stSQL = "SELECT KodeSales,NamaSales,'' as KodeCustomer,NamaCust as namacustomer,Tanggal as tglnota,NoNota,Nilai,Pot1,Pot2,DPP,PPN,PPH,JUMLAH,'" & cboPeriode.SelectedValue & "' as PERIODE, '" & USER_.username & "' as userid,'" & USER_.company & "' as company FROM [" & myCStringManipulation.SafeSqlLiteral(tbNamaSheet.Text, 1) & "$] WHERE NoNota is not null ORDER BY NamaSales,NoNota;"
                             myDataTableExcel = myCDBOperation.GetDataTableUsingReader(CONN_.dbExcel, CONN_.comm, CONN_.reader, stSQL, "tbl_omzet_" & cboPeriode.SelectedValue)
                             myDataTableExcel.Columns("KodeCustomer").ReadOnly = False
                             myDataTableExcel.Columns.Add("tgljatuhtempo", GetType(Date))
@@ -853,7 +857,7 @@
                         ElseIf (rbPenjualanPerItem.Checked) Then
                             Dim kodeSales As String = Nothing
                             Dim namaSales As String = Nothing
-                            stSQL = "SELECT '' as KodeSales,NamaSales,KodeBrg as kodeitem,NamaBrg as namaitem,QtyUB,QtyUK,Bonus,Discount,Netto, '" & cboPeriode.SelectedValue & "' as PERIODE, '" & USER_.username & "' as userid FROM [" & myCStringManipulation.SafeSqlLiteral(tbNamaSheet.Text, 1) & "$] WHERE KodeBrg is not null ORDER BY NamaSales,NamaBrg;"
+                            stSQL = "SELECT '' as KodeSales,NamaSales,KodeBrg as kodeitem,NamaBrg as namaitem,QtyUB,QtyUK,Bonus,Discount,Netto, '" & cboPeriode.SelectedValue & "' as PERIODE, '" & USER_.username & "' as userid,'" & USER_.company & "' as company FROM [" & myCStringManipulation.SafeSqlLiteral(tbNamaSheet.Text, 1) & "$] WHERE KodeBrg is not null ORDER BY NamaSales,NamaBrg;"
                             myDataTableExcel = myCDBOperation.GetDataTableUsingReader(CONN_.dbExcel, CONN_.comm, CONN_.reader, stSQL, "tbl_omzet_" & cboPeriode.SelectedValue)
                             myDataTableExcel.Columns("KodeSales").ReadOnly = False
                             If (myDataTableExcel.Rows.Count > 0) Then
@@ -995,7 +999,7 @@
             If (rbCariPenjualanPerOutlet.Checked) Then
                 arrCbo = {"NAMA CUSTOMER", "NO NOTA", "TGL NOTA", "PERIODE"}
             ElseIf (rbCariPenjualanPerItem.Checked) Then
-                arrCbo = {"KODE BARANG", "NAMA BARANG"}
+                arrCbo = {"KODE ITEM", "NAMA ITEM"}
             End If
             cboKriteria.Items.AddRange(arrCbo)
             cboKriteria.SelectedIndex = 0
@@ -1117,6 +1121,7 @@
                 myDataTableSales.Columns.Add("persenpimt", GetType(Double))
                 myDataTableSales.Columns.Add("kmspimt", GetType(Double))
                 myDataTableSales.Columns.Add("totalkms", GetType(Double))
+                myDataTableSales.Columns.Add("isnew", GetType(Boolean))
 
                 For i As Integer = 0 To myDataTableSales.Rows.Count - 1
                     isExist = myCDBOperation.IsExistRecords(CONN_.dbMain, CONN_.comm, CONN_.reader, "rid", CONN_.schemaKomisi & ".trrekapsales", "periode='" & cboPeriode.SelectedValue & "' and kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "'")
@@ -1147,29 +1152,35 @@
                         T_rekapSales.persenpimt = -1
                     End If
 
+                    myDataTableSales.Rows(i).Item("target") = IIf(IsNothing(T_rekapSales.target), 0, T_rekapSales.target)
+                    myDataTableSales.Rows(i).Item("omzet") = IIf(IsNothing(T_rekapSales.omzet), 0, T_rekapSales.omzet)
+                    myDataTableSales.Rows(i).Item("omzetlm") = T_rekapSales.omzetlm
+                    myDataTableSales.Rows(i).Item("omzetbr") = T_rekapSales.omzetbr
+                    myDataTableSales.Rows(i).Item("persenpencapaiansales") = IIf(T_rekapSales.persenpencapaiansales = -1, 0, T_rekapSales.persenpencapaiansales)
+                    myDataTableSales.Rows(i).Item("sppending") = T_rekapSales.sppending
+                    myDataTableSales.Rows(i).Item("persensppending") = IIf(T_rekapSales.persensppending = -1, 0, T_rekapSales.persensppending)
+                    myDataTableSales.Rows(i).Item("overdue") = IIf(IsNothing(T_rekapSales.overdue), 0, T_rekapSales.overdue)
+                    myDataTableSales.Rows(i).Item("hitomzet") = T_rekapSales.hitomzet
+                    myDataTableSales.Rows(i).Item("totalpersen") = T_rekapSales.totalpersen
+                    myDataTableSales.Rows(i).Item("komisireg") = 0
+                    myDataTableSales.Rows(i).Item("targetpimt") = IIf(IsNothing(T_rekapSales.targetpimt), 0, T_rekapSales.targetpimt)
+                    myDataTableSales.Rows(i).Item("realpimt") = IIf(IsNothing(T_rekapSales.realpimt), 0, T_rekapSales.realpimt)
+                    myDataTableSales.Rows(i).Item("persenpimt") = IIf(T_rekapSales.persenpimt = -1, 0, T_rekapSales.persenpimt)
+
                     If Not isExist Then
                         'kalau masih belum ada
-                        myDataTableSales.Rows(i).Item("target") = IIf(IsNothing(T_rekapSales.target), 0, T_rekapSales.target)
-                        myDataTableSales.Rows(i).Item("omzet") = IIf(IsNothing(T_rekapSales.omzet), 0, T_rekapSales.omzet)
-                        myDataTableSales.Rows(i).Item("omzetlm") = T_rekapSales.omzetlm
-                        myDataTableSales.Rows(i).Item("omzetbr") = T_rekapSales.omzetbr
-                        myDataTableSales.Rows(i).Item("persenpencapaiansales") = IIf(T_rekapSales.persenpencapaiansales = -1, 0, T_rekapSales.persenpencapaiansales)
-                        myDataTableSales.Rows(i).Item("sppending") = T_rekapSales.sppending
-                        myDataTableSales.Rows(i).Item("persensppending") = IIf(T_rekapSales.persensppending = -1, 0, T_rekapSales.persensppending)
-                        myDataTableSales.Rows(i).Item("overdue") = IIf(IsNothing(T_rekapSales.overdue), 0, T_rekapSales.overdue)
-                        myDataTableSales.Rows(i).Item("hitomzet") = T_rekapSales.hitomzet
-                        myDataTableSales.Rows(i).Item("totalpersen") = T_rekapSales.totalpersen
-                        myDataTableSales.Rows(i).Item("komisireg") = 0
-                        myDataTableSales.Rows(i).Item("targetpimt") = IIf(IsNothing(T_rekapSales.targetpimt), 0, T_rekapSales.targetpimt)
-                        myDataTableSales.Rows(i).Item("realpimt") = IIf(IsNothing(T_rekapSales.realpimt), 0, T_rekapSales.realpimt)
-                        myDataTableSales.Rows(i).Item("persenpimt") = IIf(T_rekapSales.persenpimt = -1, 0, T_rekapSales.persenpimt)
+                        'Langsung add new
+                        myDataTableSales.Rows(i).Item("isnew") = True
                     Else
-                        'Kalau sudah ada
+                        'Kalau sudah ada, update saja
+                        myDataTableSales.Rows(i).Item("isnew") = False
+                        updateString = "target=" & myDataTableSales.Rows(i).Item("target") & ",omzet=" & myDataTableSales.Rows(i).Item("omzet") & ",omzetlm=" & myDataTableSales.Rows(i).Item("omzetlm") & ",omzetbr=" & myDataTableSales.Rows(i).Item("omzetbr") & ",persenpencapaiansales=" & myDataTableSales.Rows(i).Item("persenpencapaiansales") & ",sppending=" & myDataTableSales.Rows(i).Item("sppending") & ",persensppending=" & myDataTableSales.Rows(i).Item("persensppending")
+                        updateString &= ",overdue=" & myDataTableSales.Rows(i).Item("overdue") & ",hitomzet=" & myDataTableSales.Rows(i).Item("hitomzet") & ",totalpersen=" & myDataTableSales.Rows(i).Item("totalpersen") & ",komisireg=" & myDataTableSales.Rows(i).Item("komisireg") & ",targetpimt=" & myDataTableSales.Rows(i).Item("targetpimt") & ",realpimt=" & myDataTableSales.Rows(i).Item("realpimt") & ",persenpimt=" & myDataTableSales.Rows(i).Item("persenpimt")
+                        Call myCDBOperation.UpdateData(CONN_.dbMain, CONN_.comm, CONN_.schemaKomisi & ".trrekapsales", updateString, "kodesales='" & myDataTableSales.Rows(i).Item("kodesales") & "' and periode='" & cboPeriode.SelectedValue & "'")
                     End If
                 Next
-                If Not isExist Then
-                    Call myCDBOperation.ConstructorInsertData(CONN_.dbMain, CONN_.comm, CONN_.reader, myDataTableSales, CONN_.schemaKomisi & ".trrekapsales")
-                End If
+
+                Call myCDBOperation.ConstructorInsertData(CONN_.dbMain, CONN_.comm, CONN_.reader, myDataTableSales, CONN_.schemaKomisi & ".trrekapsales", , "isnew")
 
                 Call myCShowMessage.ShowInfo("DONE!!")
                 'Else
@@ -1196,7 +1207,10 @@
                 Select Case True
                     Case rbRekap.Checked
                         reportType = "RekapKomisi"
-                        stSQL = "SELECT kodesales,namasales,periode,target,omzet,omzetlm,omzetbr,persenpencapaiansales,sppending,persensppending,overdue,hitomzet,totalpersen,komisireg,targetpimt,realpimt,persenpimt,kmspimt,totalkms,(case when dalamkota=True then 'Dalam Kota' when luarkota=True then 'Luar Kota' else 'Lainnya' end) as cakupan FROM " & CONN_.schemaKomisi & ".trrekapsales WHERE periode='" & cboPeriode.SelectedValue & "' ORDER BY namasales;"
+                        stSQL = "SELECT kodesales,namasales,periode,target,omzet,omzetlm,omzetbr,persenpencapaiansales,sppending,persensppending,overdue,hitomzet,totalpersen,komisireg,targetpimt,realpimt,persenpimt,kmspimt,totalkms,(case when dalamkota=True then '1. Dalam Kota' when luarkota=True then '2. Luar Kota' else 'Lainnya' end) as cakupan FROM " & CONN_.schemaKomisi & ".trrekapsales WHERE periode='" & cboPeriode.SelectedValue & "' ORDER BY namasales;"
+                    Case rbPerhitunganKomisi.Checked
+                        reportType = "PerhitunganKomisi"
+                        stSQL = ""
                 End Select
                 If Not IsNothing(reportType) Then
                     Dim frmDisplayReport As New FormDisplayReport.FormDisplayReport(CONN_.dbType, CONN_.schemaTmp, CONN_.schemaKomisi, CONN_.dbMain, stSQL, reportType)
@@ -1211,6 +1225,19 @@
 
         Catch ex As Exception
             Call myCShowMessage.ShowErrMsg("Pesan Error: " & ex.Message, "btnProsesRekap_Click Error")
+        End Try
+    End Sub
+
+    Private Sub rbCetak_CheckedChanged(sender As Object, e As EventArgs) Handles rbRekap.CheckedChanged, rbPerhitunganKomisi.CheckedChanged, rbDetailPerOutlet.CheckedChanged, rbDetailPerItem.CheckedChanged
+        Try
+            Select Case True
+                Case rbRekap.Checked
+                    cboSalesCetak.Enabled = False
+                Case rbPerhitunganKomisi.Checked, rbDetailPerOutlet.Checked, rbDetailPerItem.Checked
+                    cboSalesCetak.Enabled = True
+            End Select
+        Catch ex As Exception
+            Call myCShowMessage.ShowErrMsg("Pesan Error: " & ex.Message, "rbCetak_CheckedChanged Error")
         End Try
     End Sub
 End Class

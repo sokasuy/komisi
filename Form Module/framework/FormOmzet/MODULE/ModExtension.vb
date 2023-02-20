@@ -32,6 +32,7 @@
     Public Structure UserInfo
         Dim username As String
         Dim name As String
+        Dim company As String
         Dim kodePegawai As String
         Dim isLogin As Boolean
         Dim isFirstAccount As Boolean

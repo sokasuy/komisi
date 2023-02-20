@@ -83,11 +83,12 @@
 
                 If (isExist) Then
                     USER_.username = Trim(tbUserID.Text)
-                    stSQL = "SELECT superuser,lokasi FROM " & CONN_.schemaKomisi & ".msuser WHERE userid='" & myCStringManipulation.SafeSqlLiteral(tbUserID.Text) & "'and passwd='" & myCStringManipulation.GetSHA1Hash(tbPassword.Text) & "'"
+                    stSQL = "SELECT superuser,lokasi,company FROM " & CONN_.schemaKomisi & ".msuser WHERE userid='" & myCStringManipulation.SafeSqlLiteral(tbUserID.Text) & "'and passwd='" & myCStringManipulation.GetSHA1Hash(tbPassword.Text) & "'"
                     myUserInformation = myCDBOperation.GetDataTableUsingReader(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, "T_UserInformation")
 
                     USER_.isSuperuser = myUserInformation.Rows(0).Item("superuser")
                     USER_.lokasi = myUserInformation.Rows(0).Item("lokasi")
+                    USER_.company = myUserInformation.Rows(0).Item("company")
 
                     Call myCShowMessage.ShowInfo("SELAMAT DATANG " & USER_.username.ToUpper, "WELCOME")
 

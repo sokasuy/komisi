@@ -2,6 +2,7 @@ G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterTarget\bin\Debug\F
 G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterTarget\bin\Debug\FormMasterTarget.dll
 G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterTarget\bin\Debug\FormMasterTarget.pdb
 G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterTarget\bin\Debug\FormMasterTarget.xml
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterTarget\obj\Debug\FormMasterTarget.vbproj.AssemblyReference.cache
 G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterTarget\obj\Debug\FormMasterTarget.FormMasterTarget.resources
 G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterTarget\obj\Debug\FormMasterTarget.Resources.resources
 G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterTarget\obj\Debug\FormMasterTarget.vbproj.GenerateResource.cache

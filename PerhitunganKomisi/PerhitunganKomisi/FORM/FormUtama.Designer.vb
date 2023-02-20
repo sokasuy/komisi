@@ -32,6 +32,7 @@ Partial Class FormUtama
         Me.mnOmzet = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnLogout = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnExit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnMasterECEO = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnStripUtama.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -46,7 +47,7 @@ Partial Class FormUtama
         '
         'mnGroupMaster
         '
-        Me.mnGroupMaster.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.msMasterGeneral, Me.mnMasterSales, Me.mnMasterTarget})
+        Me.mnGroupMaster.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.msMasterGeneral, Me.mnMasterSales, Me.mnMasterTarget, Me.mnMasterECEO})
         Me.mnGroupMaster.Name = "mnGroupMaster"
         Me.mnGroupMaster.Size = New System.Drawing.Size(63, 20)
         Me.mnGroupMaster.Text = "MASTER"
@@ -94,6 +95,12 @@ Partial Class FormUtama
         Me.mnExit.Size = New System.Drawing.Size(41, 20)
         Me.mnExit.Text = "EXIT"
         '
+        'mnMasterECEO
+        '
+        Me.mnMasterECEO.Name = "mnMasterECEO"
+        Me.mnMasterECEO.Size = New System.Drawing.Size(180, 22)
+        Me.mnMasterECEO.Text = "Master EC EO"
+        '
         'FormUtama
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -121,4 +128,5 @@ Partial Class FormUtama
     Friend WithEvents msMasterGeneral As ToolStripMenuItem
     Friend WithEvents mnMasterSales As ToolStripMenuItem
     Friend WithEvents mnMasterTarget As ToolStripMenuItem
+    Friend WithEvents mnMasterECEO As ToolStripMenuItem
 End Class

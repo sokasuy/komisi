@@ -32,6 +32,7 @@
         Dim username As String
         Dim name As String
         Dim kodePegawai As String
+        Dim company As String
         Dim isLogin As Boolean
         Dim isFirstAccount As Boolean
         Dim isSuperuser As Boolean

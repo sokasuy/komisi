@@ -86,6 +86,9 @@
     <Reference Include="FormDisplayReport">
       <HintPath>..\..\Form Module\framework\FormDisplayReport\FormDisplayReport\bin\Debug\FormDisplayReport.dll</HintPath>
     </Reference>
+    <Reference Include="FormMasterECEO">
+      <HintPath>..\..\Form Module\framework\FormMasterECEO\bin\Debug\FormMasterECEO.dll</HintPath>
+    </Reference>
     <Reference Include="FormMasterGeneral">
       <HintPath>..\..\Form Module\framework\FormMasterGeneral\bin\Debug\FormMasterGeneral.dll</HintPath>
     </Reference>

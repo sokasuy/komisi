@@ -132,12 +132,17 @@
     End Sub
 
     Private Sub mnMasterTarget_Click(sender As Object, e As EventArgs) Handles mnMasterTarget.Click
-        Dim frmMasterTarget As New FormMasterTarget.FormMasterTarget(CONN_.dbType, CONN_.schemaTmp, CONN_.schemaKomisi, CONN_.dbMain, USER_.username, USER_.isSuperuser, USER_.T_USER_RIGHT, ADD_INFO_.newValues, ADD_INFO_.newFields, ADD_INFO_.updateString)
+        Dim frmMasterTarget As New FormMasterTarget.FormMasterTarget(CONN_.dbType, CONN_.schemaTmp, CONN_.schemaKomisi, CONN_.dbMain, USER_.username, USER_.isSuperuser, USER_.T_USER_RIGHT, ADD_INFO_.newValues, ADD_INFO_.newFields, ADD_INFO_.updateString, USER_.company)
         Call myCFormManipulation.GoToForm(Me, frmMasterTarget)
     End Sub
 
     Private Sub mnOmzet_Click(sender As Object, e As EventArgs) Handles mnOmzet.Click
-        Dim frmMasterOmzet As New FormOmzet.FormTransaksiPenjualan(CONN_.dbType, CONN_.schemaTmp, CONN_.schemaKomisi, CONN_.dbMain, CONN_.dbSQL, USER_.username, USER_.isSuperuser, USER_.T_USER_RIGHT, ADD_INFO_.newValues, ADD_INFO_.newFields, ADD_INFO_.updateString)
+        Dim frmMasterOmzet As New FormOmzet.FormTransaksiPenjualan(CONN_.dbType, CONN_.schemaTmp, CONN_.schemaKomisi, CONN_.dbMain, CONN_.dbSQL, USER_.username, USER_.isSuperuser, USER_.T_USER_RIGHT, ADD_INFO_.newValues, ADD_INFO_.newFields, ADD_INFO_.updateString, USER_.company)
         Call myCFormManipulation.GoToForm(Me, frmMasterOmzet)
+    End Sub
+
+    Private Sub mnMasterECEO_Click(sender As Object, e As EventArgs) Handles mnMasterECEO.Click
+        Dim frmMasterECEO As New FormMasterECEO.FormMasterECEO(CONN_.dbType, CONN_.schemaTmp, CONN_.schemaKomisi, CONN_.dbMain, USER_.username, USER_.isSuperuser, USER_.T_USER_RIGHT, ADD_INFO_.newValues, ADD_INFO_.newFields, ADD_INFO_.updateString, USER_.company)
+        Call myCFormManipulation.GoToForm(Me, frmMasterECEO)
     End Sub
 End Class

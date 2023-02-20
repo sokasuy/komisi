@@ -1,0 +1,12 @@
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterECEO\bin\Debug\FormMasterECEO.dll.config
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterECEO\bin\Debug\FormMasterECEO.dll
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterECEO\bin\Debug\FormMasterECEO.pdb
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterECEO\bin\Debug\FormMasterECEO.xml
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterECEO\obj\Debug\FormMasterECEO.FormMasterECEO.resources
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterECEO\obj\Debug\FormMasterECEO.Resources.resources
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterECEO\obj\Debug\FormMasterECEO.vbproj.GenerateResource.cache
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterECEO\obj\Debug\FormMasterECEO.vbproj.CoreCompileInputs.cache
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterECEO\obj\Debug\FormMasterECEO.dll
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterECEO\obj\Debug\FormMasterECEO.xml
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterECEO\obj\Debug\FormMasterECEO.pdb
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\FormMasterECEO\obj\Debug\FormMasterECEO.vbproj.AssemblyReference.cache

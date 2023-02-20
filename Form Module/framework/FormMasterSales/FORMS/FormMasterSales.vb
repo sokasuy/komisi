@@ -14,13 +14,15 @@
     Private cmbDgvHapusButton As New DataGridViewButtonColumn()
     Private cmbDgvEditButton As New DataGridViewButtonColumn()
     Private cekTambahButton(1) As Boolean
-    Private arrDefValues(5) As String
+    Private arrDefValues(6) As String
     Private tableName(1) As String
 
     Private myDataTableCboWilayah As New DataTable
     Private myBindingWilayah As New BindingSource
     Private myDataTableCboCariWilayah As New DataTable
     Private myBindingCariWilayah As New BindingSource
+    Private myDataTableCboPerusahaan As New DataTable
+    Private myBindingPerusahaan As New BindingSource
     Private myDataTableColumnNames As New DataTable
     Private myBindingColumnNames As New BindingSource
 
@@ -73,6 +75,9 @@
             Call myCDBOperation.SetCbo_(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, myDataTableCboWilayah, myBindingWilayah, cboWilayah, "T_" & cboWilayah.Name, "keterangan", "area", isCboPrepared)
             Call myCDBOperation.SetCbo_(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, myDataTableCboCariWilayah, myBindingCariWilayah, cboCariWilayah, "T_" & cboCariWilayah.Name, "keterangan", "area", isCboPrepared, True)
 
+            stSQL = "SELECT kode,keterangan FROM " & CONN_.schemaKomisi & ".msgeneral where kategori='perusahaan' order by keterangan;"
+            Call myCDBOperation.SetCbo_(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, myDataTableCboPerusahaan, myBindingPerusahaan, cboPerusahaan, "T_" & cboPerusahaan.Name, "kode", "keterangan", isCboPrepared)
+
             Call myCFormManipulation.SetCheckListBoxUserRights(clbUserRight, USER_.isSuperuser, Me.Name, USER_.T_USER_RIGHT)
             Call myCFormManipulation.SetButtonSimpanAvailabilty(btnSimpan, clbUserRight, "load")
 
@@ -102,7 +107,7 @@
         End Try
     End Sub
 
-    Private Sub FormMasterSales_KeyDown(sender As Object, e As KeyEventArgs) Handles cboWilayah.KeyDown, tbKode.KeyDown, tbNama.KeyDown, btnSimpan.KeyDown, btnKeluar.KeyDown, btnAddNew.KeyDown, tbCari.KeyDown, btnTampilkan.KeyDown
+    Private Sub FormMasterSales_KeyDown(sender As Object, e As KeyEventArgs) Handles cboWilayah.KeyDown, tbKode.KeyDown, tbNama.KeyDown, cboWilayah.KeyDown, cboPerusahaan.KeyDown, btnSimpan.KeyDown, btnKeluar.KeyDown, btnAddNew.KeyDown, tbCari.KeyDown, btnTampilkan.KeyDown
         Try
             If (e.KeyCode = Keys.Enter) Then
                 Me.SelectNextControl(Me.ActiveControl, True, True, True, True)
@@ -212,6 +217,8 @@
                 Next
 
                 .Columns("nama_sales").Width = 200
+                .Columns("dalam_kota").Width = 80
+                .Columns("luar_kota").Width = 80
                 .Columns("wilayah").Width = 120
                 .Columns("company").Width = 70
 
@@ -500,6 +507,17 @@
                         cbLuarKota.Checked = dgvView.CurrentRow.Cells("luar_kota").Value
                         arrDefValues(5) = dgvView.CurrentRow.Cells("luar_kota").Value
                     End If
+                    'Company
+                    If Not IsDBNull(dgvView.CurrentRow.Cells("company").Value) Then
+                        For i As Integer = 0 To cboPerusahaan.Items.Count - 1
+                            If (DirectCast(cboPerusahaan.Items(i), DataRowView).Item("kode") = dgvView.CurrentRow.Cells("company").Value) Then
+                                cboPerusahaan.SelectedIndex = i
+                                arrDefValues(6) = dgvView.CurrentRow.Cells("company").Value
+                            End If
+                        Next
+                    Else
+                        arrDefValues(6) = Nothing
+                    End If
                     isDataPrepared = True
                 End If
             End If
@@ -526,6 +544,10 @@
                         'CREATE NEW
                         newValues = "'" & myCStringManipulation.SafeSqlLiteral(tbKode.Text) & "','" & myCStringManipulation.SafeSqlLiteral(tbNama.Text) & "','" & myCStringManipulation.SafeSqlLiteral(cboWilayah.SelectedValue) & "','" & myCStringManipulation.SafeSqlLiteral(DirectCast(cboWilayah.SelectedItem, DataRowView).Item("kode")) & "','" & cbDalamKota.Checked & "','" & cbLuarKota.Checked & "'," & ADD_INFO_.newValues
                         newFields = "kodesales,namasales,wilayah,area,dalamkota,luarkota," & ADD_INFO_.newFields
+                        If (cboPerusahaan.SelectedIndex <> -1) Then
+                            newValues &= ",'" & myCStringManipulation.SafeSqlLiteral(cboPerusahaan.SelectedValue) & "'"
+                            newFields &= ",company"
+                        End If
                         Call myCDBOperation.InsertData(CONN_.dbMain, CONN_.comm, tableName(0), newValues, newFields)
                         Call myCShowMessage.ShowSavedMsg("Data di master sales " & tbKode.Text & " - " & tbNama.Text & " berhasil dimasukkan ke wilayah " & DirectCast(cboWilayah.SelectedItem, DataRowView).Item("area"))
                         Call btnTampilkan_Click(sender, e)
@@ -573,6 +595,21 @@
                         updateString &= IIf(IsNothing(updateString), "", ",") & "luarkota='" & cbLuarKota.Checked & "'"
                         If (foundRows.Length > 0) Then
                             myDataTableDGV.Rows(myDataTableDGV.Rows.IndexOf(foundRows(0))).Item("luar_kota") = cbLuarKota.Checked
+                        End If
+                    End If
+                    If (cboPerusahaan.SelectedIndex <> -1) Then
+                        If (arrDefValues(6) <> cboPerusahaan.SelectedValue) Then
+                            updateString &= IIf(IsNothing(updateString), "", ",") & "company='" & myCStringManipulation.SafeSqlLiteral(cboPerusahaan.SelectedValue) & "'"
+                            If (foundRows.Length > 0) Then
+                                myDataTableDGV.Rows(myDataTableDGV.Rows.IndexOf(foundRows(0))).Item("company") = Trim(cboPerusahaan.SelectedValue)
+                            End If
+                        End If
+                    Else
+                        If Not IsNothing(arrDefValues(6)) Then
+                            updateString &= IIf(IsNothing(updateString), "", ",") & "company=Null"
+                            If (foundRows.Length > 0) Then
+                                myDataTableDGV.Rows(myDataTableDGV.Rows.IndexOf(foundRows(0))).Item("company") = DBNull.Value
+                            End If
                         End If
                     End If
                     If Not IsNothing(updateString) Then

@@ -1,10 +1,3 @@
-G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.vbproj.AssemblyReference.cache
-G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.exe.config
-G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.FormLogin.resources
-G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.FormUtama.resources
-G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.Resources.resources
-G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.vbproj.GenerateResource.cache
-G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.vbproj.CoreCompileInputs.cache
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\PerhitunganKomisi.exe.config
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\PerhitunganKomisi.exe
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\PerhitunganKomisi.pdb
@@ -20,6 +13,7 @@ G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\CNet
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\CShowMessage.dll
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\CStringManipulation.dll
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormDisplayReport.dll
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormMasterECEO.dll
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormMasterGeneral.dll
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormMasterSales.dll
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormMasterTarget.dll
@@ -72,6 +66,9 @@ G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\CStr
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormDisplayReport.pdb
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormDisplayReport.xml
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormDisplayReport.dll.config
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormMasterECEO.pdb
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormMasterECEO.xml
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormMasterECEO.dll.config
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormMasterGeneral.pdb
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormMasterGeneral.xml
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormMasterGeneral.dll.config
@@ -125,6 +122,13 @@ G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\pt\M
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\ru\Microsoft.ReportViewer.DataVisualization.resources.dll
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\zh-CHS\Microsoft.ReportViewer.DataVisualization.resources.dll
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\zh-CHT\Microsoft.ReportViewer.DataVisualization.resources.dll
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.vbproj.AssemblyReference.cache
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.exe.config
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.FormLogin.resources
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.FormUtama.resources
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.Resources.resources
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.vbproj.GenerateResource.cache
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.vbproj.CoreCompileInputs.cache
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.vbproj.CopyComplete
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.exe
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.xml

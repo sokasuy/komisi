@@ -27,6 +27,10 @@ Partial Class FormMasterSales
         Me.lblEntryType = New System.Windows.Forms.Label()
         Me.clbUserRight = New System.Windows.Forms.CheckedListBox()
         Me.gbDataEntry = New System.Windows.Forms.GroupBox()
+        Me.cboPerusahaan = New System.Windows.Forms.ComboBox()
+        Me.lblPerusahaan = New System.Windows.Forms.Label()
+        Me.cbLuarKota = New System.Windows.Forms.CheckBox()
+        Me.cbDalamKota = New System.Windows.Forms.CheckBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cboWilayah = New System.Windows.Forms.ComboBox()
         Me.lblWilayah = New System.Windows.Forms.Label()
@@ -59,8 +63,7 @@ Partial Class FormMasterSales
         Me.cboKriteria = New System.Windows.Forms.ComboBox()
         Me.dgvView = New System.Windows.Forms.DataGridView()
         Me.btnKeluar = New System.Windows.Forms.Button()
-        Me.cbDalamKota = New System.Windows.Forms.CheckBox()
-        Me.cbLuarKota = New System.Windows.Forms.CheckBox()
+        Me.cbLuarPulau = New System.Windows.Forms.CheckBox()
         Me.gbDataEntry.SuspendLayout()
         Me.gbView.SuspendLayout()
         Me.pnlNavigasi.SuspendLayout()
@@ -105,6 +108,9 @@ Partial Class FormMasterSales
         '
         'gbDataEntry
         '
+        Me.gbDataEntry.Controls.Add(Me.cbLuarPulau)
+        Me.gbDataEntry.Controls.Add(Me.cboPerusahaan)
+        Me.gbDataEntry.Controls.Add(Me.lblPerusahaan)
         Me.gbDataEntry.Controls.Add(Me.cbLuarKota)
         Me.gbDataEntry.Controls.Add(Me.cbDalamKota)
         Me.gbDataEntry.Controls.Add(Me.Label3)
@@ -121,10 +127,51 @@ Partial Class FormMasterSales
         Me.gbDataEntry.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.gbDataEntry.Location = New System.Drawing.Point(12, 28)
         Me.gbDataEntry.Name = "gbDataEntry"
-        Me.gbDataEntry.Size = New System.Drawing.Size(523, 152)
+        Me.gbDataEntry.Size = New System.Drawing.Size(523, 180)
         Me.gbDataEntry.TabIndex = 200
         Me.gbDataEntry.TabStop = False
         Me.gbDataEntry.Text = "DATA ENTRY"
+        '
+        'cboPerusahaan
+        '
+        Me.cboPerusahaan.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cboPerusahaan.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cboPerusahaan.FormattingEnabled = True
+        Me.cboPerusahaan.IntegralHeight = False
+        Me.cboPerusahaan.Location = New System.Drawing.Point(99, 90)
+        Me.cboPerusahaan.Name = "cboPerusahaan"
+        Me.cboPerusahaan.Size = New System.Drawing.Size(371, 23)
+        Me.cboPerusahaan.TabIndex = 4
+        '
+        'lblPerusahaan
+        '
+        Me.lblPerusahaan.AutoSize = True
+        Me.lblPerusahaan.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.lblPerusahaan.Location = New System.Drawing.Point(67, 93)
+        Me.lblPerusahaan.Name = "lblPerusahaan"
+        Me.lblPerusahaan.Size = New System.Drawing.Size(26, 15)
+        Me.lblPerusahaan.TabIndex = 224
+        Me.lblPerusahaan.Text = "PT :"
+        '
+        'cbLuarKota
+        '
+        Me.cbLuarKota.AutoSize = True
+        Me.cbLuarKota.Location = New System.Drawing.Point(99, 148)
+        Me.cbLuarKota.Name = "cbLuarKota"
+        Me.cbLuarKota.Size = New System.Drawing.Size(76, 19)
+        Me.cbLuarKota.TabIndex = 222
+        Me.cbLuarKota.Text = "Luar Kota"
+        Me.cbLuarKota.UseVisualStyleBackColor = True
+        '
+        'cbDalamKota
+        '
+        Me.cbDalamKota.AutoSize = True
+        Me.cbDalamKota.Location = New System.Drawing.Point(99, 123)
+        Me.cbDalamKota.Name = "cbDalamKota"
+        Me.cbDalamKota.Size = New System.Drawing.Size(87, 19)
+        Me.cbDalamKota.TabIndex = 221
+        Me.cbDalamKota.Text = "Dalam Kota"
+        Me.cbDalamKota.UseVisualStyleBackColor = True
         '
         'Label3
         '
@@ -146,7 +193,7 @@ Partial Class FormMasterSales
         Me.cboWilayah.Location = New System.Drawing.Point(99, 66)
         Me.cboWilayah.Name = "cboWilayah"
         Me.cboWilayah.Size = New System.Drawing.Size(218, 23)
-        Me.cboWilayah.TabIndex = 218
+        Me.cboWilayah.TabIndex = 3
         '
         'lblWilayah
         '
@@ -184,10 +231,10 @@ Partial Class FormMasterSales
         Me.btnCreateNew.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnCreateNew.Image = CType(resources.GetObject("btnCreateNew.Image"), System.Drawing.Image)
         Me.btnCreateNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnCreateNew.Location = New System.Drawing.Point(271, 91)
+        Me.btnCreateNew.Location = New System.Drawing.Point(271, 119)
         Me.btnCreateNew.Name = "btnCreateNew"
         Me.btnCreateNew.Size = New System.Drawing.Size(120, 54)
-        Me.btnCreateNew.TabIndex = 11
+        Me.btnCreateNew.TabIndex = 5
         Me.btnCreateNew.Text = "BUAT BARU"
         Me.btnCreateNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnCreateNew.UseVisualStyleBackColor = True
@@ -197,7 +244,7 @@ Partial Class FormMasterSales
         Me.tbKode.Location = New System.Drawing.Point(99, 18)
         Me.tbKode.Name = "tbKode"
         Me.tbKode.Size = New System.Drawing.Size(107, 23)
-        Me.tbKode.TabIndex = 3
+        Me.tbKode.TabIndex = 1
         '
         'lblKeterangan
         '
@@ -232,10 +279,10 @@ Partial Class FormMasterSales
         Me.btnSimpan.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnSimpan.Image = CType(resources.GetObject("btnSimpan.Image"), System.Drawing.Image)
         Me.btnSimpan.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSimpan.Location = New System.Drawing.Point(397, 91)
+        Me.btnSimpan.Location = New System.Drawing.Point(397, 119)
         Me.btnSimpan.Name = "btnSimpan"
         Me.btnSimpan.Size = New System.Drawing.Size(120, 54)
-        Me.btnSimpan.TabIndex = 4
+        Me.btnSimpan.TabIndex = 6
         Me.btnSimpan.Text = "SIMPAN"
         Me.btnSimpan.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnSimpan.UseVisualStyleBackColor = True
@@ -255,7 +302,7 @@ Partial Class FormMasterSales
         Me.gbView.Controls.Add(Me.lblCari)
         Me.gbView.Controls.Add(Me.cboKriteria)
         Me.gbView.Controls.Add(Me.dgvView)
-        Me.gbView.Location = New System.Drawing.Point(12, 186)
+        Me.gbView.Location = New System.Drawing.Point(12, 214)
         Me.gbView.Name = "gbView"
         Me.gbView.Size = New System.Drawing.Size(780, 370)
         Me.gbView.TabIndex = 199
@@ -280,7 +327,7 @@ Partial Class FormMasterSales
         Me.cboSortingType.Location = New System.Drawing.Point(557, 40)
         Me.cboSortingType.Name = "cboSortingType"
         Me.cboSortingType.Size = New System.Drawing.Size(91, 21)
-        Me.cboSortingType.TabIndex = 9
+        Me.cboSortingType.TabIndex = 11
         '
         'cboSortingCriteria
         '
@@ -291,7 +338,7 @@ Partial Class FormMasterSales
         Me.cboSortingCriteria.Location = New System.Drawing.Point(435, 40)
         Me.cboSortingCriteria.Name = "cboSortingCriteria"
         Me.cboSortingCriteria.Size = New System.Drawing.Size(116, 21)
-        Me.cboSortingCriteria.TabIndex = 8
+        Me.cboSortingCriteria.TabIndex = 10
         '
         'lblCariWilayah
         '
@@ -311,7 +358,7 @@ Partial Class FormMasterSales
         Me.cboCariWilayah.Location = New System.Drawing.Point(6, 40)
         Me.cboCariWilayah.Name = "cboCariWilayah"
         Me.cboCariWilayah.Size = New System.Drawing.Size(109, 21)
-        Me.cboCariWilayah.TabIndex = 5
+        Me.cboCariWilayah.TabIndex = 7
         '
         'pnlNavigasi
         '
@@ -406,7 +453,7 @@ Partial Class FormMasterSales
         Me.tbCari.Location = New System.Drawing.Point(243, 40)
         Me.tbCari.Name = "tbCari"
         Me.tbCari.Size = New System.Drawing.Size(186, 20)
-        Me.tbCari.TabIndex = 7
+        Me.tbCari.TabIndex = 9
         '
         'btnTampilkan
         '
@@ -416,7 +463,7 @@ Partial Class FormMasterSales
         Me.btnTampilkan.Location = New System.Drawing.Point(654, 11)
         Me.btnTampilkan.Name = "btnTampilkan"
         Me.btnTampilkan.Size = New System.Drawing.Size(120, 54)
-        Me.btnTampilkan.TabIndex = 10
+        Me.btnTampilkan.TabIndex = 12
         Me.btnTampilkan.Text = "TAMPILKAN"
         Me.btnTampilkan.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnTampilkan.UseVisualStyleBackColor = True
@@ -440,7 +487,7 @@ Partial Class FormMasterSales
         Me.cboKriteria.Location = New System.Drawing.Point(121, 40)
         Me.cboKriteria.Name = "cboKriteria"
         Me.cboKriteria.Size = New System.Drawing.Size(116, 21)
-        Me.cboKriteria.TabIndex = 6
+        Me.cboKriteria.TabIndex = 8
         '
         'dgvView
         '
@@ -459,40 +506,30 @@ Partial Class FormMasterSales
         Me.btnKeluar.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnKeluar.Image = CType(resources.GetObject("btnKeluar.Image"), System.Drawing.Image)
         Me.btnKeluar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnKeluar.Location = New System.Drawing.Point(672, 116)
+        Me.btnKeluar.Location = New System.Drawing.Point(672, 147)
         Me.btnKeluar.Name = "btnKeluar"
         Me.btnKeluar.Size = New System.Drawing.Size(120, 54)
-        Me.btnKeluar.TabIndex = 198
+        Me.btnKeluar.TabIndex = 13
         Me.btnKeluar.Text = "KELUAR"
         Me.btnKeluar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnKeluar.UseVisualStyleBackColor = True
         '
-        'cbDalamKota
+        'cbLuarPulau
         '
-        Me.cbDalamKota.AutoSize = True
-        Me.cbDalamKota.Location = New System.Drawing.Point(99, 95)
-        Me.cbDalamKota.Name = "cbDalamKota"
-        Me.cbDalamKota.Size = New System.Drawing.Size(87, 19)
-        Me.cbDalamKota.TabIndex = 221
-        Me.cbDalamKota.Text = "Dalam Kota"
-        Me.cbDalamKota.UseVisualStyleBackColor = True
-        '
-        'cbLuarKota
-        '
-        Me.cbLuarKota.AutoSize = True
-        Me.cbLuarKota.Location = New System.Drawing.Point(99, 120)
-        Me.cbLuarKota.Name = "cbLuarKota"
-        Me.cbLuarKota.Size = New System.Drawing.Size(76, 19)
-        Me.cbLuarKota.TabIndex = 222
-        Me.cbLuarKota.Text = "Luar Kota"
-        Me.cbLuarKota.UseVisualStyleBackColor = True
+        Me.cbLuarPulau.AutoSize = True
+        Me.cbLuarPulau.Location = New System.Drawing.Point(192, 123)
+        Me.cbLuarPulau.Name = "cbLuarPulau"
+        Me.cbLuarPulau.Size = New System.Drawing.Size(82, 19)
+        Me.cbLuarPulau.TabIndex = 225
+        Me.cbLuarPulau.Text = "Luar Pulau"
+        Me.cbLuarPulau.UseVisualStyleBackColor = True
         '
         'FormMasterSales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(804, 565)
+        Me.ClientSize = New System.Drawing.Size(804, 591)
         Me.Controls.Add(Me.lblEntryType)
         Me.Controls.Add(Me.clbUserRight)
         Me.Controls.Add(Me.gbDataEntry)
@@ -552,4 +589,7 @@ Partial Class FormMasterSales
     Friend WithEvents lblWilayah As Label
     Friend WithEvents cbLuarKota As CheckBox
     Friend WithEvents cbDalamKota As CheckBox
+    Friend WithEvents cboPerusahaan As ComboBox
+    Friend WithEvents lblPerusahaan As Label
+    Friend WithEvents cbLuarPulau As CheckBox
 End Class

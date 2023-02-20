@@ -80,6 +80,11 @@ Partial Class FormTransaksiPenjualan
         Me.btnCetak = New System.Windows.Forms.Button()
         Me.pnlCetak = New System.Windows.Forms.Panel()
         Me.rbRekap = New System.Windows.Forms.RadioButton()
+        Me.rbPerhitunganKomisi = New System.Windows.Forms.RadioButton()
+        Me.cboSalesCetak = New System.Windows.Forms.ComboBox()
+        Me.rbDetailPerOutlet = New System.Windows.Forms.RadioButton()
+        Me.rbDetailPerItem = New System.Windows.Forms.RadioButton()
+        Me.lblSalesCetak = New System.Windows.Forms.Label()
         Me.pnlImportExcel.SuspendLayout()
         Me.gbView.SuspendLayout()
         Me.pnlNavigasi.SuspendLayout()
@@ -115,7 +120,7 @@ Partial Class FormTransaksiPenjualan
         Me.btnProsesImport.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnProsesImport.Image = CType(resources.GetObject("btnProsesImport.Image"), System.Drawing.Image)
         Me.btnProsesImport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnProsesImport.Location = New System.Drawing.Point(913, 5)
+        Me.btnProsesImport.Location = New System.Drawing.Point(910, 3)
         Me.btnProsesImport.Name = "btnProsesImport"
         Me.btnProsesImport.Size = New System.Drawing.Size(120, 54)
         Me.btnProsesImport.TabIndex = 246
@@ -179,7 +184,7 @@ Partial Class FormTransaksiPenjualan
         'rbTmpTopKhusus
         '
         Me.rbTmpTopKhusus.AutoSize = True
-        Me.rbTmpTopKhusus.Location = New System.Drawing.Point(796, 7)
+        Me.rbTmpTopKhusus.Location = New System.Drawing.Point(654, 42)
         Me.rbTmpTopKhusus.Name = "rbTmpTopKhusus"
         Me.rbTmpTopKhusus.Size = New System.Drawing.Size(111, 17)
         Me.rbTmpTopKhusus.TabIndex = 258
@@ -189,7 +194,7 @@ Partial Class FormTransaksiPenjualan
         'rbDataPelunasan
         '
         Me.rbDataPelunasan.AutoSize = True
-        Me.rbDataPelunasan.Location = New System.Drawing.Point(647, 42)
+        Me.rbDataPelunasan.Location = New System.Drawing.Point(519, 42)
         Me.rbDataPelunasan.Name = "rbDataPelunasan"
         Me.rbDataPelunasan.Size = New System.Drawing.Size(101, 17)
         Me.rbDataPelunasan.TabIndex = 257
@@ -199,7 +204,7 @@ Partial Class FormTransaksiPenjualan
         'rbTOPKhususLuarKota
         '
         Me.rbTOPKhususLuarKota.AutoSize = True
-        Me.rbTOPKhususLuarKota.Location = New System.Drawing.Point(647, 24)
+        Me.rbTOPKhususLuarKota.Location = New System.Drawing.Point(654, 24)
         Me.rbTOPKhususLuarKota.Name = "rbTOPKhususLuarKota"
         Me.rbTOPKhususLuarKota.Size = New System.Drawing.Size(134, 17)
         Me.rbTOPKhususLuarKota.TabIndex = 256
@@ -209,7 +214,7 @@ Partial Class FormTransaksiPenjualan
         'rbTOPKhususDalamKota
         '
         Me.rbTOPKhususDalamKota.AutoSize = True
-        Me.rbTOPKhususDalamKota.Location = New System.Drawing.Point(647, 4)
+        Me.rbTOPKhususDalamKota.Location = New System.Drawing.Point(654, 6)
         Me.rbTOPKhususDalamKota.Name = "rbTOPKhususDalamKota"
         Me.rbTOPKhususDalamKota.Size = New System.Drawing.Size(143, 17)
         Me.rbTOPKhususDalamKota.TabIndex = 255
@@ -398,7 +403,7 @@ Partial Class FormTransaksiPenjualan
         Me.pnlTanggal.Controls.Add(Me.lblSD)
         Me.pnlTanggal.Controls.Add(Me.dtpAkhir)
         Me.pnlTanggal.Controls.Add(Me.dtpAwal)
-        Me.pnlTanggal.Location = New System.Drawing.Point(258, 52)
+        Me.pnlTanggal.Location = New System.Drawing.Point(395, 52)
         Me.pnlTanggal.Name = "pnlTanggal"
         Me.pnlTanggal.Size = New System.Drawing.Size(285, 30)
         Me.pnlTanggal.TabIndex = 254
@@ -436,7 +441,7 @@ Partial Class FormTransaksiPenjualan
         Me.cboCariPeriode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboCariPeriode.FormattingEnabled = True
         Me.cboCariPeriode.IntegralHeight = False
-        Me.cboCariPeriode.Location = New System.Drawing.Point(258, 57)
+        Me.cboCariPeriode.Location = New System.Drawing.Point(395, 57)
         Me.cboCariPeriode.Name = "cboCariPeriode"
         Me.cboCariPeriode.Size = New System.Drawing.Size(109, 21)
         Me.cboCariPeriode.TabIndex = 255
@@ -444,7 +449,7 @@ Partial Class FormTransaksiPenjualan
         'rbCariPenjualanPerItem
         '
         Me.rbCariPenjualanPerItem.AutoSize = True
-        Me.rbCariPenjualanPerItem.Location = New System.Drawing.Point(730, 58)
+        Me.rbCariPenjualanPerItem.Location = New System.Drawing.Point(856, 58)
         Me.rbCariPenjualanPerItem.Name = "rbCariPenjualanPerItem"
         Me.rbCariPenjualanPerItem.Size = New System.Drawing.Size(113, 17)
         Me.rbCariPenjualanPerItem.TabIndex = 253
@@ -455,7 +460,7 @@ Partial Class FormTransaksiPenjualan
         '
         Me.rbCariPenjualanPerOutlet.AutoSize = True
         Me.rbCariPenjualanPerOutlet.Checked = True
-        Me.rbCariPenjualanPerOutlet.Location = New System.Drawing.Point(730, 36)
+        Me.rbCariPenjualanPerOutlet.Location = New System.Drawing.Point(856, 36)
         Me.rbCariPenjualanPerOutlet.Name = "rbCariPenjualanPerOutlet"
         Me.rbCariPenjualanPerOutlet.Size = New System.Drawing.Size(121, 17)
         Me.rbCariPenjualanPerOutlet.TabIndex = 251
@@ -466,7 +471,7 @@ Partial Class FormTransaksiPenjualan
         'lblSorting
         '
         Me.lblSorting.AutoSize = True
-        Me.lblSorting.Location = New System.Drawing.Point(545, 42)
+        Me.lblSorting.Location = New System.Drawing.Point(683, 42)
         Me.lblSorting.Name = "lblSorting"
         Me.lblSorting.Size = New System.Drawing.Size(46, 13)
         Me.lblSorting.TabIndex = 184
@@ -478,7 +483,7 @@ Partial Class FormTransaksiPenjualan
         Me.cboSortingType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboSortingType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboSortingType.FormattingEnabled = True
-        Me.cboSortingType.Location = New System.Drawing.Point(647, 58)
+        Me.cboSortingType.Location = New System.Drawing.Point(785, 58)
         Me.cboSortingType.Name = "cboSortingType"
         Me.cboSortingType.Size = New System.Drawing.Size(65, 21)
         Me.cboSortingType.TabIndex = 9
@@ -489,7 +494,7 @@ Partial Class FormTransaksiPenjualan
         Me.cboSortingCriteria.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboSortingCriteria.FormattingEnabled = True
         Me.cboSortingCriteria.IntegralHeight = False
-        Me.cboSortingCriteria.Location = New System.Drawing.Point(548, 58)
+        Me.cboSortingCriteria.Location = New System.Drawing.Point(686, 58)
         Me.cboSortingCriteria.Name = "cboSortingCriteria"
         Me.cboSortingCriteria.Size = New System.Drawing.Size(93, 21)
         Me.cboSortingCriteria.TabIndex = 8
@@ -511,12 +516,12 @@ Partial Class FormTransaksiPenjualan
         Me.cboCariSales.IntegralHeight = False
         Me.cboCariSales.Location = New System.Drawing.Point(21, 57)
         Me.cboCariSales.Name = "cboCariSales"
-        Me.cboCariSales.Size = New System.Drawing.Size(109, 21)
+        Me.cboCariSales.Size = New System.Drawing.Size(246, 21)
         Me.cboCariSales.TabIndex = 5
         '
         'tbCari
         '
-        Me.tbCari.Location = New System.Drawing.Point(258, 57)
+        Me.tbCari.Location = New System.Drawing.Point(395, 57)
         Me.tbCari.Name = "tbCari"
         Me.tbCari.Size = New System.Drawing.Size(235, 20)
         Me.tbCari.TabIndex = 7
@@ -526,7 +531,7 @@ Partial Class FormTransaksiPenjualan
         Me.btnTampilkan.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnTampilkan.Image = CType(resources.GetObject("btnTampilkan.Image"), System.Drawing.Image)
         Me.btnTampilkan.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnTampilkan.Location = New System.Drawing.Point(849, 28)
+        Me.btnTampilkan.Location = New System.Drawing.Point(975, 28)
         Me.btnTampilkan.Name = "btnTampilkan"
         Me.btnTampilkan.Size = New System.Drawing.Size(120, 54)
         Me.btnTampilkan.TabIndex = 10
@@ -537,7 +542,7 @@ Partial Class FormTransaksiPenjualan
         'lblCari
         '
         Me.lblCari.AutoSize = True
-        Me.lblCari.Location = New System.Drawing.Point(133, 41)
+        Me.lblCari.Location = New System.Drawing.Point(270, 41)
         Me.lblCari.Name = "lblCari"
         Me.lblCari.Size = New System.Drawing.Size(45, 13)
         Me.lblCari.TabIndex = 132
@@ -550,7 +555,7 @@ Partial Class FormTransaksiPenjualan
         Me.cboKriteria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboKriteria.FormattingEnabled = True
         Me.cboKriteria.IntegralHeight = False
-        Me.cboKriteria.Location = New System.Drawing.Point(136, 57)
+        Me.cboKriteria.Location = New System.Drawing.Point(273, 57)
         Me.cboKriteria.Name = "cboKriteria"
         Me.cboKriteria.Size = New System.Drawing.Size(116, 21)
         Me.cboKriteria.TabIndex = 6
@@ -621,7 +626,7 @@ Partial Class FormTransaksiPenjualan
         '
         'btnProsesRekap
         '
-        Me.btnProsesRekap.Location = New System.Drawing.Point(380, 517)
+        Me.btnProsesRekap.Location = New System.Drawing.Point(136, 575)
         Me.btnProsesRekap.Name = "btnProsesRekap"
         Me.btnProsesRekap.Size = New System.Drawing.Size(90, 23)
         Me.btnProsesRekap.TabIndex = 264
@@ -631,7 +636,7 @@ Partial Class FormTransaksiPenjualan
         'lblProsesRekap
         '
         Me.lblProsesRekap.AutoSize = True
-        Me.lblProsesRekap.Location = New System.Drawing.Point(260, 522)
+        Me.lblProsesRekap.Location = New System.Drawing.Point(16, 580)
         Me.lblProsesRekap.Name = "lblProsesRekap"
         Me.lblProsesRekap.Size = New System.Drawing.Size(86, 13)
         Me.lblProsesRekap.TabIndex = 263
@@ -642,7 +647,7 @@ Partial Class FormTransaksiPenjualan
         Me.btnCetak.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnCetak.Image = CType(resources.GetObject("btnCetak.Image"), System.Drawing.Image)
         Me.btnCetak.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnCetak.Location = New System.Drawing.Point(139, 0)
+        Me.btnCetak.Location = New System.Drawing.Point(416, 11)
         Me.btnCetak.Name = "btnCetak"
         Me.btnCetak.Size = New System.Drawing.Size(120, 54)
         Me.btnCetak.TabIndex = 265
@@ -653,11 +658,16 @@ Partial Class FormTransaksiPenjualan
         'pnlCetak
         '
         Me.pnlCetak.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlCetak.Controls.Add(Me.lblSalesCetak)
+        Me.pnlCetak.Controls.Add(Me.rbDetailPerItem)
+        Me.pnlCetak.Controls.Add(Me.rbDetailPerOutlet)
+        Me.pnlCetak.Controls.Add(Me.cboSalesCetak)
+        Me.pnlCetak.Controls.Add(Me.rbPerhitunganKomisi)
         Me.pnlCetak.Controls.Add(Me.rbRekap)
         Me.pnlCetak.Controls.Add(Me.btnCetak)
-        Me.pnlCetak.Location = New System.Drawing.Point(624, 514)
+        Me.pnlCetak.Location = New System.Drawing.Point(412, 517)
         Me.pnlCetak.Name = "pnlCetak"
-        Me.pnlCetak.Size = New System.Drawing.Size(263, 57)
+        Me.pnlCetak.Size = New System.Drawing.Size(544, 82)
         Me.pnlCetak.TabIndex = 266
         '
         'rbRekap
@@ -668,16 +678,65 @@ Partial Class FormTransaksiPenjualan
         Me.rbRekap.Name = "rbRekap"
         Me.rbRekap.Size = New System.Drawing.Size(61, 17)
         Me.rbRekap.TabIndex = 266
-        Me.rbRekap.TabStop = True
         Me.rbRekap.Text = "REKAP"
         Me.rbRekap.UseVisualStyleBackColor = True
+        '
+        'rbPerhitunganKomisi
+        '
+        Me.rbPerhitunganKomisi.AutoSize = True
+        Me.rbPerhitunganKomisi.Location = New System.Drawing.Point(3, 27)
+        Me.rbPerhitunganKomisi.Name = "rbPerhitunganKomisi"
+        Me.rbPerhitunganKomisi.Size = New System.Drawing.Size(144, 17)
+        Me.rbPerhitunganKomisi.TabIndex = 267
+        Me.rbPerhitunganKomisi.Text = "PERHITUNGAN KOMISI"
+        Me.rbPerhitunganKomisi.UseVisualStyleBackColor = True
+        '
+        'cboSalesCetak
+        '
+        Me.cboSalesCetak.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cboSalesCetak.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cboSalesCetak.FormattingEnabled = True
+        Me.cboSalesCetak.IntegralHeight = False
+        Me.cboSalesCetak.Location = New System.Drawing.Point(47, 50)
+        Me.cboSalesCetak.Name = "cboSalesCetak"
+        Me.cboSalesCetak.Size = New System.Drawing.Size(230, 21)
+        Me.cboSalesCetak.TabIndex = 268
+        '
+        'rbDetailPerOutlet
+        '
+        Me.rbDetailPerOutlet.AutoSize = True
+        Me.rbDetailPerOutlet.Location = New System.Drawing.Point(153, 27)
+        Me.rbDetailPerOutlet.Name = "rbDetailPerOutlet"
+        Me.rbDetailPerOutlet.Size = New System.Drawing.Size(134, 17)
+        Me.rbDetailPerOutlet.TabIndex = 269
+        Me.rbDetailPerOutlet.Text = "DETAIL PER OUTLET"
+        Me.rbDetailPerOutlet.UseVisualStyleBackColor = True
+        '
+        'rbDetailPerItem
+        '
+        Me.rbDetailPerItem.AutoSize = True
+        Me.rbDetailPerItem.Location = New System.Drawing.Point(293, 27)
+        Me.rbDetailPerItem.Name = "rbDetailPerItem"
+        Me.rbDetailPerItem.Size = New System.Drawing.Size(117, 17)
+        Me.rbDetailPerItem.TabIndex = 270
+        Me.rbDetailPerItem.Text = "DETAIL PER ITEM"
+        Me.rbDetailPerItem.UseVisualStyleBackColor = True
+        '
+        'lblSalesCetak
+        '
+        Me.lblSalesCetak.AutoSize = True
+        Me.lblSalesCetak.Location = New System.Drawing.Point(2, 53)
+        Me.lblSalesCetak.Name = "lblSalesCetak"
+        Me.lblSalesCetak.Size = New System.Drawing.Size(39, 13)
+        Me.lblSalesCetak.TabIndex = 271
+        Me.lblSalesCetak.Text = "Sales :"
         '
         'FormTransaksiPenjualan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(1209, 576)
+        Me.ClientSize = New System.Drawing.Size(1209, 611)
         Me.Controls.Add(Me.pnlCetak)
         Me.Controls.Add(Me.btnProsesRekap)
         Me.Controls.Add(Me.lblProsesRekap)
@@ -781,4 +840,9 @@ Partial Class FormTransaksiPenjualan
     Friend WithEvents btnCetak As Button
     Friend WithEvents pnlCetak As Panel
     Friend WithEvents rbRekap As RadioButton
+    Friend WithEvents rbPerhitunganKomisi As RadioButton
+    Friend WithEvents cboSalesCetak As ComboBox
+    Friend WithEvents rbDetailPerOutlet As RadioButton
+    Friend WithEvents rbDetailPerItem As RadioButton
+    Friend WithEvents lblSalesCetak As Label
 End Class

@@ -40,7 +40,7 @@
 
     Private fileAttachment As fileTempel
 
-    Public Sub New(_dbType As String, _schemaTmp As String, _schemaKomisi As String, _ConnMain As Object, _username As String, _superuser As Boolean, _dtTableUserRights As DataTable, _addNewValues As String, _addNewFields As String, _addUpdateString As String)
+    Public Sub New(_dbType As String, _schemaTmp As String, _schemaKomisi As String, _ConnMain As Object, _username As String, _superuser As Boolean, _dtTableUserRights As DataTable, _addNewValues As String, _addNewFields As String, _addUpdateString As String, _company As String)
         Try
             ' This call is required by the designer.
             InitializeComponent()
@@ -56,6 +56,7 @@
             With USER_
                 .username = _username
                 .isSuperuser = _superuser
+                .company = _company
                 .T_USER_RIGHT = _dtTableUserRights
             End With
             With ADD_INFO_
@@ -83,7 +84,7 @@
             Me.Cursor = Cursors.WaitCursor
             Call myCDBConnection.OpenConn(CONN_.dbMain)
 
-            stSQL = "SELECT kodesales,namasales,area FROM " & CONN_.schemaKomisi & ".mssales ORDER BY namasales;"
+            stSQL = "SELECT kodesales,namasales,area FROM " & CONN_.schemaKomisi & ".mssales WHERE company='" & USER_.company & "' ORDER BY namasales;"
             Call myCDBOperation.SetCbo_(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, myDataTableCboSales, myBindingSales, cboSales, "T_" & cboSales.Name, "kodesales", "namasales", isCboPrepared)
 
             stSQL = "SELECT kodeitem,namaitem FROM " & CONN_.schemaKomisi & ".mstargetsales GROUP BY kodeitem,namaitem ORDER BY namaitem;"
@@ -538,7 +539,7 @@
                             If (DirectCast(cboPeriode.Items(i), DataRowView).Item("keterangan") = dgvView.CurrentRow.Cells("periode").Value) Then
                                 cboPeriode.SelectedIndex = i
                                 arrDefValues(6) = dgvView.CurrentRow.Cells("periode").Value
-                                cboItem.Enabled = False
+                                cboPeriode.Enabled = False
                             End If
                         Next
                     End If
@@ -563,6 +564,14 @@
         Finally
             Me.Cursor = Cursors.Default
             Call myCDBConnection.CloseConn(CONN_.dbMain, -1)
+        End Try
+    End Sub
+
+    Private Sub btnSimpan_Click(sender As Object, e As EventArgs) Handles btnSimpan.Click
+        Try
+
+        Catch ex As Exception
+            Call myCShowMessage.ShowErrMsg("Pesan Error: " & ex.Message, "btnSimpan_Click Error")
         End Try
     End Sub
 
@@ -682,14 +691,6 @@
             End If
         Catch ex As Exception
             Call myCShowMessage.ShowErrMsg("Pesan Error: " & ex.Message, "cboFields_Validated Error")
-        End Try
-    End Sub
-
-    Private Sub btnSimpan_Click(sender As Object, e As EventArgs) Handles btnSimpan.Click
-        Try
-
-        Catch ex As Exception
-            Call myCShowMessage.ShowErrMsg("Pesan Error: " & ex.Message, "btnSimpan_Click Error")
         End Try
     End Sub
 End Class
