@@ -59,6 +59,8 @@ Partial Class FormMasterSales
         Me.cboKriteria = New System.Windows.Forms.ComboBox()
         Me.dgvView = New System.Windows.Forms.DataGridView()
         Me.btnKeluar = New System.Windows.Forms.Button()
+        Me.cbDalamKota = New System.Windows.Forms.CheckBox()
+        Me.cbLuarKota = New System.Windows.Forms.CheckBox()
         Me.gbDataEntry.SuspendLayout()
         Me.gbView.SuspendLayout()
         Me.pnlNavigasi.SuspendLayout()
@@ -103,6 +105,8 @@ Partial Class FormMasterSales
         '
         'gbDataEntry
         '
+        Me.gbDataEntry.Controls.Add(Me.cbLuarKota)
+        Me.gbDataEntry.Controls.Add(Me.cbDalamKota)
         Me.gbDataEntry.Controls.Add(Me.Label3)
         Me.gbDataEntry.Controls.Add(Me.cboWilayah)
         Me.gbDataEntry.Controls.Add(Me.lblWilayah)
@@ -463,6 +467,26 @@ Partial Class FormMasterSales
         Me.btnKeluar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnKeluar.UseVisualStyleBackColor = True
         '
+        'cbDalamKota
+        '
+        Me.cbDalamKota.AutoSize = True
+        Me.cbDalamKota.Location = New System.Drawing.Point(99, 95)
+        Me.cbDalamKota.Name = "cbDalamKota"
+        Me.cbDalamKota.Size = New System.Drawing.Size(87, 19)
+        Me.cbDalamKota.TabIndex = 221
+        Me.cbDalamKota.Text = "Dalam Kota"
+        Me.cbDalamKota.UseVisualStyleBackColor = True
+        '
+        'cbLuarKota
+        '
+        Me.cbLuarKota.AutoSize = True
+        Me.cbLuarKota.Location = New System.Drawing.Point(99, 120)
+        Me.cbLuarKota.Name = "cbLuarKota"
+        Me.cbLuarKota.Size = New System.Drawing.Size(76, 19)
+        Me.cbLuarKota.TabIndex = 222
+        Me.cbLuarKota.Text = "Luar Kota"
+        Me.cbLuarKota.UseVisualStyleBackColor = True
+        '
         'FormMasterSales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -526,4 +550,6 @@ Partial Class FormMasterSales
     Friend WithEvents Label3 As Label
     Friend WithEvents cboWilayah As ComboBox
     Friend WithEvents lblWilayah As Label
+    Friend WithEvents cbLuarKota As CheckBox
+    Friend WithEvents cbDalamKota As CheckBox
 End Class

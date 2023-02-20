@@ -77,6 +77,10 @@
       <HintPath>..\..\..\..\Class Module\framework\CStringManipulation\CStringManipulation\bin\Debug\CStringManipulation.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="FormDisplayReport">
+      <HintPath>..\FormDisplayReport\FormDisplayReport\bin\Debug\FormDisplayReport.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />

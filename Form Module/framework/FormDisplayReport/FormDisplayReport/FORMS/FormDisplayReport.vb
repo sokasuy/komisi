@@ -46,13 +46,6 @@ Public Class FormDisplayReport
             Dim rdlcRptSource As New ReportDataSource
             Me.rptViewer.Reset()
 
-            'Select Case docType
-            '    Case "RptSPL"
-            '        myDataTable = myCDBOperation.GetDataTableUsingReader(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, docType)
-            '        reportType = "rptPrintOut" & docType
-            '        rdlcRptSource.Name = "dtSetPrintOut" & docType
-            'End Select
-
             myDataTable = myCDBOperation.GetDataTableUsingReader(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, docType)
             reportType = "rptPrintOut" & docType & IIf(reportCriteria.Length > 0, reportCriteria, "")
             rdlcRptSource.Name = "dtSetPrintOut" & docType

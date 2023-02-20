@@ -1099,7 +1099,7 @@
                 'End If
 
                 'If (lanjut) Then
-                stSQL = "SELECT kodesales,namasales,'" & cboPeriode.SelectedValue & "' as periode, '" & USER_.username & "' as userid FROM " & CONN_.schemaKomisi & ".mssales WHERE company='SRF' ORDER BY namasales;"
+                stSQL = "SELECT kodesales,namasales,dalamkota,luarkota,'" & cboPeriode.SelectedValue & "' as periode, '" & USER_.username & "' as userid FROM " & CONN_.schemaKomisi & ".mssales WHERE company='SRF' ORDER BY namasales;"
                 myDataTableSales = myCDBOperation.GetDataTableUsingReader(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, "T_Sales")
                 myDataTableSales.Columns.Add("target", GetType(Double))
                 myDataTableSales.Columns.Add("omzet", GetType(Double))
@@ -1142,7 +1142,7 @@
                     T_rekapSales.targetpimt = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "qty", CONN_.schemaKomisi & ".mstargetsales", "Sum", "kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and periode='" & cboPeriode.SelectedValue & "' and kodeitem in('OJ0121','OJ0121A')")
                     T_rekapSales.realpimt = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "(qtyub-bonus)", CONN_.schemaKomisi & ".trpenjualanperitem", "Sum", "kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and periode='" & cboPeriode.SelectedValue & "' and kodeitem in('OJ0121','OJ0121A')")
                     If Not IsNothing(T_rekapSales.targetpimt) Then
-                        T_rekapSales.persenpimt = (myDataTableSales.Rows(i).Item("realpimt") / myDataTableSales.Rows(i).Item("targetpimt")) * 100
+                        T_rekapSales.persenpimt = (T_rekapSales.realpimt / T_rekapSales.targetpimt) * 100
                     Else
                         T_rekapSales.persenpimt = -1
                     End If
@@ -1186,6 +1186,31 @@
                 Call myCDBConnection.CloseConn(CONN_.dbMain, -1)
                 Me.Cursor = Cursors.Default
             End If
+        End Try
+    End Sub
+
+    Private Sub btnCetak_Click(sender As Object, e As EventArgs) Handles btnCetak.Click
+        Try
+            If (cboPeriode.SelectedIndex <> -1) Then
+                Dim reportType As String
+                Select Case True
+                    Case rbRekap.Checked
+                        reportType = "RekapKomisi"
+                        stSQL = "SELECT kodesales,namasales,periode,target,omzet,omzetlm,omzetbr,persenpencapaiansales,sppending,persensppending,overdue,hitomzet,totalpersen,komisireg,targetpimt,realpimt,persenpimt,kmspimt,totalkms,(case when dalamkota=True then 'Dalam Kota' when luarkota=True then 'Luar Kota' else 'Lainnya' end) as cakupan FROM " & CONN_.schemaKomisi & ".trrekapsales WHERE periode='" & cboPeriode.SelectedValue & "' ORDER BY namasales;"
+                End Select
+                If Not IsNothing(reportType) Then
+                    Dim frmDisplayReport As New FormDisplayReport.FormDisplayReport(CONN_.dbType, CONN_.schemaTmp, CONN_.schemaKomisi, CONN_.dbMain, stSQL, reportType)
+                    Call myCFormManipulation.GoToForm(Me.MdiParent, frmDisplayReport)
+                Else
+                    Call myCShowMessage.ShowWarning("Silahkan tentukan dulu report yang mau dicetak!!")
+                End If
+            Else
+                Call myCShowMessage.ShowWarning("Silahkan pilih periodenya terlebih dahulu!!")
+                cboPeriode.Focus()
+            End If
+
+        Catch ex As Exception
+            Call myCShowMessage.ShowErrMsg("Pesan Error: " & ex.Message, "btnProsesRekap_Click Error")
         End Try
     End Sub
 End Class

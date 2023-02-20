@@ -119,56 +119,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DATASET\Analisa\CDtSetPrintOutReportAnalisaBulanan.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DATASET\Analisa\CDtSetPrintOutReportAnalisaJamKerja.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DATASET\Analisa\CDtSetPrintOutReportAnalisaSuratDokter.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DATASET\IjinAbsen\CDtSetPrintOutIjinAbsen.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DATASET\IjinAbsen\CDtSetPrintOutRekapIjinAbsen.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DATASET\Payroll\CDtSetPrintOutRekapPayroll.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DATASET\Presensi\CDtSetPrintOutDataMentah.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DATASET\Presensi\CDtSetPrintOutDataPresensi.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DATASET\Presensi\CDtSetPrintOutJadwalPresensi.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DATASET\Presensi\CDtSetPrintOutKaryawanTidakMasukHarian.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DATASET\Presensi\CDtSetPrintOutPresensiMentahStaff.vb" />
-    <Compile Include="DATASET\Presensi\CDtSetPrintOutPresensiMingguan.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DATASET\Presensi\CDtSetPrintOutPresensiSecurity.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DATASET\Presensi\CDtSetPrintOutPresensiStaff.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DATASET\Presensi\CDtSetPrintOutRekapDataPresensi.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DATASET\ScheduleShift\CDtSetPrintOutScheduleShift.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DATASET\SPK\CDtSetPrintOutSPK.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DATASET\SPL\CDtSetPrintOutSPL.vb">
+    <Compile Include="DATASET\Rekap\CDtSetPrintOutRekapKomisi.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FORMS\FormDisplayReport.vb">
@@ -206,28 +157,7 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="REPORTS\Analisa\rptPrintOutReportAnalisaBulanan.rdlc" />
-    <EmbeddedResource Include="REPORTS\Analisa\rptPrintOutReportAnalisaJamKerja.rdlc" />
-    <EmbeddedResource Include="REPORTS\Analisa\rptPrintOutReportAnalisaSuratDokter.rdlc" />
-    <EmbeddedResource Include="REPORTS\IjinAbsen\rptPrintOutIjinAbsen.rdlc" />
-    <EmbeddedResource Include="REPORTS\IjinAbsen\rptPrintOutRekapIjinAbsen.rdlc" />
-    <EmbeddedResource Include="REPORTS\Payroll\rptPrintOutRekapPayrollNonStaff.rdlc" />
-    <EmbeddedResource Include="REPORTS\Presensi\rptPrintOutDataMentahPANDAAN.rdlc" />
-    <EmbeddedResource Include="REPORTS\Presensi\rptPrintOutDataPresensiSIDOARJO.rdlc" />
-    <EmbeddedResource Include="REPORTS\Presensi\rptPrintOutJadwalPresensi.rdlc" />
-    <EmbeddedResource Include="REPORTS\Presensi\rptPrintOutKaryawanTidakMasukHarianPANDAAN.rdlc" />
-    <EmbeddedResource Include="REPORTS\Presensi\rptPrintOutPresensiMentahStaffPANDAAN.rdlc" />
-    <EmbeddedResource Include="REPORTS\Presensi\rptPrintOutPresensiMingguanPANDAAN.rdlc" />
-    <EmbeddedResource Include="REPORTS\Presensi\rptPrintOutPresensiSecurityPANDAAN.rdlc" />
-    <EmbeddedResource Include="REPORTS\Presensi\rptPrintOutPresensiStaffPANDAAN.rdlc" />
-    <EmbeddedResource Include="REPORTS\Presensi\rptPrintOutPresensiStaffSIDOARJO.rdlc" />
-    <EmbeddedResource Include="REPORTS\Presensi\xxxrptPrintOutRekapDataPresensiPANDAAN-v1.rdlc" />
-    <EmbeddedResource Include="REPORTS\Presensi\rptPrintOutRekapDataPresensiPANDAAN.rdlc" />
-    <EmbeddedResource Include="REPORTS\ScheduleShift\rptPrintOutScheduleShift.rdlc" />
-    <EmbeddedResource Include="REPORTS\SPK\xxxrptPrintOutSPK.rdlc" />
-    <EmbeddedResource Include="REPORTS\SPK\rptPrintOutSPK.rdlc" />
-    <EmbeddedResource Include="REPORTS\SPL\xxxrptPrintOutReportSPL.rdlc" />
-    <EmbeddedResource Include="REPORTS\SPL\rptPrintOutSPL.rdlc" />
+    <EmbeddedResource Include="REPORTS\Rekap\rptPrintOutRekapKomisi.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="My Project\Application.myapp">
@@ -246,6 +176,7 @@
     <None Include="My Project\DataSources\CDtSetPrintOutPresensiStaff.datasource" />
     <None Include="My Project\DataSources\CDtSetPrintOutRekapDataPresensi.datasource" />
     <None Include="My Project\DataSources\CDtSetPrintOutRekapIjinAbsen.datasource" />
+    <None Include="My Project\DataSources\CDtSetPrintOutRekapKomisi.datasource" />
     <None Include="My Project\DataSources\CDtSetPrintOutRekapPayroll.datasource" />
     <None Include="My Project\DataSources\CDtSetPrintOutReportAnalisaBulanan.datasource" />
     <None Include="My Project\DataSources\CDtSetPrintOutReportAnalisaJamKerja.datasource" />
