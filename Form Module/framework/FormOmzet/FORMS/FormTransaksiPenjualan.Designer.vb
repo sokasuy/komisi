@@ -79,12 +79,14 @@ Partial Class FormTransaksiPenjualan
         Me.lblProsesRekap = New System.Windows.Forms.Label()
         Me.btnCetak = New System.Windows.Forms.Button()
         Me.pnlCetak = New System.Windows.Forms.Panel()
-        Me.rbRekap = New System.Windows.Forms.RadioButton()
-        Me.rbPerhitunganKomisi = New System.Windows.Forms.RadioButton()
-        Me.cboSalesCetak = New System.Windows.Forms.ComboBox()
-        Me.rbDetailPerOutlet = New System.Windows.Forms.RadioButton()
-        Me.rbDetailPerItem = New System.Windows.Forms.RadioButton()
         Me.lblSalesCetak = New System.Windows.Forms.Label()
+        Me.rbDetailPerItem = New System.Windows.Forms.RadioButton()
+        Me.rbDetailPerOutlet = New System.Windows.Forms.RadioButton()
+        Me.cboSalesCetak = New System.Windows.Forms.ComboBox()
+        Me.rbPerhitunganKomisi = New System.Windows.Forms.RadioButton()
+        Me.rbRekap = New System.Windows.Forms.RadioButton()
+        Me.btnProsesPerhitunganKomisi = New System.Windows.Forms.Button()
+        Me.lblProsesPerhitunganKomisi = New System.Windows.Forms.Label()
         Me.pnlImportExcel.SuspendLayout()
         Me.gbView.SuspendLayout()
         Me.pnlNavigasi.SuspendLayout()
@@ -626,7 +628,7 @@ Partial Class FormTransaksiPenjualan
         '
         'btnProsesRekap
         '
-        Me.btnProsesRekap.Location = New System.Drawing.Point(136, 575)
+        Me.btnProsesRekap.Location = New System.Drawing.Point(409, 517)
         Me.btnProsesRekap.Name = "btnProsesRekap"
         Me.btnProsesRekap.Size = New System.Drawing.Size(90, 23)
         Me.btnProsesRekap.TabIndex = 264
@@ -636,7 +638,7 @@ Partial Class FormTransaksiPenjualan
         'lblProsesRekap
         '
         Me.lblProsesRekap.AutoSize = True
-        Me.lblProsesRekap.Location = New System.Drawing.Point(16, 580)
+        Me.lblProsesRekap.Location = New System.Drawing.Point(259, 522)
         Me.lblProsesRekap.Name = "lblProsesRekap"
         Me.lblProsesRekap.Size = New System.Drawing.Size(86, 13)
         Me.lblProsesRekap.TabIndex = 263
@@ -665,31 +667,39 @@ Partial Class FormTransaksiPenjualan
         Me.pnlCetak.Controls.Add(Me.rbPerhitunganKomisi)
         Me.pnlCetak.Controls.Add(Me.rbRekap)
         Me.pnlCetak.Controls.Add(Me.btnCetak)
-        Me.pnlCetak.Location = New System.Drawing.Point(412, 517)
+        Me.pnlCetak.Location = New System.Drawing.Point(532, 514)
         Me.pnlCetak.Name = "pnlCetak"
-        Me.pnlCetak.Size = New System.Drawing.Size(544, 82)
+        Me.pnlCetak.Size = New System.Drawing.Size(543, 82)
         Me.pnlCetak.TabIndex = 266
         '
-        'rbRekap
+        'lblSalesCetak
         '
-        Me.rbRekap.AutoSize = True
-        Me.rbRekap.Checked = True
-        Me.rbRekap.Location = New System.Drawing.Point(3, 4)
-        Me.rbRekap.Name = "rbRekap"
-        Me.rbRekap.Size = New System.Drawing.Size(61, 17)
-        Me.rbRekap.TabIndex = 266
-        Me.rbRekap.Text = "REKAP"
-        Me.rbRekap.UseVisualStyleBackColor = True
+        Me.lblSalesCetak.AutoSize = True
+        Me.lblSalesCetak.Location = New System.Drawing.Point(2, 53)
+        Me.lblSalesCetak.Name = "lblSalesCetak"
+        Me.lblSalesCetak.Size = New System.Drawing.Size(39, 13)
+        Me.lblSalesCetak.TabIndex = 271
+        Me.lblSalesCetak.Text = "Sales :"
         '
-        'rbPerhitunganKomisi
+        'rbDetailPerItem
         '
-        Me.rbPerhitunganKomisi.AutoSize = True
-        Me.rbPerhitunganKomisi.Location = New System.Drawing.Point(3, 27)
-        Me.rbPerhitunganKomisi.Name = "rbPerhitunganKomisi"
-        Me.rbPerhitunganKomisi.Size = New System.Drawing.Size(144, 17)
-        Me.rbPerhitunganKomisi.TabIndex = 267
-        Me.rbPerhitunganKomisi.Text = "PERHITUNGAN KOMISI"
-        Me.rbPerhitunganKomisi.UseVisualStyleBackColor = True
+        Me.rbDetailPerItem.AutoSize = True
+        Me.rbDetailPerItem.Location = New System.Drawing.Point(293, 27)
+        Me.rbDetailPerItem.Name = "rbDetailPerItem"
+        Me.rbDetailPerItem.Size = New System.Drawing.Size(117, 17)
+        Me.rbDetailPerItem.TabIndex = 270
+        Me.rbDetailPerItem.Text = "DETAIL PER ITEM"
+        Me.rbDetailPerItem.UseVisualStyleBackColor = True
+        '
+        'rbDetailPerOutlet
+        '
+        Me.rbDetailPerOutlet.AutoSize = True
+        Me.rbDetailPerOutlet.Location = New System.Drawing.Point(153, 27)
+        Me.rbDetailPerOutlet.Name = "rbDetailPerOutlet"
+        Me.rbDetailPerOutlet.Size = New System.Drawing.Size(134, 17)
+        Me.rbDetailPerOutlet.TabIndex = 269
+        Me.rbDetailPerOutlet.Text = "DETAIL PER OUTLET"
+        Me.rbDetailPerOutlet.UseVisualStyleBackColor = True
         '
         'cboSalesCetak
         '
@@ -702,34 +712,45 @@ Partial Class FormTransaksiPenjualan
         Me.cboSalesCetak.Size = New System.Drawing.Size(230, 21)
         Me.cboSalesCetak.TabIndex = 268
         '
-        'rbDetailPerOutlet
+        'rbPerhitunganKomisi
         '
-        Me.rbDetailPerOutlet.AutoSize = True
-        Me.rbDetailPerOutlet.Location = New System.Drawing.Point(153, 27)
-        Me.rbDetailPerOutlet.Name = "rbDetailPerOutlet"
-        Me.rbDetailPerOutlet.Size = New System.Drawing.Size(134, 17)
-        Me.rbDetailPerOutlet.TabIndex = 269
-        Me.rbDetailPerOutlet.Text = "DETAIL PER OUTLET"
-        Me.rbDetailPerOutlet.UseVisualStyleBackColor = True
+        Me.rbPerhitunganKomisi.AutoSize = True
+        Me.rbPerhitunganKomisi.Location = New System.Drawing.Point(3, 27)
+        Me.rbPerhitunganKomisi.Name = "rbPerhitunganKomisi"
+        Me.rbPerhitunganKomisi.Size = New System.Drawing.Size(144, 17)
+        Me.rbPerhitunganKomisi.TabIndex = 267
+        Me.rbPerhitunganKomisi.Text = "PERHITUNGAN KOMISI"
+        Me.rbPerhitunganKomisi.UseVisualStyleBackColor = True
         '
-        'rbDetailPerItem
+        'rbRekap
         '
-        Me.rbDetailPerItem.AutoSize = True
-        Me.rbDetailPerItem.Location = New System.Drawing.Point(293, 27)
-        Me.rbDetailPerItem.Name = "rbDetailPerItem"
-        Me.rbDetailPerItem.Size = New System.Drawing.Size(117, 17)
-        Me.rbDetailPerItem.TabIndex = 270
-        Me.rbDetailPerItem.Text = "DETAIL PER ITEM"
-        Me.rbDetailPerItem.UseVisualStyleBackColor = True
+        Me.rbRekap.AutoSize = True
+        Me.rbRekap.Checked = True
+        Me.rbRekap.Location = New System.Drawing.Point(3, 4)
+        Me.rbRekap.Name = "rbRekap"
+        Me.rbRekap.Size = New System.Drawing.Size(61, 17)
+        Me.rbRekap.TabIndex = 266
+        Me.rbRekap.TabStop = True
+        Me.rbRekap.Text = "REKAP"
+        Me.rbRekap.UseVisualStyleBackColor = True
         '
-        'lblSalesCetak
+        'btnProsesPerhitunganKomisi
         '
-        Me.lblSalesCetak.AutoSize = True
-        Me.lblSalesCetak.Location = New System.Drawing.Point(2, 53)
-        Me.lblSalesCetak.Name = "lblSalesCetak"
-        Me.lblSalesCetak.Size = New System.Drawing.Size(39, 13)
-        Me.lblSalesCetak.TabIndex = 271
-        Me.lblSalesCetak.Text = "Sales :"
+        Me.btnProsesPerhitunganKomisi.Location = New System.Drawing.Point(409, 546)
+        Me.btnProsesPerhitunganKomisi.Name = "btnProsesPerhitunganKomisi"
+        Me.btnProsesPerhitunganKomisi.Size = New System.Drawing.Size(90, 23)
+        Me.btnProsesPerhitunganKomisi.TabIndex = 272
+        Me.btnProsesPerhitunganKomisi.Text = "4. PROSES"
+        Me.btnProsesPerhitunganKomisi.UseVisualStyleBackColor = True
+        '
+        'lblProsesPerhitunganKomisi
+        '
+        Me.lblProsesPerhitunganKomisi.AutoSize = True
+        Me.lblProsesPerhitunganKomisi.Location = New System.Drawing.Point(259, 551)
+        Me.lblProsesPerhitunganKomisi.Name = "lblProsesPerhitunganKomisi"
+        Me.lblProsesPerhitunganKomisi.Size = New System.Drawing.Size(144, 13)
+        Me.lblProsesPerhitunganKomisi.TabIndex = 273
+        Me.lblProsesPerhitunganKomisi.Text = "4. Proses Perhitungan Komisi"
         '
         'FormTransaksiPenjualan
         '
@@ -737,6 +758,8 @@ Partial Class FormTransaksiPenjualan
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1209, 611)
+        Me.Controls.Add(Me.lblProsesPerhitunganKomisi)
+        Me.Controls.Add(Me.btnProsesPerhitunganKomisi)
         Me.Controls.Add(Me.pnlCetak)
         Me.Controls.Add(Me.btnProsesRekap)
         Me.Controls.Add(Me.lblProsesRekap)
@@ -845,4 +868,6 @@ Partial Class FormTransaksiPenjualan
     Friend WithEvents rbDetailPerOutlet As RadioButton
     Friend WithEvents rbDetailPerItem As RadioButton
     Friend WithEvents lblSalesCetak As Label
+    Friend WithEvents btnProsesPerhitunganKomisi As Button
+    Friend WithEvents lblProsesPerhitunganKomisi As Label
 End Class

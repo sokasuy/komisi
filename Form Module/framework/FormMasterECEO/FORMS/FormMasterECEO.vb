@@ -223,6 +223,7 @@
                 .Columns("eo").Width = 70
                 .Columns("x").Width = 70
                 .Columns("y").Width = 70
+                .Columns("akhir").Width = 70
 
                 For a As Integer = 0 To myDataTable.Columns.Count - 1
                     .Columns(myDataTable.Columns(a).ColumnName).HeaderText = myDataTable.Columns(a).ColumnName.ToUpper
@@ -235,6 +236,13 @@
                 .Columns("eo").DefaultCellStyle.Format = "#,##0.00"
                 .Columns("x").DefaultCellStyle.Format = "#,##0.00"
                 .Columns("y").DefaultCellStyle.Format = "#,##0.00"
+                .Columns("akhir").DefaultCellStyle.Format = "#,##0.00"
+
+                .Columns("ec").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                .Columns("eo").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                .Columns("x").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                .Columns("y").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                .Columns("akhir").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
                 .Font = New Font("Arial", 8, FontStyle.Regular)
                 .ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -617,6 +625,12 @@
                             myDataTableDGV.Rows(myDataTableDGV.Rows.IndexOf(foundRows(0))).Item("y") = Double.Parse(tbY.Text)
                         End If
                     End If
+                    If (arrDefValues(8) <> tbAkhir.Text) Then
+                        updateString = "akhir=" & Double.Parse(tbAkhir.Text)
+                        If (foundRows.Length > 0) Then
+                            myDataTableDGV.Rows(myDataTableDGV.Rows.IndexOf(foundRows(0))).Item("akhir") = Double.Parse(tbAkhir.Text)
+                        End If
+                    End If
                     If Not IsNothing(updateString) Then
                         updateString &= "," & ADD_INFO_.updateString
                         'Call myCDBOperation.EditUpdatedAt(CONN_.dbMain, CONN_.comm, CONN_.reader, updateString, tableName(0), CONN_.dbType)
@@ -642,10 +656,10 @@
         End Try
     End Sub
 
-    Private Sub tbNumeric_Validated(sender As Object, e As EventArgs) Handles tbEO.Validated, tbEO.Validated, tbX.Validated, tbY.Validated
+    Private Sub tbNumeric_Validated(sender As Object, e As EventArgs) Handles tbEC.Validated, tbEO.Validated, tbX.Validated, tbY.Validated, tbAkhir.Validated
         Try
             Call myCStringManipulation.CleanInputDouble(sender.Text)
-            Call myCStringManipulation.ValidateTextBox(sender, "Numeric", "#,##0.00;(#,##0.00)")
+            Call myCStringManipulation.ValidateTextBox(sender, "Numeric", "#,##0.00")
         Catch ex As Exception
             Call myCShowMessage.ShowErrMsg("Pesan Error: " & ex.Message, "tbNumeric_Validated Error")
         End Try
