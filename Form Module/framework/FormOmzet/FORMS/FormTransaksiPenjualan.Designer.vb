@@ -87,6 +87,9 @@ Partial Class FormTransaksiPenjualan
         Me.rbRekap = New System.Windows.Forms.RadioButton()
         Me.btnProsesPerhitunganKomisi = New System.Windows.Forms.Button()
         Me.lblProsesPerhitunganKomisi = New System.Windows.Forms.Label()
+        Me.btnProsesPencapaianTargetItem = New System.Windows.Forms.Button()
+        Me.lblProsesPencapaianTargetItem = New System.Windows.Forms.Label()
+        Me.lblTargetItem = New System.Windows.Forms.Label()
         Me.pnlImportExcel.SuspendLayout()
         Me.gbView.SuspendLayout()
         Me.pnlNavigasi.SuspendLayout()
@@ -642,7 +645,7 @@ Partial Class FormTransaksiPenjualan
         Me.lblProsesRekap.Name = "lblProsesRekap"
         Me.lblProsesRekap.Size = New System.Drawing.Size(86, 13)
         Me.lblProsesRekap.TabIndex = 263
-        Me.lblProsesRekap.Text = "3. Proses Rekap"
+        Me.lblProsesRekap.Text = "4. Proses Rekap"
         '
         'btnCetak
         '
@@ -750,7 +753,34 @@ Partial Class FormTransaksiPenjualan
         Me.lblProsesPerhitunganKomisi.Name = "lblProsesPerhitunganKomisi"
         Me.lblProsesPerhitunganKomisi.Size = New System.Drawing.Size(144, 13)
         Me.lblProsesPerhitunganKomisi.TabIndex = 273
-        Me.lblProsesPerhitunganKomisi.Text = "4. Proses Perhitungan Komisi"
+        Me.lblProsesPerhitunganKomisi.Text = "5. Proses Perhitungan Komisi"
+        '
+        'btnProsesPencapaianTargetItem
+        '
+        Me.btnProsesPencapaianTargetItem.Location = New System.Drawing.Point(136, 575)
+        Me.btnProsesPencapaianTargetItem.Name = "btnProsesPencapaianTargetItem"
+        Me.btnProsesPencapaianTargetItem.Size = New System.Drawing.Size(90, 23)
+        Me.btnProsesPencapaianTargetItem.TabIndex = 275
+        Me.btnProsesPencapaianTargetItem.Text = "3. PROSES"
+        Me.btnProsesPencapaianTargetItem.UseVisualStyleBackColor = True
+        '
+        'lblProsesPencapaianTargetItem
+        '
+        Me.lblProsesPencapaianTargetItem.AutoSize = True
+        Me.lblProsesPencapaianTargetItem.Location = New System.Drawing.Point(16, 580)
+        Me.lblProsesPencapaianTargetItem.Name = "lblProsesPencapaianTargetItem"
+        Me.lblProsesPencapaianTargetItem.Size = New System.Drawing.Size(111, 13)
+        Me.lblProsesPencapaianTargetItem.TabIndex = 274
+        Me.lblProsesPencapaianTargetItem.Text = "3. Proses Pencapaian"
+        '
+        'lblTargetItem
+        '
+        Me.lblTargetItem.AutoSize = True
+        Me.lblTargetItem.Location = New System.Drawing.Point(26, 593)
+        Me.lblTargetItem.Name = "lblTargetItem"
+        Me.lblTargetItem.Size = New System.Drawing.Size(61, 13)
+        Me.lblTargetItem.TabIndex = 276
+        Me.lblTargetItem.Text = "Target Item"
         '
         'FormTransaksiPenjualan
         '
@@ -758,6 +788,9 @@ Partial Class FormTransaksiPenjualan
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
         Me.ClientSize = New System.Drawing.Size(1209, 611)
+        Me.Controls.Add(Me.lblTargetItem)
+        Me.Controls.Add(Me.btnProsesPencapaianTargetItem)
+        Me.Controls.Add(Me.lblProsesPencapaianTargetItem)
         Me.Controls.Add(Me.lblProsesPerhitunganKomisi)
         Me.Controls.Add(Me.btnProsesPerhitunganKomisi)
         Me.Controls.Add(Me.pnlCetak)
@@ -870,4 +903,7 @@ Partial Class FormTransaksiPenjualan
     Friend WithEvents lblSalesCetak As Label
     Friend WithEvents btnProsesPerhitunganKomisi As Button
     Friend WithEvents lblProsesPerhitunganKomisi As Label
+    Friend WithEvents btnProsesPencapaianTargetItem As Button
+    Friend WithEvents lblProsesPencapaianTargetItem As Label
+    Friend WithEvents lblTargetItem As Label
 End Class
