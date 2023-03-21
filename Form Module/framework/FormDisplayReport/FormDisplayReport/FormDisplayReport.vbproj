@@ -119,6 +119,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DATASET\PerhitunganKomisi\CDtSetPrintOutPerhitunganKomisi.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DATASET\Rekap\CDtSetPrintOutRekapKomisi.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -157,6 +160,8 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="REPORTS\PerhitunganKomisi\rptPrintOutPerhitunganKomisi.rdlc" />
+    <EmbeddedResource Include="REPORTS\PerhitunganKomisi\rptPrintOutPerhitunganKomisiLuarPulau.rdlc" />
     <EmbeddedResource Include="REPORTS\Rekap\rptPrintOutRekapKomisi.rdlc" />
   </ItemGroup>
   <ItemGroup>

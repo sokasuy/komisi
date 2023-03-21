@@ -99,6 +99,7 @@
         Dim perhitunganinsentifpenjualan90 As String
         Dim totalperhitunganinsentifpenjualan As String
         Dim persenklaimperhitunganinsentifpenjualan As String
+        Dim finalperhitunganinsentifpenjualan As String
         Dim overdue As String
         Dim persenoverdue As String
         Dim jtpalinglama As String
@@ -1306,6 +1307,7 @@
                 Dim targetItem As Short
                 Dim itemMencapaiTarget As Byte
                 Dim myDataTableNotaBelumLunas As New DataTable
+                Dim cekBanyakJatuhTempo As Short
 
                 Me.Cursor = Cursors.WaitCursor
                 Call myCDBConnection.OpenConn(CONN_.dbMain)
@@ -1341,6 +1343,7 @@
                 myDataTableSales.Columns.Add("perhitunganinsentifpenjualan90", GetType(Double))
                 myDataTableSales.Columns.Add("totalperhitunganinsentifpenjualan", GetType(Double))
                 myDataTableSales.Columns.Add("persenklaimperhitunganinsentifpenjualan", GetType(Double))
+                myDataTableSales.Columns.Add("finalperhitunganinsentifpenjualan", GetType(Double))
                 myDataTableSales.Columns.Add("overdue", GetType(Double))
                 myDataTableSales.Columns.Add("persenoverdue", GetType(Double))
                 myDataTableSales.Columns.Add("jtpalinglama", GetType(String))
@@ -1389,6 +1392,7 @@
                     T_perhitunganKomisi.perhitunganinsentifpenjualan90 = Nothing
                     T_perhitunganKomisi.totalperhitunganinsentifpenjualan = Nothing
                     T_perhitunganKomisi.persenklaimperhitunganinsentifpenjualan = Nothing
+                    T_perhitunganKomisi.finalperhitunganinsentifpenjualan = Nothing
                     T_perhitunganKomisi.overdue = Nothing
                     T_perhitunganKomisi.persenoverdue = Nothing
                     T_perhitunganKomisi.jtpalinglama = Nothing
@@ -1446,8 +1450,11 @@
                             T_perhitunganKomisi.perhitunganinsentifpenjualan = (T_perhitunganKomisi.hitomzet / ((T_perhitunganKomisi.ppn + 100) / 100)) * T_perhitunganKomisi.perseninsentifpenjualan
                         End If
                         T_perhitunganKomisi.totalperhitunganinsentifpenjualan = Double.Parse(IIf(IsNothing(T_perhitunganKomisi.perhitunganinsentifpenjualan), 0, T_perhitunganKomisi.perhitunganinsentifpenjualan)) + Double.Parse(IIf(IsNothing(T_perhitunganKomisi.perhitunganinsentifpenjualan90), 0, T_perhitunganKomisi.perhitunganinsentifpenjualan90))
+                        cekBanyakJatuhTempo = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "rid", CONN_.schemaKomisi & ".trpenjualanperoutlet", "Count", "kodesales='" & myDataTableSales.Rows(i).Item("kodesales") & "' AND periode='" & cboPeriode.SelectedValue & "' AND jmlharilunas>60", CONN_.dbType)
+                        T_perhitunganKomisi.persenklaimperhitunganinsentifpenjualan = IIf(cekBanyakJatuhTempo > 0, 50, 0)
+                        T_perhitunganKomisi.finalperhitunganinsentifpenjualan = T_perhitunganKomisi.totalperhitunganinsentifpenjualan * ((T_perhitunganKomisi.persenklaimperhitunganinsentifpenjualan) / 100)
                         T_perhitunganKomisi.perseninsentifpimtrakol = myCDBOperation.GetSpecificRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "perseninsentif", CONN_.schemaKomisi & ".msinsentif",, "kategori='PIMTRAKOL' AND (dalamkota='" & myDataTableSales.Rows(i).Item("dalamkota") & "' OR luarkota='" & myDataTableSales.Rows(i).Item("luarkota") & "' OR luarpulau='" & myDataTableSales.Rows(i).Item("luarpulau") & "') AND batasbawah<=" & IIf(IsNothing(T_perhitunganKomisi.persenpencapaianpimtrakol), 0, T_perhitunganKomisi.persenpencapaianpimtrakol) & " and batasatas>" & IIf(IsNothing(T_perhitunganKomisi.persenpencapaianpimtrakol), 0, T_perhitunganKomisi.persenpencapaianpimtrakol), CONN_.dbType)
-                        T_perhitunganKomisi.perhitungansetelahpimtrakol = IIf(IsNothing(T_perhitunganKomisi.totalperhitunganinsentifpenjualan), 0, T_perhitunganKomisi.totalperhitunganinsentifpenjualan) + ((T_perhitunganKomisi.perseninsentifpimtrakol / 100) * IIf(IsNothing(T_perhitunganKomisi.totalperhitunganinsentifpenjualan), 0, T_perhitunganKomisi.totalperhitunganinsentifpenjualan))
+                        T_perhitunganKomisi.perhitungansetelahpimtrakol = IIf(IsNothing(T_perhitunganKomisi.finalperhitunganinsentifpenjualan), 0, T_perhitunganKomisi.finalperhitunganinsentifpenjualan) + ((T_perhitunganKomisi.perseninsentifpimtrakol / 100) * IIf(IsNothing(T_perhitunganKomisi.finalperhitunganinsentifpenjualan), 0, T_perhitunganKomisi.finalperhitunganinsentifpenjualan))
                     End If
                     batasMinimalPersenTargetItem = myCDBOperation.GetSpecificRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "kode", CONN_.schemaKomisi & ".msgeneral",, "kategori='targetitem'", CONN_.dbType)
                     targetItem = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "rid", CONN_.schemaKomisi & ".mstargetsales", "Count", "periode='" & cboPeriode.SelectedValue & "' and kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and qty>0 and kodeitem not in ('OJ0121','OJ0121A','XSTPRS24')")
@@ -1459,14 +1466,14 @@
                     T_perhitunganKomisi.perhitunganinsentifakhir = (T_perhitunganKomisi.persenklaiminsentif / 100) * T_perhitunganKomisi.perhitungansetelahpimtrakol
                     T_perhitunganKomisi.overdue = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "jumlah", CONN_.schemaKomisi & ".trpenjualanperoutlet", "Sum", "overdue>3 and ignoreoverdue='False' and kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and periode='" & cboPeriode.SelectedValue & "' and company='" & USER_.company & "'")
                     T_perhitunganKomisi.persenoverdue = (T_perhitunganKomisi.overdue / T_perhitunganKomisi.omzetbruto) * 100
-                    stSQL = "select (namacustomer || ' (' || jmlharilunas || ' hari)') as jtpalinglama from " & CONN_.schemaKomisi & ".trpenjualanperoutlet where ignoreoverdue='False' and kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and periode='" & cboPeriode.SelectedValue & "' and company='" & USER_.company & "' order by jmlharilunas desc limit 1;"
+                    stSQL = "select (namacustomer || ' (' || jmlharilunas || ' hari)') as jtpalinglama from " & CONN_.schemaKomisi & ".trpenjualanperoutlet where ignoreoverdue='False' and kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and periode='" & cboPeriode.SelectedValue & "' and company='" & USER_.company & "' and jmlharilunas is not null order by jmlharilunas desc limit 1;"
                     T_perhitunganKomisi.jtpalinglama = myCDBOperation.GetDataIndividual(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL)
-                    stSQL = "select namacustomer,nonota,tglnota from " & CONN_.schemaKomisi & ".trpenjualanperoutlet where lunas is null and kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and periode='" & cboPeriode.SelectedValue & "' and company='" & USER_.company & "';"
+                    stSQL = "select namacustomer,nonota,tglnota,jumlah from " & CONN_.schemaKomisi & ".trpenjualanperoutlet where lunas is null and kodesales='" & myCStringManipulation.SafeSqlLiteral(myDataTableSales.Rows(i).Item("kodesales")) & "' and periode='" & cboPeriode.SelectedValue & "' and company='" & USER_.company & "' ORDER BY namacustomer,nonota;"
                     myDataTableNotaBelumLunas = myCDBOperation.GetDataTableUsingReader(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, "T_NotaBelumLunas")
                     If (myDataTableNotaBelumLunas.Rows.Count > 0) Then
                         T_perhitunganKomisi.note = "Belum Lunas: "
-                        For x As Integer = 0 To myDataTableNotaBelumLunas.Rows.Count > 0
-                            T_perhitunganKomisi.note &= ControlChars.NewLine & (x + 1) & ". " & myDataTableNotaBelumLunas.Rows(x).Item("nonota")
+                        For x As Integer = 0 To myDataTableNotaBelumLunas.Rows.Count - 1
+                            T_perhitunganKomisi.note &= ControlChars.NewLine & (x + 1) & ". " & myDataTableNotaBelumLunas.Rows(x).Item("namacustomer") & ";" & myDataTableNotaBelumLunas.Rows(x).Item("nonota") & "."
                         Next
                     End If
 
@@ -1504,6 +1511,7 @@
                     myDataTableSales.Rows(i).Item("perhitunganinsentifpenjualan90") = IIf(IsNothing(T_perhitunganKomisi.perhitunganinsentifpenjualan90), 0, T_perhitunganKomisi.perhitunganinsentifpenjualan90)
                     myDataTableSales.Rows(i).Item("totalperhitunganinsentifpenjualan") = IIf(IsNothing(T_perhitunganKomisi.totalperhitunganinsentifpenjualan), 0, T_perhitunganKomisi.totalperhitunganinsentifpenjualan)
                     myDataTableSales.Rows(i).Item("persenklaimperhitunganinsentifpenjualan") = IIf(IsNothing(T_perhitunganKomisi.persenklaimperhitunganinsentifpenjualan), 0, T_perhitunganKomisi.persenklaimperhitunganinsentifpenjualan)
+                    myDataTableSales.Rows(i).Item("finalperhitunganinsentifpenjualan") = IIf(IsNothing(T_perhitunganKomisi.finalperhitunganinsentifpenjualan), 0, T_perhitunganKomisi.finalperhitunganinsentifpenjualan)
                     myDataTableSales.Rows(i).Item("overdue") = IIf(IsNothing(T_perhitunganKomisi.overdue), 0, T_perhitunganKomisi.overdue)
                     myDataTableSales.Rows(i).Item("persenoverdue") = IIf(IsNothing(T_perhitunganKomisi.persenoverdue), 0, T_perhitunganKomisi.persenoverdue)
                     myDataTableSales.Rows(i).Item("jtpalinglama") = IIf(IsNothing(T_perhitunganKomisi.jtpalinglama), Nothing, T_perhitunganKomisi.jtpalinglama)
@@ -1521,7 +1529,7 @@
                         updateString = "targetomzet=" & myDataTableSales.Rows(i).Item("targetomzet") & ",omzetbruto=" & myDataTableSales.Rows(i).Item("omzetbruto") & ",retur=" & myDataTableSales.Rows(i).Item("retur") & ",omzetnett=" & myDataTableSales.Rows(i).Item("omzetnett") & ",persenpencapaianomzet=" & myDataTableSales.Rows(i).Item("persenpencapaianomzet") & ",targetpimtrakol=" & myDataTableSales.Rows(i).Item("targetpimtrakol") & ",pencapaianpimtrakol=" & myDataTableSales.Rows(i).Item("pencapaianpimtrakol") & ",persenpencapaianpimtrakol=" & myDataTableSales.Rows(i).Item("persenpencapaianpimtrakol") & ",hitomzet=" & myDataTableSales.Rows(i).Item("hitomzet")
                         updateString &= ",ppn=" & myDataTableSales.Rows(i).Item("ppn") & ",perseninsentifpenjualan=" & myDataTableSales.Rows(i).Item("perseninsentifpenjualan") & ",perhitunganinsentifpenjualan=" & myDataTableSales.Rows(i).Item("perhitunganinsentifpenjualan") & ",ec=" & myDataTableSales.Rows(i).Item("ec") & ",eo=" & myDataTableSales.Rows(i).Item("eo") & ",x=" & myDataTableSales.Rows(i).Item("x") & ",y=" & myDataTableSales.Rows(i).Item("y") & ",z=" & myDataTableSales.Rows(i).Item("z") & ",perhitungansetelaheceo=" & myDataTableSales.Rows(i).Item("perhitungansetelaheceo") & ",perseninsentifpimtrakol=" & myDataTableSales.Rows(i).Item("perseninsentifpimtrakol")
                         updateString &= ",perhitungansetelahpimtrakol=" & myDataTableSales.Rows(i).Item("perhitungansetelahpimtrakol") & ",persenpencapaiantargetitem=" & myDataTableSales.Rows(i).Item("persenpencapaiantargetitem") & ",persenklaiminsentif=" & myDataTableSales.Rows(i).Item("persenklaiminsentif") & ",perhitunganinsentifakhir=" & myDataTableSales.Rows(i).Item("perhitunganinsentifakhir") & ",company='" & myDataTableSales.Rows(i).Item("company") & "',dalamkota='" & myDataTableSales.Rows(i).Item("dalamkota") & "',luarkota='" & myDataTableSales.Rows(i).Item("luarkota") & "',luarpulau='" & myDataTableSales.Rows(i).Item("luarpulau") & "',omzetnett90=" & myDataTableSales.Rows(i).Item("omzetnett90") & ",omzetnett10=" & myDataTableSales.Rows(i).Item("omzetnett10")
-                        updateString &= ",perseninsentifpenjualan90=" & myDataTableSales.Rows(i).Item("perseninsentifpenjualan90") & ",perhitunganinsentifpenjualan90=" & myDataTableSales.Rows(i).Item("perhitunganinsentifpenjualan90") & ",totalperhitunganinsentifpenjualan=" & myDataTableSales.Rows(i).Item("totalperhitunganinsentifpenjualan") & ",persenklaimperhitunganinsentifpenjualan=" & myDataTableSales.Rows(i).Item("persenklaimperhitunganinsentifpenjualan") & ",overdue=" & myDataTableSales.Rows(i).Item("overdue") & ",persenoverdue=" & myDataTableSales.Rows(i).Item("persenoverdue") & ",jtpalinglama='" & myDataTableSales.Rows(i).Item("jtpalinglama") & "',note='" & myDataTableSales.Rows(i).Item("note") & "',updated_at=clock_timestamp()"
+                        updateString &= ",perseninsentifpenjualan90=" & myDataTableSales.Rows(i).Item("perseninsentifpenjualan90") & ",perhitunganinsentifpenjualan90=" & myDataTableSales.Rows(i).Item("perhitunganinsentifpenjualan90") & ",totalperhitunganinsentifpenjualan=" & myDataTableSales.Rows(i).Item("totalperhitunganinsentifpenjualan") & ",persenklaimperhitunganinsentifpenjualan=" & myDataTableSales.Rows(i).Item("persenklaimperhitunganinsentifpenjualan") & ",finalperhitunganinsentifpenjualan=" & myDataTableSales.Rows(i).Item("finalperhitunganinsentifpenjualan") & ",overdue=" & myDataTableSales.Rows(i).Item("overdue") & ",persenoverdue=" & myDataTableSales.Rows(i).Item("persenoverdue") & ",jtpalinglama='" & myDataTableSales.Rows(i).Item("jtpalinglama") & "',note='" & myDataTableSales.Rows(i).Item("note") & "',updated_at=clock_timestamp()"
 
                         Call myCDBOperation.UpdateData(CONN_.dbMain, CONN_.comm, CONN_.schemaKomisi & ".trperhitungankomisi", updateString, "kodesales='" & myDataTableSales.Rows(i).Item("kodesales") & "' and periode='" & cboPeriode.SelectedValue & "'")
                     End If
@@ -1554,7 +1562,9 @@
                         stSQL = "SELECT kodesales,namasales,periode,target,omzet,omzetlm,omzetbr,persenpencapaiansales,sppending,persensppending,overdue,hitomzet,totalpersen,komisireg,targetpimt,realpimt,persenpimt,kmspimt,totalkms,(case when dalamkota=True then '1. Dalam Kota' when luarkota=True then '2. Luar Kota' else 'Lainnya' end) as cakupan FROM " & CONN_.schemaKomisi & ".trrekapsales WHERE periode='" & cboPeriode.SelectedValue & "' ORDER BY namasales;"
                     Case rbPerhitunganKomisi.Checked
                         reportType = "PerhitunganKomisi"
-                        stSQL = ""
+                        stSQL = "SELECT kodesales,namasales,periode,targetomzet,omzetbruto,retur,omzetnett,persenpencapaianomzet,targetpimtrakol,pencapaianpimtrakol,persenpencapaianpimtrakol,hitomzet,ppn,perseninsentifpenjualan,perhitunganinsentifpenjualan,ec,eo,x,y,z,perhitungansetelaheceo,perseninsentifpimtrakol,perhitungansetelahpimtrakol,persenpencapaiantargetitem,persenklaiminsentif,perhitunganinsentifakhir,omzetnett90,omzetnett10,perseninsentifpenjualan90,perhitunganinsentifpenjualan90,totalperhitunganinsentifpenjualan,persenklaimperhitunganinsentifpenjualan,overdue,persenoverdue,jtpalinglama,note,finalperhitunganinsentifpenjualan 
+                                FROM trperhitungankomisi 
+                                WHERE kodesales='" & myCStringManipulation.SafeSqlLiteral(cboSalesCetak.SelectedValue) & "' and periode='" & myCStringManipulation.SafeSqlLiteral(cboPeriode.SelectedValue) & "';"
                 End Select
                 If Not IsNothing(reportType) Then
                     Dim frmDisplayReport As New FormDisplayReport.FormDisplayReport(CONN_.dbType, CONN_.schemaTmp, CONN_.schemaKomisi, CONN_.dbMain, stSQL, reportType)
