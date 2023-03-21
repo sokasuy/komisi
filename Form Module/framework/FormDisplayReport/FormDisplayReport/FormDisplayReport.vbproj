@@ -176,6 +176,7 @@
     <None Include="My Project\DataSources\CDtSetPrintOutJadwalPresensi.datasource" />
     <None Include="My Project\DataSources\CDtSetPrintOutKaryawanTidakMasuk.datasource" />
     <None Include="My Project\DataSources\CDtSetPrintOutKaryawanTidakMasukHarian.datasource" />
+    <None Include="My Project\DataSources\CDtSetPrintOutPerhitunganKomisi.datasource" />
     <None Include="My Project\DataSources\CDtSetPrintOutPresensiMingguan.datasource" />
     <None Include="My Project\DataSources\CDtSetPrintOutPresensiSecurity.datasource" />
     <None Include="My Project\DataSources\CDtSetPrintOutPresensiStaff.datasource" />

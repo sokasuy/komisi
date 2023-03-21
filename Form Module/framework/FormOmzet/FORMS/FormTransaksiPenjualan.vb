@@ -159,7 +159,7 @@
             Call myCDBOperation.SetCbo_(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, myDataTableCboPeriode, myBindingPeriode, cboPeriode, "T_" & cboPeriode.Name, "keterangan", "keterangan", isCboPrepared)
             Call myCDBOperation.SetCbo_(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, myDataTableCboCariPeriode, myBindingCariPeriode, cboCariPeriode, "T_" & cboCariPeriode.Name, "keterangan", "keterangan", isCboPrepared, True)
 
-            stSQL = "SELECT kodesales,namasales,area FROM " & CONN_.schemaKomisi & ".mssales WHERE company='" & USER_.company & "' ORDER BY namasales;"
+            stSQL = "SELECT kodesales,namasales,area,dalamkota,luarkota,luarpulau FROM " & CONN_.schemaKomisi & ".mssales WHERE company='" & USER_.company & "' ORDER BY namasales;"
             Call myCDBOperation.SetCbo_(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, myDataTableCboCariSales, myBindingCariSales, cboCariSales, "T_" & cboCariSales.Name, "kodesales", "namasales", isCboPrepared)
             Call myCDBOperation.SetCbo_(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, myDataTableCboSalesCetak, myBindingSalesCetak, cboSalesCetak, "T_" & cboSalesCetak.Name, "kodesales", "namasales", isCboPrepared, True)
 
@@ -1556,18 +1556,28 @@
         Try
             If (cboPeriode.SelectedIndex <> -1) Then
                 Dim reportType As String
+                Dim reportCriteria As String
                 Select Case True
                     Case rbRekap.Checked
                         reportType = "RekapKomisi"
+                        reportCriteria = ""
                         stSQL = "SELECT kodesales,namasales,periode,target,omzet,omzetlm,omzetbr,persenpencapaiansales,sppending,persensppending,overdue,hitomzet,totalpersen,komisireg,targetpimt,realpimt,persenpimt,kmspimt,totalkms,(case when dalamkota=True then '1. Dalam Kota' when luarkota=True then '2. Luar Kota' else 'Lainnya' end) as cakupan FROM " & CONN_.schemaKomisi & ".trrekapsales WHERE periode='" & cboPeriode.SelectedValue & "' ORDER BY namasales;"
                     Case rbPerhitunganKomisi.Checked
                         reportType = "PerhitunganKomisi"
+                        If (DirectCast(cboSalesCetak.SelectedItem, DataRowView).Item("luarpulau")) Then
+                            reportCriteria = "LuarPulau"
+                        Else
+                            reportCriteria = ""
+                        End If
                         stSQL = "SELECT kodesales,namasales,periode,targetomzet,omzetbruto,retur,omzetnett,persenpencapaianomzet,targetpimtrakol,pencapaianpimtrakol,persenpencapaianpimtrakol,hitomzet,ppn,perseninsentifpenjualan,perhitunganinsentifpenjualan,ec,eo,x,y,z,perhitungansetelaheceo,perseninsentifpimtrakol,perhitungansetelahpimtrakol,persenpencapaiantargetitem,persenklaiminsentif,perhitunganinsentifakhir,omzetnett90,omzetnett10,perseninsentifpenjualan90,perhitunganinsentifpenjualan90,totalperhitunganinsentifpenjualan,persenklaimperhitunganinsentifpenjualan,overdue,persenoverdue,jtpalinglama,note,finalperhitunganinsentifpenjualan 
-                                FROM trperhitungankomisi 
+                                FROM " & CONN_.schemaKomisi & ".trperhitungankomisi 
                                 WHERE kodesales='" & myCStringManipulation.SafeSqlLiteral(cboSalesCetak.SelectedValue) & "' and periode='" & myCStringManipulation.SafeSqlLiteral(cboPeriode.SelectedValue) & "';"
+                    Case Else
+                        reportType = Nothing
+                        reportCriteria = ""
                 End Select
                 If Not IsNothing(reportType) Then
-                    Dim frmDisplayReport As New FormDisplayReport.FormDisplayReport(CONN_.dbType, CONN_.schemaTmp, CONN_.schemaKomisi, CONN_.dbMain, stSQL, reportType)
+                    Dim frmDisplayReport As New FormDisplayReport.FormDisplayReport(CONN_.dbType, CONN_.schemaTmp, CONN_.schemaKomisi, CONN_.dbMain, stSQL, reportType,, reportCriteria)
                     Call myCFormManipulation.GoToForm(Me.MdiParent, frmDisplayReport)
                 Else
                     Call myCShowMessage.ShowWarning("Silahkan tentukan dulu report yang mau dicetak!!")
