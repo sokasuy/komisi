@@ -40,6 +40,10 @@ Partial Class FormTransaksiPenjualan
         Me.cboPeriode = New System.Windows.Forms.ComboBox()
         Me.lblPeriodeImport = New System.Windows.Forms.Label()
         Me.gbView = New System.Windows.Forms.GroupBox()
+        Me.lblSum3 = New System.Windows.Forms.Label()
+        Me.tbSum3 = New System.Windows.Forms.TextBox()
+        Me.lblSum2 = New System.Windows.Forms.Label()
+        Me.tbSum2 = New System.Windows.Forms.TextBox()
         Me.tbSum1 = New System.Windows.Forms.TextBox()
         Me.lblSum1 = New System.Windows.Forms.Label()
         Me.pnlNavigasi = New System.Windows.Forms.Panel()
@@ -90,10 +94,10 @@ Partial Class FormTransaksiPenjualan
         Me.btnProsesPencapaianTargetItem = New System.Windows.Forms.Button()
         Me.lblProsesPencapaianTargetItem = New System.Windows.Forms.Label()
         Me.lblTargetItem = New System.Windows.Forms.Label()
-        Me.tbSum2 = New System.Windows.Forms.TextBox()
-        Me.lblSum2 = New System.Windows.Forms.Label()
-        Me.lblSum3 = New System.Windows.Forms.Label()
-        Me.tbSum3 = New System.Windows.Forms.TextBox()
+        Me.lblSum4 = New System.Windows.Forms.Label()
+        Me.tbSum4 = New System.Windows.Forms.TextBox()
+        Me.lblSum5 = New System.Windows.Forms.Label()
+        Me.tbSum5 = New System.Windows.Forms.TextBox()
         Me.pnlImportExcel.SuspendLayout()
         Me.gbView.SuspendLayout()
         Me.pnlNavigasi.SuspendLayout()
@@ -185,7 +189,7 @@ Partial Class FormTransaksiPenjualan
         Me.pnlImportExcel.Controls.Add(Me.btnBrowse)
         Me.pnlImportExcel.Controls.Add(Me.lblNamaFile)
         Me.pnlImportExcel.Controls.Add(Me.btnProsesImport)
-        Me.pnlImportExcel.Location = New System.Drawing.Point(12, 449)
+        Me.pnlImportExcel.Location = New System.Drawing.Point(12, 473)
         Me.pnlImportExcel.Name = "pnlImportExcel"
         Me.pnlImportExcel.Size = New System.Drawing.Size(1189, 62)
         Me.pnlImportExcel.TabIndex = 250
@@ -258,7 +262,7 @@ Partial Class FormTransaksiPenjualan
         Me.cboPeriode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboPeriode.FormattingEnabled = True
         Me.cboPeriode.IntegralHeight = False
-        Me.cboPeriode.Location = New System.Drawing.Point(70, 422)
+        Me.cboPeriode.Location = New System.Drawing.Point(75, 446)
         Me.cboPeriode.Name = "cboPeriode"
         Me.cboPeriode.Size = New System.Drawing.Size(131, 21)
         Me.cboPeriode.TabIndex = 253
@@ -267,7 +271,7 @@ Partial Class FormTransaksiPenjualan
         '
         Me.lblPeriodeImport.AutoSize = True
         Me.lblPeriodeImport.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.lblPeriodeImport.Location = New System.Drawing.Point(11, 424)
+        Me.lblPeriodeImport.Location = New System.Drawing.Point(16, 448)
         Me.lblPeriodeImport.Name = "lblPeriodeImport"
         Me.lblPeriodeImport.Size = New System.Drawing.Size(53, 15)
         Me.lblPeriodeImport.TabIndex = 254
@@ -277,6 +281,10 @@ Partial Class FormTransaksiPenjualan
         '
         Me.gbView.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.gbView.Controls.Add(Me.lblSum5)
+        Me.gbView.Controls.Add(Me.tbSum5)
+        Me.gbView.Controls.Add(Me.lblSum4)
+        Me.gbView.Controls.Add(Me.tbSum4)
         Me.gbView.Controls.Add(Me.lblSum3)
         Me.gbView.Controls.Add(Me.tbSum3)
         Me.gbView.Controls.Add(Me.lblSum2)
@@ -287,10 +295,48 @@ Partial Class FormTransaksiPenjualan
         Me.gbView.Controls.Add(Me.dgvView)
         Me.gbView.Location = New System.Drawing.Point(12, 98)
         Me.gbView.Name = "gbView"
-        Me.gbView.Size = New System.Drawing.Size(1185, 323)
+        Me.gbView.Size = New System.Drawing.Size(1185, 342)
         Me.gbView.TabIndex = 251
         Me.gbView.TabStop = False
         Me.gbView.Text = "VIEW"
+        '
+        'lblSum3
+        '
+        Me.lblSum3.AutoSize = True
+        Me.lblSum3.Location = New System.Drawing.Point(975, 291)
+        Me.lblSum3.Name = "lblSum3"
+        Me.lblSum3.Size = New System.Drawing.Size(43, 13)
+        Me.lblSum3.TabIndex = 179
+        Me.lblSum3.Text = "SUM 3:"
+        '
+        'tbSum3
+        '
+        Me.tbSum3.BackColor = System.Drawing.Color.LemonChiffon
+        Me.tbSum3.Location = New System.Drawing.Point(1024, 288)
+        Me.tbSum3.Name = "tbSum3"
+        Me.tbSum3.ReadOnly = True
+        Me.tbSum3.Size = New System.Drawing.Size(156, 20)
+        Me.tbSum3.TabIndex = 178
+        Me.tbSum3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'lblSum2
+        '
+        Me.lblSum2.AutoSize = True
+        Me.lblSum2.Location = New System.Drawing.Point(751, 291)
+        Me.lblSum2.Name = "lblSum2"
+        Me.lblSum2.Size = New System.Drawing.Size(43, 13)
+        Me.lblSum2.TabIndex = 177
+        Me.lblSum2.Text = "SUM 2:"
+        '
+        'tbSum2
+        '
+        Me.tbSum2.BackColor = System.Drawing.Color.LemonChiffon
+        Me.tbSum2.Location = New System.Drawing.Point(800, 288)
+        Me.tbSum2.Name = "tbSum2"
+        Me.tbSum2.ReadOnly = True
+        Me.tbSum2.Size = New System.Drawing.Size(156, 20)
+        Me.tbSum2.TabIndex = 176
+        Me.tbSum2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'tbSum1
         '
@@ -305,11 +351,11 @@ Partial Class FormTransaksiPenjualan
         'lblSum1
         '
         Me.lblSum1.AutoSize = True
-        Me.lblSum1.Location = New System.Drawing.Point(514, 291)
+        Me.lblSum1.Location = New System.Drawing.Point(527, 291)
         Me.lblSum1.Name = "lblSum1"
-        Me.lblSum1.Size = New System.Drawing.Size(56, 13)
+        Me.lblSum1.Size = New System.Drawing.Size(43, 13)
         Me.lblSum1.TabIndex = 173
-        Me.lblSum1.Text = "JUMLAH :"
+        Me.lblSum1.Text = "SUM 1:"
         '
         'pnlNavigasi
         '
@@ -590,7 +636,7 @@ Partial Class FormTransaksiPenjualan
         Me.btnKeluar.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnKeluar.Image = CType(resources.GetObject("btnKeluar.Image"), System.Drawing.Image)
         Me.btnKeluar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnKeluar.Location = New System.Drawing.Point(1081, 517)
+        Me.btnKeluar.Location = New System.Drawing.Point(1081, 541)
         Me.btnKeluar.Name = "btnKeluar"
         Me.btnKeluar.Size = New System.Drawing.Size(120, 54)
         Me.btnKeluar.TabIndex = 252
@@ -604,7 +650,7 @@ Partial Class FormTransaksiPenjualan
         'lblProsesTOPKhusus
         '
         Me.lblProsesTOPKhusus.AutoSize = True
-        Me.lblProsesTOPKhusus.Location = New System.Drawing.Point(16, 522)
+        Me.lblProsesTOPKhusus.Location = New System.Drawing.Point(16, 546)
         Me.lblProsesTOPKhusus.Name = "lblProsesTOPKhusus"
         Me.lblProsesTOPKhusus.Size = New System.Drawing.Size(114, 13)
         Me.lblProsesTOPKhusus.TabIndex = 259
@@ -612,7 +658,7 @@ Partial Class FormTransaksiPenjualan
         '
         'btnProsesTOPKhusus
         '
-        Me.btnProsesTOPKhusus.Location = New System.Drawing.Point(136, 517)
+        Me.btnProsesTOPKhusus.Location = New System.Drawing.Point(136, 541)
         Me.btnProsesTOPKhusus.Name = "btnProsesTOPKhusus"
         Me.btnProsesTOPKhusus.Size = New System.Drawing.Size(90, 23)
         Me.btnProsesTOPKhusus.TabIndex = 260
@@ -621,7 +667,7 @@ Partial Class FormTransaksiPenjualan
         '
         'btnProsesOverdue
         '
-        Me.btnProsesOverdue.Location = New System.Drawing.Point(136, 546)
+        Me.btnProsesOverdue.Location = New System.Drawing.Point(136, 570)
         Me.btnProsesOverdue.Name = "btnProsesOverdue"
         Me.btnProsesOverdue.Size = New System.Drawing.Size(90, 23)
         Me.btnProsesOverdue.TabIndex = 262
@@ -631,7 +677,7 @@ Partial Class FormTransaksiPenjualan
         'lblProsesOverdue
         '
         Me.lblProsesOverdue.AutoSize = True
-        Me.lblProsesOverdue.Location = New System.Drawing.Point(16, 551)
+        Me.lblProsesOverdue.Location = New System.Drawing.Point(16, 575)
         Me.lblProsesOverdue.Name = "lblProsesOverdue"
         Me.lblProsesOverdue.Size = New System.Drawing.Size(95, 13)
         Me.lblProsesOverdue.TabIndex = 261
@@ -639,7 +685,7 @@ Partial Class FormTransaksiPenjualan
         '
         'btnProsesRekap
         '
-        Me.btnProsesRekap.Location = New System.Drawing.Point(409, 517)
+        Me.btnProsesRekap.Location = New System.Drawing.Point(409, 541)
         Me.btnProsesRekap.Name = "btnProsesRekap"
         Me.btnProsesRekap.Size = New System.Drawing.Size(90, 23)
         Me.btnProsesRekap.TabIndex = 264
@@ -649,7 +695,7 @@ Partial Class FormTransaksiPenjualan
         'lblProsesRekap
         '
         Me.lblProsesRekap.AutoSize = True
-        Me.lblProsesRekap.Location = New System.Drawing.Point(259, 522)
+        Me.lblProsesRekap.Location = New System.Drawing.Point(259, 546)
         Me.lblProsesRekap.Name = "lblProsesRekap"
         Me.lblProsesRekap.Size = New System.Drawing.Size(86, 13)
         Me.lblProsesRekap.TabIndex = 263
@@ -678,7 +724,7 @@ Partial Class FormTransaksiPenjualan
         Me.pnlCetak.Controls.Add(Me.rbPerhitunganKomisi)
         Me.pnlCetak.Controls.Add(Me.rbRekap)
         Me.pnlCetak.Controls.Add(Me.btnCetak)
-        Me.pnlCetak.Location = New System.Drawing.Point(532, 514)
+        Me.pnlCetak.Location = New System.Drawing.Point(532, 538)
         Me.pnlCetak.Name = "pnlCetak"
         Me.pnlCetak.Size = New System.Drawing.Size(543, 82)
         Me.pnlCetak.TabIndex = 266
@@ -747,7 +793,7 @@ Partial Class FormTransaksiPenjualan
         '
         'btnProsesPerhitunganKomisi
         '
-        Me.btnProsesPerhitunganKomisi.Location = New System.Drawing.Point(409, 546)
+        Me.btnProsesPerhitunganKomisi.Location = New System.Drawing.Point(409, 570)
         Me.btnProsesPerhitunganKomisi.Name = "btnProsesPerhitunganKomisi"
         Me.btnProsesPerhitunganKomisi.Size = New System.Drawing.Size(90, 23)
         Me.btnProsesPerhitunganKomisi.TabIndex = 272
@@ -757,7 +803,7 @@ Partial Class FormTransaksiPenjualan
         'lblProsesPerhitunganKomisi
         '
         Me.lblProsesPerhitunganKomisi.AutoSize = True
-        Me.lblProsesPerhitunganKomisi.Location = New System.Drawing.Point(259, 551)
+        Me.lblProsesPerhitunganKomisi.Location = New System.Drawing.Point(259, 575)
         Me.lblProsesPerhitunganKomisi.Name = "lblProsesPerhitunganKomisi"
         Me.lblProsesPerhitunganKomisi.Size = New System.Drawing.Size(144, 13)
         Me.lblProsesPerhitunganKomisi.TabIndex = 273
@@ -765,7 +811,7 @@ Partial Class FormTransaksiPenjualan
         '
         'btnProsesPencapaianTargetItem
         '
-        Me.btnProsesPencapaianTargetItem.Location = New System.Drawing.Point(136, 575)
+        Me.btnProsesPencapaianTargetItem.Location = New System.Drawing.Point(136, 599)
         Me.btnProsesPencapaianTargetItem.Name = "btnProsesPencapaianTargetItem"
         Me.btnProsesPencapaianTargetItem.Size = New System.Drawing.Size(90, 23)
         Me.btnProsesPencapaianTargetItem.TabIndex = 275
@@ -775,7 +821,7 @@ Partial Class FormTransaksiPenjualan
         'lblProsesPencapaianTargetItem
         '
         Me.lblProsesPencapaianTargetItem.AutoSize = True
-        Me.lblProsesPencapaianTargetItem.Location = New System.Drawing.Point(16, 580)
+        Me.lblProsesPencapaianTargetItem.Location = New System.Drawing.Point(16, 604)
         Me.lblProsesPencapaianTargetItem.Name = "lblProsesPencapaianTargetItem"
         Me.lblProsesPencapaianTargetItem.Size = New System.Drawing.Size(111, 13)
         Me.lblProsesPencapaianTargetItem.TabIndex = 274
@@ -784,56 +830,56 @@ Partial Class FormTransaksiPenjualan
         'lblTargetItem
         '
         Me.lblTargetItem.AutoSize = True
-        Me.lblTargetItem.Location = New System.Drawing.Point(26, 593)
+        Me.lblTargetItem.Location = New System.Drawing.Point(26, 617)
         Me.lblTargetItem.Name = "lblTargetItem"
         Me.lblTargetItem.Size = New System.Drawing.Size(61, 13)
         Me.lblTargetItem.TabIndex = 276
         Me.lblTargetItem.Text = "Target Item"
         '
-        'tbSum2
+        'lblSum4
         '
-        Me.tbSum2.BackColor = System.Drawing.Color.LemonChiffon
-        Me.tbSum2.Location = New System.Drawing.Point(800, 288)
-        Me.tbSum2.Name = "tbSum2"
-        Me.tbSum2.ReadOnly = True
-        Me.tbSum2.Size = New System.Drawing.Size(156, 20)
-        Me.tbSum2.TabIndex = 176
-        Me.tbSum2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.lblSum4.AutoSize = True
+        Me.lblSum4.Location = New System.Drawing.Point(751, 317)
+        Me.lblSum4.Name = "lblSum4"
+        Me.lblSum4.Size = New System.Drawing.Size(43, 13)
+        Me.lblSum4.TabIndex = 181
+        Me.lblSum4.Text = "SUM 4:"
         '
-        'lblSum2
+        'tbSum4
         '
-        Me.lblSum2.AutoSize = True
-        Me.lblSum2.Location = New System.Drawing.Point(738, 291)
-        Me.lblSum2.Name = "lblSum2"
-        Me.lblSum2.Size = New System.Drawing.Size(51, 13)
-        Me.lblSum2.TabIndex = 177
-        Me.lblSum2.Text = "RETUR :"
+        Me.tbSum4.BackColor = System.Drawing.Color.LemonChiffon
+        Me.tbSum4.Location = New System.Drawing.Point(800, 314)
+        Me.tbSum4.Name = "tbSum4"
+        Me.tbSum4.ReadOnly = True
+        Me.tbSum4.Size = New System.Drawing.Size(156, 20)
+        Me.tbSum4.TabIndex = 180
+        Me.tbSum4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'lblSum3
+        'lblSum5
         '
-        Me.lblSum3.AutoSize = True
-        Me.lblSum3.Location = New System.Drawing.Point(975, 291)
-        Me.lblSum3.Name = "lblSum3"
-        Me.lblSum3.Size = New System.Drawing.Size(43, 13)
-        Me.lblSum3.TabIndex = 179
-        Me.lblSum3.Text = "SUM 3:"
+        Me.lblSum5.AutoSize = True
+        Me.lblSum5.Location = New System.Drawing.Point(975, 317)
+        Me.lblSum5.Name = "lblSum5"
+        Me.lblSum5.Size = New System.Drawing.Size(43, 13)
+        Me.lblSum5.TabIndex = 183
+        Me.lblSum5.Text = "SUM 5:"
         '
-        'tbSum3
+        'tbSum5
         '
-        Me.tbSum3.BackColor = System.Drawing.Color.LemonChiffon
-        Me.tbSum3.Location = New System.Drawing.Point(1024, 288)
-        Me.tbSum3.Name = "tbSum3"
-        Me.tbSum3.ReadOnly = True
-        Me.tbSum3.Size = New System.Drawing.Size(156, 20)
-        Me.tbSum3.TabIndex = 178
-        Me.tbSum3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.tbSum5.BackColor = System.Drawing.Color.LemonChiffon
+        Me.tbSum5.Location = New System.Drawing.Point(1024, 314)
+        Me.tbSum5.Name = "tbSum5"
+        Me.tbSum5.ReadOnly = True
+        Me.tbSum5.Size = New System.Drawing.Size(156, 20)
+        Me.tbSum5.TabIndex = 182
+        Me.tbSum5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'FormTransaksiPenjualan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AliceBlue
-        Me.ClientSize = New System.Drawing.Size(1209, 611)
+        Me.ClientSize = New System.Drawing.Size(1209, 637)
         Me.Controls.Add(Me.lblTargetItem)
         Me.Controls.Add(Me.btnProsesPencapaianTargetItem)
         Me.Controls.Add(Me.lblProsesPencapaianTargetItem)
@@ -956,4 +1002,8 @@ Partial Class FormTransaksiPenjualan
     Friend WithEvents lblSum2 As Label
     Friend WithEvents lblSum3 As Label
     Friend WithEvents tbSum3 As TextBox
+    Friend WithEvents lblSum5 As Label
+    Friend WithEvents tbSum5 As TextBox
+    Friend WithEvents lblSum4 As Label
+    Friend WithEvents tbSum4 As TextBox
 End Class

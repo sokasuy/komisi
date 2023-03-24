@@ -37,7 +37,6 @@
 
     Private isCboPrepared As Boolean
     Private contentView As String
-    Private mySumJumlah As Double
     Private initialValue As String
     Private isPartialChanged As Boolean
     Private isValueChanged As Boolean
@@ -221,6 +220,12 @@
             Dim mGroupCriteria As String = Nothing
             Dim mWhereString As String
             Dim filterCompany As String
+            'Dim myDataTableSummary As New DataTable
+            Dim mySumJumlah1 As Double
+            Dim mySumJumlah2 As Double
+            Dim mySumJumlah3 As Double
+            Dim mySumJumlah4 As Double
+            Dim mySumJumlah5 As Double
 
             Me.Cursor = Cursors.WaitCursor
             Call myCDBConnection.OpenConn(myConn)
@@ -261,13 +266,68 @@
                 If (rbCariPenjualanPerOutlet.Checked) Then
                     stSQL = "SELECT count(*) FROM " & tableName(0) & " as tbl WHERE " & mWhereString & " " & mGroupCriteria & ";"
 
-                    mySumJumlah = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "jumlah", tableName(0) & " as tbl", "Sum", mWhereString & " " & mGroupCriteria, CONN_.dbType)
+                    'Omzet Bruto
+                    mySumJumlah1 = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "jumlah", tableName(0) & " as tbl", "Sum", mWhereString & " " & mGroupCriteria & " AND (nonota not like 'X%')", CONN_.dbType)
+                    tbSum1.Text = mySumJumlah1
+                    lblSum1.Text = "Bruto"
+                    lblSum1.Location = New Point(520, lblSum1.Location.Y)
+                    'RETUR
+                    mySumJumlah2 = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "jumlah", tableName(0) & " as tbl", "Sum", mWhereString & " " & mGroupCriteria & " AND (nonota like 'X%')", CONN_.dbType)
+                    tbSum2.Text = mySumJumlah2
+                    lblSum2.Text = "Retur"
+
+                    'NETTO
+                    mySumJumlah3 = mySumJumlah1 + mySumJumlah2
+                    tbSum3.Text = mySumJumlah3
+                    lblSum3.Text = "Netto"
+
+                    'OVERDUE
+                    mySumJumlah4 = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "jumlah", tableName(0) & " as tbl", "Sum", mWhereString & " " & mGroupCriteria & " and overdue>3 and ignoreoverdue=False")
+                    tbSum4.Text = mySumJumlah4
+                    lblSum4.Text = "Overdue"
+
+                    '% OVERDUE
+                    mySumJumlah5 = (mySumJumlah4 / mySumJumlah1) * 100
+                    tbSum5.Text = mySumJumlah5
+                    lblSum5.Text = "% Overdue"
+
                 ElseIf (rbCariPenjualanPerItem.Checked) Then
                     stSQL = "SELECT count(*) FROM " & tableName(1) & " as tbl WHERE " & mWhereString & " " & mGroupCriteria & ";"
 
-                    mySumJumlah = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "(qtyub-bonus)", tableName(1) & " as tbl", "Sum", mWhereString & " " & mGroupCriteria, CONN_.dbType)
+                    'mySumJumlah1 = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "nettjual", tableName(1) & " as tbl", "Sum", mWhereString & " " & mGroupCriteria, CONN_.dbType)
+                    'tbSum1.Text = mySumJumlah1
+                    'lblSum1.Text = "Nett Jual"
+                    'lblSum1.Location = New Point(500, lblSum1.Location.Y)
+
+                    mySumJumlah1 = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "nettjual", tableName(1) & " as tbl", "Sum", mWhereString & " " & mGroupCriteria & " and kodeitem in('OJ0121','OJ0121A')")
+                    tbSum1.Text = mySumJumlah1
+                    lblSum1.Text = "PimT"
+
+                    mySumJumlah2 = myCDBOperation.GetFormulationRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "targetjual", tableName(1) & " as tbl", "Sum", mWhereString & " " & mGroupCriteria & " and kodeitem in('OJ0121','OJ0121A')")
+                    tbSum2.Text = mySumJumlah2
+                    lblSum2.Text = "Target"
+                    'lblSum2.Location = New Point(500, lblSum2.Location.Y)
+
+                    mySumJumlah3 = (mySumJumlah1 / mySumJumlah2) * 100
+                    tbSum3.Text = mySumJumlah3
+                    lblSum3.Text = "% PimT"
+
+                    tbSum4.Clear()
+                    tbSum5.Clear()
                 End If
                 mJumlah = Integer.Parse(myCDBOperation.GetDataIndividual(myConn, myComm, myReader, stSQL))
+
+                If (rbCariPenjualanPerOutlet.Checked) Then
+                    myCStringManipulation.ValidateTextBox(tbSum1, tbSum1.Name)
+                    myCStringManipulation.ValidateTextBox(tbSum2, tbSum2.Name)
+                    myCStringManipulation.ValidateTextBox(tbSum3, tbSum3.Name)
+                    myCStringManipulation.ValidateTextBox(tbSum4, tbSum4.Name)
+                    myCStringManipulation.ValidateTextBox(tbSum5, tbSum5.Name)
+                ElseIf (rbCariPenjualanPerItem.Checked) Then
+                    myCStringManipulation.ValidateTextBoxNumber(tbSum1, tbSum1.Name)
+                    myCStringManipulation.ValidateTextBoxNumber(tbSum2, tbSum2.Name)
+                    myCStringManipulation.ValidateTextBox(tbSum3, tbSum3.Name)
+                End If
 
                 If (mJumlah > 10) Then
                     banyakPages = mJumlah / 10
@@ -479,13 +539,6 @@
                     .ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
                     .ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False
                 End With
-            End If
-
-            tbSum1.Text = mySumJumlah
-            If (rbCariPenjualanPerOutlet.Checked) Then
-                myCStringManipulation.ValidateTextBox(tbSum1, tbSum1.Name)
-            ElseIf (rbCariPenjualanPerItem.Checked) Then
-                myCStringManipulation.ValidateTextBoxNumber(tbSum1, tbSum1.Name)
             End If
 
             'With cmbDgvEditButton
@@ -1058,7 +1111,7 @@
             If (rbCariPenjualanPerOutlet.Checked) Then
                 arrCbo = {"NAMA CUSTOMER", "NO NOTA", "TGL NOTA", "PERIODE"}
             ElseIf (rbCariPenjualanPerItem.Checked) Then
-                arrCbo = {"KODE ITEM", "NAMA ITEM"}
+                arrCbo = {"PERIODE", "KODE ITEM", "NAMA ITEM"}
             End If
             cboKriteria.Items.AddRange(arrCbo)
             cboKriteria.SelectedIndex = 0
@@ -1096,7 +1149,7 @@
                 Call myCDBConnection.OpenConn(CONN_.dbMain)
 
                 'stSQL = "UPDATE " & CONN_.schemaKomisi & ".trpenjualanperoutlet as penj set topkhusus=topk.topkhusus,updated_at=clock_timestamp() from " & CONN_.schemaKomisi & ".mstopkhusus as topk where penj.periode='" & cboPeriode.SelectedValue & "' and penj.kodecustomer=topk.kodecustomer and penj.company='" & USER_.company & "';"
-                stSQL = "UPDATE " & CONN_.schemaKomisi & ".trpenjualanperoutlet as penj set topkhusus=topk.topkhusus,updated_at=clock_timestamp() from " & CONN_.schemaKomisi & ".mstopkhusus topk,komisi.msgeneral ge1,msgeneral ge2 where ge1.kategori='periode' and ge2.kategori='periode' and topk.periodemulaiberlaku=ge1.keterangan and penj.periode=ge2.keterangan and ge2.kode>=ge1.kode and penj.periode='" & cboPeriode.SelectedValue & "' and penj.kodecustomer=topk.kodecustomer and penj.company='" & USER_.company & "' and topk.discontinue='False';"
+                stSQL = "UPDATE " & CONN_.schemaKomisi & ".trpenjualanperoutlet as penj set topkhusus=topk.topkhusus,updated_at=clock_timestamp() from " & CONN_.schemaKomisi & ".mstopkhusus topk,komisi.msgeneral ge1,msgeneral ge2 where ge1.kategori='periode' and ge2.kategori='periode' and topk.periodemulaiberlaku=ge1.keterangan and penj.periode=ge2.keterangan and to_date(ge2.kode,'MM-YYYY')>=to_date(ge1.kode,'MM-YYYY') and penj.periode='" & cboPeriode.SelectedValue & "' and penj.kodecustomer=topk.kodecustomer and penj.company='" & USER_.company & "' and topk.discontinue='False';"
                 Call myCDBOperation.ExecuteCmd(CONN_.dbMain, CONN_.comm, stSQL)
 
                 Call myCShowMessage.ShowInfo("DONE!!")
