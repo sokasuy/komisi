@@ -43,8 +43,8 @@ Partial Class FormMasterTarget
         Me.Label4 = New System.Windows.Forms.Label()
         Me.lblQty = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.lblSatuan = New System.Windows.Forms.Label()
-        Me.tbSatuan = New System.Windows.Forms.TextBox()
+        Me.lblSatUB = New System.Windows.Forms.Label()
+        Me.tbSatUB = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cboItem = New System.Windows.Forms.ComboBox()
         Me.lblItem = New System.Windows.Forms.Label()
@@ -77,6 +77,9 @@ Partial Class FormMasterTarget
         Me.ofd1 = New System.Windows.Forms.OpenFileDialog()
         Me.cboPeriodeImport = New System.Windows.Forms.ComboBox()
         Me.lblPeriodeImport = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.lblSatUK = New System.Windows.Forms.Label()
+        Me.tbSatUK = New System.Windows.Forms.TextBox()
         Me.gbDataEntry.SuspendLayout()
         Me.gbView.SuspendLayout()
         Me.pnlNavigasi.SuspendLayout()
@@ -176,6 +179,9 @@ Partial Class FormMasterTarget
         '
         'gbDataEntry
         '
+        Me.gbDataEntry.Controls.Add(Me.Label7)
+        Me.gbDataEntry.Controls.Add(Me.lblSatUK)
+        Me.gbDataEntry.Controls.Add(Me.tbSatUK)
         Me.gbDataEntry.Controls.Add(Me.Label6)
         Me.gbDataEntry.Controls.Add(Me.cboPeriode)
         Me.gbDataEntry.Controls.Add(Me.lblPeriode)
@@ -186,8 +192,8 @@ Partial Class FormMasterTarget
         Me.gbDataEntry.Controls.Add(Me.Label4)
         Me.gbDataEntry.Controls.Add(Me.lblQty)
         Me.gbDataEntry.Controls.Add(Me.Label2)
-        Me.gbDataEntry.Controls.Add(Me.lblSatuan)
-        Me.gbDataEntry.Controls.Add(Me.tbSatuan)
+        Me.gbDataEntry.Controls.Add(Me.lblSatUB)
+        Me.gbDataEntry.Controls.Add(Me.tbSatUB)
         Me.gbDataEntry.Controls.Add(Me.Label1)
         Me.gbDataEntry.Controls.Add(Me.cboItem)
         Me.gbDataEntry.Controls.Add(Me.lblItem)
@@ -196,7 +202,6 @@ Partial Class FormMasterTarget
         Me.gbDataEntry.Controls.Add(Me.lblSales)
         Me.gbDataEntry.Controls.Add(Me.btnCreateNew)
         Me.gbDataEntry.Controls.Add(Me.btnSimpan)
-        Me.gbDataEntry.Enabled = False
         Me.gbDataEntry.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.gbDataEntry.Location = New System.Drawing.Point(12, 34)
         Me.gbDataEntry.Name = "gbDataEntry"
@@ -306,23 +311,23 @@ Partial Class FormMasterTarget
         Me.Label2.TabIndex = 229
         Me.Label2.Text = "*"
         '
-        'lblSatuan
+        'lblSatUB
         '
-        Me.lblSatuan.AutoSize = True
-        Me.lblSatuan.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.lblSatuan.Location = New System.Drawing.Point(36, 74)
-        Me.lblSatuan.Name = "lblSatuan"
-        Me.lblSatuan.Size = New System.Drawing.Size(29, 15)
-        Me.lblSatuan.TabIndex = 228
-        Me.lblSatuan.Text = "Sat :"
+        Me.lblSatUB.AutoSize = True
+        Me.lblSatUB.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.lblSatUB.Location = New System.Drawing.Point(21, 74)
+        Me.lblSatUB.Name = "lblSatUB"
+        Me.lblSatUB.Size = New System.Drawing.Size(44, 15)
+        Me.lblSatUB.TabIndex = 228
+        Me.lblSatUB.Text = "Sat UB:"
         '
-        'tbSatuan
+        'tbSatUB
         '
-        Me.tbSatuan.Location = New System.Drawing.Point(71, 71)
-        Me.tbSatuan.Name = "tbSatuan"
-        Me.tbSatuan.ReadOnly = True
-        Me.tbSatuan.Size = New System.Drawing.Size(83, 23)
-        Me.tbSatuan.TabIndex = 227
+        Me.tbSatUB.Location = New System.Drawing.Point(71, 71)
+        Me.tbSatUB.Name = "tbSatUB"
+        Me.tbSatUB.ReadOnly = True
+        Me.tbSatUB.Size = New System.Drawing.Size(83, 23)
+        Me.tbSatUB.TabIndex = 227
         '
         'Label1
         '
@@ -665,6 +670,35 @@ Partial Class FormMasterTarget
         Me.lblPeriodeImport.TabIndex = 241
         Me.lblPeriodeImport.Text = "Periode :"
         '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.Label7.ForeColor = System.Drawing.Color.Red
+        Me.Label7.Location = New System.Drawing.Point(375, 74)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(12, 15)
+        Me.Label7.TabIndex = 242
+        Me.Label7.Text = "*"
+        '
+        'lblSatUK
+        '
+        Me.lblSatUK.AutoSize = True
+        Me.lblSatUK.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.lblSatUK.Location = New System.Drawing.Point(236, 74)
+        Me.lblSatUK.Name = "lblSatUK"
+        Me.lblSatUK.Size = New System.Drawing.Size(44, 15)
+        Me.lblSatUK.TabIndex = 241
+        Me.lblSatUK.Text = "Sat UK:"
+        '
+        'tbSatUK
+        '
+        Me.tbSatUK.Location = New System.Drawing.Point(286, 71)
+        Me.tbSatUK.Name = "tbSatUK"
+        Me.tbSatUK.ReadOnly = True
+        Me.tbSatUK.Size = New System.Drawing.Size(83, 23)
+        Me.tbSatUK.TabIndex = 240
+        '
         'FormMasterTarget
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -740,8 +774,8 @@ Partial Class FormMasterTarget
     Friend WithEvents cboItem As ComboBox
     Friend WithEvents lblItem As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents lblSatuan As Label
-    Friend WithEvents tbSatuan As TextBox
+    Friend WithEvents lblSatUB As Label
+    Friend WithEvents tbSatUB As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents lblQty As Label
     Friend WithEvents tbQty As TextBox
@@ -754,4 +788,7 @@ Partial Class FormMasterTarget
     Friend WithEvents lblPeriode As Label
     Friend WithEvents cboPeriodeImport As ComboBox
     Friend WithEvents lblPeriodeImport As Label
+    Friend WithEvents Label7 As Label
+    Friend WithEvents lblSatUK As Label
+    Friend WithEvents tbSatUK As TextBox
 End Class

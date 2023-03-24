@@ -602,31 +602,31 @@
                         End If
                     End If
                     If (arrDefValues(4) <> tbEC.Text) Then
-                        updateString = "ec=" & Double.Parse(tbEC.Text)
+                        updateString &= IIf(IsNothing(updateString), "", ",") & "ec=" & Double.Parse(tbEC.Text)
                         If (foundRows.Length > 0) Then
                             myDataTableDGV.Rows(myDataTableDGV.Rows.IndexOf(foundRows(0))).Item("ec") = Double.Parse(tbEC.Text)
                         End If
                     End If
                     If (arrDefValues(5) <> tbEO.Text) Then
-                        updateString = "eo=" & Double.Parse(tbEO.Text)
+                        updateString &= IIf(IsNothing(updateString), "", ",") & "eo=" & Double.Parse(tbEO.Text)
                         If (foundRows.Length > 0) Then
                             myDataTableDGV.Rows(myDataTableDGV.Rows.IndexOf(foundRows(0))).Item("eo") = Double.Parse(tbEO.Text)
                         End If
                     End If
                     If (arrDefValues(6) <> tbX.Text) Then
-                        updateString = "x=" & Double.Parse(tbX.Text)
+                        updateString &= IIf(IsNothing(updateString), "", ",") & "x=" & Double.Parse(tbX.Text)
                         If (foundRows.Length > 0) Then
                             myDataTableDGV.Rows(myDataTableDGV.Rows.IndexOf(foundRows(0))).Item("x") = Double.Parse(tbX.Text)
                         End If
                     End If
                     If (arrDefValues(7) <> tbY.Text) Then
-                        updateString = "y=" & Double.Parse(tbY.Text)
+                        updateString &= IIf(IsNothing(updateString), "", ",") & "y=" & Double.Parse(tbY.Text)
                         If (foundRows.Length > 0) Then
                             myDataTableDGV.Rows(myDataTableDGV.Rows.IndexOf(foundRows(0))).Item("y") = Double.Parse(tbY.Text)
                         End If
                     End If
                     If (arrDefValues(8) <> tbAkhir.Text) Then
-                        updateString = "akhir=" & Double.Parse(tbAkhir.Text)
+                        updateString &= IIf(IsNothing(updateString), "", ",") & "akhir=" & Double.Parse(tbAkhir.Text)
                         If (foundRows.Length > 0) Then
                             myDataTableDGV.Rows(myDataTableDGV.Rows.IndexOf(foundRows(0))).Item("akhir") = Double.Parse(tbAkhir.Text)
                         End If

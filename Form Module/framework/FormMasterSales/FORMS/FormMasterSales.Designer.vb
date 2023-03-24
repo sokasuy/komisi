@@ -27,6 +27,7 @@ Partial Class FormMasterSales
         Me.lblEntryType = New System.Windows.Forms.Label()
         Me.clbUserRight = New System.Windows.Forms.CheckedListBox()
         Me.gbDataEntry = New System.Windows.Forms.GroupBox()
+        Me.cbLuarPulau = New System.Windows.Forms.CheckBox()
         Me.cboPerusahaan = New System.Windows.Forms.ComboBox()
         Me.lblPerusahaan = New System.Windows.Forms.Label()
         Me.cbLuarKota = New System.Windows.Forms.CheckBox()
@@ -38,7 +39,7 @@ Partial Class FormMasterSales
         Me.lblKode = New System.Windows.Forms.Label()
         Me.btnCreateNew = New System.Windows.Forms.Button()
         Me.tbKode = New System.Windows.Forms.TextBox()
-        Me.lblKeterangan = New System.Windows.Forms.Label()
+        Me.lblNama = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.tbNama = New System.Windows.Forms.TextBox()
         Me.btnSimpan = New System.Windows.Forms.Button()
@@ -63,7 +64,6 @@ Partial Class FormMasterSales
         Me.cboKriteria = New System.Windows.Forms.ComboBox()
         Me.dgvView = New System.Windows.Forms.DataGridView()
         Me.btnKeluar = New System.Windows.Forms.Button()
-        Me.cbLuarPulau = New System.Windows.Forms.CheckBox()
         Me.gbDataEntry.SuspendLayout()
         Me.gbView.SuspendLayout()
         Me.pnlNavigasi.SuspendLayout()
@@ -120,7 +120,7 @@ Partial Class FormMasterSales
         Me.gbDataEntry.Controls.Add(Me.lblKode)
         Me.gbDataEntry.Controls.Add(Me.btnCreateNew)
         Me.gbDataEntry.Controls.Add(Me.tbKode)
-        Me.gbDataEntry.Controls.Add(Me.lblKeterangan)
+        Me.gbDataEntry.Controls.Add(Me.lblNama)
         Me.gbDataEntry.Controls.Add(Me.Label2)
         Me.gbDataEntry.Controls.Add(Me.tbNama)
         Me.gbDataEntry.Controls.Add(Me.btnSimpan)
@@ -131,6 +131,16 @@ Partial Class FormMasterSales
         Me.gbDataEntry.TabIndex = 200
         Me.gbDataEntry.TabStop = False
         Me.gbDataEntry.Text = "DATA ENTRY"
+        '
+        'cbLuarPulau
+        '
+        Me.cbLuarPulau.AutoSize = True
+        Me.cbLuarPulau.Location = New System.Drawing.Point(192, 123)
+        Me.cbLuarPulau.Name = "cbLuarPulau"
+        Me.cbLuarPulau.Size = New System.Drawing.Size(82, 19)
+        Me.cbLuarPulau.TabIndex = 225
+        Me.cbLuarPulau.Text = "Luar Pulau"
+        Me.cbLuarPulau.UseVisualStyleBackColor = True
         '
         'cboPerusahaan
         '
@@ -246,15 +256,15 @@ Partial Class FormMasterSales
         Me.tbKode.Size = New System.Drawing.Size(107, 23)
         Me.tbKode.TabIndex = 1
         '
-        'lblKeterangan
+        'lblNama
         '
-        Me.lblKeterangan.AutoSize = True
-        Me.lblKeterangan.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.lblKeterangan.Location = New System.Drawing.Point(48, 45)
-        Me.lblKeterangan.Name = "lblKeterangan"
-        Me.lblKeterangan.Size = New System.Drawing.Size(45, 15)
-        Me.lblKeterangan.TabIndex = 214
-        Me.lblKeterangan.Text = "Nama :"
+        Me.lblNama.AutoSize = True
+        Me.lblNama.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.lblNama.Location = New System.Drawing.Point(48, 45)
+        Me.lblNama.Name = "lblNama"
+        Me.lblNama.Size = New System.Drawing.Size(45, 15)
+        Me.lblNama.TabIndex = 214
+        Me.lblNama.Text = "Nama :"
         '
         'Label2
         '
@@ -514,16 +524,6 @@ Partial Class FormMasterSales
         Me.btnKeluar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnKeluar.UseVisualStyleBackColor = True
         '
-        'cbLuarPulau
-        '
-        Me.cbLuarPulau.AutoSize = True
-        Me.cbLuarPulau.Location = New System.Drawing.Point(192, 123)
-        Me.cbLuarPulau.Name = "cbLuarPulau"
-        Me.cbLuarPulau.Size = New System.Drawing.Size(82, 19)
-        Me.cbLuarPulau.TabIndex = 225
-        Me.cbLuarPulau.Text = "Luar Pulau"
-        Me.cbLuarPulau.UseVisualStyleBackColor = True
-        '
         'FormMasterSales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -558,7 +558,7 @@ Partial Class FormMasterSales
     Friend WithEvents lblKode As Label
     Friend WithEvents btnCreateNew As Button
     Friend WithEvents tbKode As TextBox
-    Friend WithEvents lblKeterangan As Label
+    Friend WithEvents lblNama As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents tbNama As TextBox
     Friend WithEvents btnSimpan As Button

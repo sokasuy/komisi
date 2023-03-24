@@ -28,11 +28,12 @@ Partial Class FormUtama
         Me.msMasterGeneral = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnMasterSales = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnMasterTarget = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnMasterECEO = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnSales = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnOmzet = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnLogout = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnExit = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnMasterECEO = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnMasterTOPKhusus = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnStripUtama.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -47,7 +48,7 @@ Partial Class FormUtama
         '
         'mnGroupMaster
         '
-        Me.mnGroupMaster.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.msMasterGeneral, Me.mnMasterSales, Me.mnMasterTarget, Me.mnMasterECEO})
+        Me.mnGroupMaster.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.msMasterGeneral, Me.mnMasterSales, Me.mnMasterTarget, Me.mnMasterECEO, Me.mnMasterTOPKhusus})
         Me.mnGroupMaster.Name = "mnGroupMaster"
         Me.mnGroupMaster.Size = New System.Drawing.Size(63, 20)
         Me.mnGroupMaster.Text = "MASTER"
@@ -69,6 +70,12 @@ Partial Class FormUtama
         Me.mnMasterTarget.Name = "mnMasterTarget"
         Me.mnMasterTarget.Size = New System.Drawing.Size(180, 22)
         Me.mnMasterTarget.Text = "Master Target"
+        '
+        'mnMasterECEO
+        '
+        Me.mnMasterECEO.Name = "mnMasterECEO"
+        Me.mnMasterECEO.Size = New System.Drawing.Size(180, 22)
+        Me.mnMasterECEO.Text = "Master EC EO"
         '
         'mnSales
         '
@@ -95,11 +102,11 @@ Partial Class FormUtama
         Me.mnExit.Size = New System.Drawing.Size(41, 20)
         Me.mnExit.Text = "EXIT"
         '
-        'mnMasterECEO
+        'mnMasterTOPKhusus
         '
-        Me.mnMasterECEO.Name = "mnMasterECEO"
-        Me.mnMasterECEO.Size = New System.Drawing.Size(180, 22)
-        Me.mnMasterECEO.Text = "Master EC EO"
+        Me.mnMasterTOPKhusus.Name = "mnMasterTOPKhusus"
+        Me.mnMasterTOPKhusus.Size = New System.Drawing.Size(180, 22)
+        Me.mnMasterTOPKhusus.Text = "Master TOP Khusus"
         '
         'FormUtama
         '
@@ -129,4 +136,5 @@ Partial Class FormUtama
     Friend WithEvents mnMasterSales As ToolStripMenuItem
     Friend WithEvents mnMasterTarget As ToolStripMenuItem
     Friend WithEvents mnMasterECEO As ToolStripMenuItem
+    Friend WithEvents mnMasterTOPKhusus As ToolStripMenuItem
 End Class

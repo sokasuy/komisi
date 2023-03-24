@@ -18,6 +18,7 @@ G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\Form
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormMasterSales.dll
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormMasterTarget.dll
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormOmzet.dll
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\MasterTOPKhusus.dll
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\Npgsql.dll
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\MySql.Data.dll
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\Microsoft.ReportViewer.WinForms.dll
@@ -81,6 +82,8 @@ G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\Form
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormOmzet.pdb
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormOmzet.xml
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\FormOmzet.dll.config
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\MasterTOPKhusus.pdb
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\MasterTOPKhusus.dll.config
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\Npgsql.xml
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\MySql.Data.xml
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\System.ValueTuple.xml
@@ -133,3 +136,4 @@ G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\Perh
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.exe
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.xml
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.pdb
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\MasterTOPKhusus.xml

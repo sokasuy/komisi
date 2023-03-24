@@ -5,6 +5,7 @@ VisualStudioVersion = 16.0.32510.428
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "PerhitunganKomisi", "PerhitunganKomisi\PerhitunganKomisi.vbproj", "{A44ACF24-20D4-42F5-A7E7-5D9C12BF4F7F}"
 	ProjectSection(ProjectDependencies) = postProject
+		{8061E201-7487-4F70-8895-25D511F2BA18} = {8061E201-7487-4F70-8895-25D511F2BA18}
 		{FD62FF03-EAF6-4C03-84BF-A354E3329B10} = {FD62FF03-EAF6-4C03-84BF-A354E3329B10}
 		{011B063B-A160-4206-987B-2CD37110AC34} = {011B063B-A160-4206-987B-2CD37110AC34}
 		{7C1CC23C-BBDA-4D56-92EE-7AA954A4BB24} = {7C1CC23C-BBDA-4D56-92EE-7AA954A4BB24}
@@ -27,6 +28,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FormOmzet", "..\Form Module
 	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FormMasterECEO", "..\Form Module\framework\FormMasterECEO\FormMasterECEO.vbproj", "{011B063B-A160-4206-987B-2CD37110AC34}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MasterTOPKhusus", "..\Form Module\framework\MasterTOPKhusus\MasterTOPKhusus.vbproj", "{8061E201-7487-4F70-8895-25D511F2BA18}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,6 +65,10 @@ Global
 		{011B063B-A160-4206-987B-2CD37110AC34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{011B063B-A160-4206-987B-2CD37110AC34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{011B063B-A160-4206-987B-2CD37110AC34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8061E201-7487-4F70-8895-25D511F2BA18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8061E201-7487-4F70-8895-25D511F2BA18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8061E201-7487-4F70-8895-25D511F2BA18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8061E201-7487-4F70-8895-25D511F2BA18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

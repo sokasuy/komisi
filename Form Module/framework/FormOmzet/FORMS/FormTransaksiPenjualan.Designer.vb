@@ -40,8 +40,8 @@ Partial Class FormTransaksiPenjualan
         Me.cboPeriode = New System.Windows.Forms.ComboBox()
         Me.lblPeriodeImport = New System.Windows.Forms.Label()
         Me.gbView = New System.Windows.Forms.GroupBox()
-        Me.tbSumJumlah = New System.Windows.Forms.TextBox()
-        Me.lblSum = New System.Windows.Forms.Label()
+        Me.tbSum1 = New System.Windows.Forms.TextBox()
+        Me.lblSum1 = New System.Windows.Forms.Label()
         Me.pnlNavigasi = New System.Windows.Forms.Panel()
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.btnFFBack = New System.Windows.Forms.Button()
@@ -90,6 +90,10 @@ Partial Class FormTransaksiPenjualan
         Me.btnProsesPencapaianTargetItem = New System.Windows.Forms.Button()
         Me.lblProsesPencapaianTargetItem = New System.Windows.Forms.Label()
         Me.lblTargetItem = New System.Windows.Forms.Label()
+        Me.tbSum2 = New System.Windows.Forms.TextBox()
+        Me.lblSum2 = New System.Windows.Forms.Label()
+        Me.lblSum3 = New System.Windows.Forms.Label()
+        Me.tbSum3 = New System.Windows.Forms.TextBox()
         Me.pnlImportExcel.SuspendLayout()
         Me.gbView.SuspendLayout()
         Me.pnlNavigasi.SuspendLayout()
@@ -273,8 +277,12 @@ Partial Class FormTransaksiPenjualan
         '
         Me.gbView.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.gbView.Controls.Add(Me.tbSumJumlah)
-        Me.gbView.Controls.Add(Me.lblSum)
+        Me.gbView.Controls.Add(Me.lblSum3)
+        Me.gbView.Controls.Add(Me.tbSum3)
+        Me.gbView.Controls.Add(Me.lblSum2)
+        Me.gbView.Controls.Add(Me.tbSum2)
+        Me.gbView.Controls.Add(Me.tbSum1)
+        Me.gbView.Controls.Add(Me.lblSum1)
         Me.gbView.Controls.Add(Me.pnlNavigasi)
         Me.gbView.Controls.Add(Me.dgvView)
         Me.gbView.Location = New System.Drawing.Point(12, 98)
@@ -284,24 +292,24 @@ Partial Class FormTransaksiPenjualan
         Me.gbView.TabStop = False
         Me.gbView.Text = "VIEW"
         '
-        'tbSumJumlah
+        'tbSum1
         '
-        Me.tbSumJumlah.BackColor = System.Drawing.Color.LemonChiffon
-        Me.tbSumJumlah.Location = New System.Drawing.Point(1023, 288)
-        Me.tbSumJumlah.Name = "tbSumJumlah"
-        Me.tbSumJumlah.ReadOnly = True
-        Me.tbSumJumlah.Size = New System.Drawing.Size(156, 20)
-        Me.tbSumJumlah.TabIndex = 174
-        Me.tbSumJumlah.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.tbSum1.BackColor = System.Drawing.Color.LemonChiffon
+        Me.tbSum1.Location = New System.Drawing.Point(576, 288)
+        Me.tbSum1.Name = "tbSum1"
+        Me.tbSum1.ReadOnly = True
+        Me.tbSum1.Size = New System.Drawing.Size(156, 20)
+        Me.tbSum1.TabIndex = 174
+        Me.tbSum1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'lblSum
+        'lblSum1
         '
-        Me.lblSum.AutoSize = True
-        Me.lblSum.Location = New System.Drawing.Point(934, 291)
-        Me.lblSum.Name = "lblSum"
-        Me.lblSum.Size = New System.Drawing.Size(83, 13)
-        Me.lblSum.TabIndex = 173
-        Me.lblSum.Text = "SUM JUMLAH :"
+        Me.lblSum1.AutoSize = True
+        Me.lblSum1.Location = New System.Drawing.Point(514, 291)
+        Me.lblSum1.Name = "lblSum1"
+        Me.lblSum1.Size = New System.Drawing.Size(56, 13)
+        Me.lblSum1.TabIndex = 173
+        Me.lblSum1.Text = "JUMLAH :"
         '
         'pnlNavigasi
         '
@@ -782,6 +790,44 @@ Partial Class FormTransaksiPenjualan
         Me.lblTargetItem.TabIndex = 276
         Me.lblTargetItem.Text = "Target Item"
         '
+        'tbSum2
+        '
+        Me.tbSum2.BackColor = System.Drawing.Color.LemonChiffon
+        Me.tbSum2.Location = New System.Drawing.Point(800, 288)
+        Me.tbSum2.Name = "tbSum2"
+        Me.tbSum2.ReadOnly = True
+        Me.tbSum2.Size = New System.Drawing.Size(156, 20)
+        Me.tbSum2.TabIndex = 176
+        Me.tbSum2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'lblSum2
+        '
+        Me.lblSum2.AutoSize = True
+        Me.lblSum2.Location = New System.Drawing.Point(738, 291)
+        Me.lblSum2.Name = "lblSum2"
+        Me.lblSum2.Size = New System.Drawing.Size(51, 13)
+        Me.lblSum2.TabIndex = 177
+        Me.lblSum2.Text = "RETUR :"
+        '
+        'lblSum3
+        '
+        Me.lblSum3.AutoSize = True
+        Me.lblSum3.Location = New System.Drawing.Point(975, 291)
+        Me.lblSum3.Name = "lblSum3"
+        Me.lblSum3.Size = New System.Drawing.Size(43, 13)
+        Me.lblSum3.TabIndex = 179
+        Me.lblSum3.Text = "SUM 3:"
+        '
+        'tbSum3
+        '
+        Me.tbSum3.BackColor = System.Drawing.Color.LemonChiffon
+        Me.tbSum3.Location = New System.Drawing.Point(1024, 288)
+        Me.tbSum3.Name = "tbSum3"
+        Me.tbSum3.ReadOnly = True
+        Me.tbSum3.Size = New System.Drawing.Size(156, 20)
+        Me.tbSum3.TabIndex = 178
+        Me.tbSum3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'FormTransaksiPenjualan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -881,8 +927,8 @@ Partial Class FormTransaksiPenjualan
     Friend WithEvents cboCariPeriode As ComboBox
     Friend WithEvents rbTOPKhususDalamKota As RadioButton
     Friend WithEvents rbTOPKhususLuarKota As RadioButton
-    Friend WithEvents lblSum As Label
-    Friend WithEvents tbSumJumlah As TextBox
+    Friend WithEvents lblSum1 As Label
+    Friend WithEvents tbSum1 As TextBox
     Friend WithEvents lblProsesTOPKhusus As Label
     Friend WithEvents btnProsesTOPKhusus As Button
     Friend WithEvents btnProsesOverdue As Button
@@ -906,4 +952,8 @@ Partial Class FormTransaksiPenjualan
     Friend WithEvents btnProsesPencapaianTargetItem As Button
     Friend WithEvents lblProsesPencapaianTargetItem As Label
     Friend WithEvents lblTargetItem As Label
+    Friend WithEvents tbSum2 As TextBox
+    Friend WithEvents lblSum2 As Label
+    Friend WithEvents lblSum3 As Label
+    Friend WithEvents tbSum3 As TextBox
 End Class

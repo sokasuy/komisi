@@ -132,7 +132,7 @@
     End Sub
 
     Private Sub mnMasterTarget_Click(sender As Object, e As EventArgs) Handles mnMasterTarget.Click
-        Dim frmMasterTarget As New FormMasterTarget.FormMasterTarget(CONN_.dbType, CONN_.schemaTmp, CONN_.schemaKomisi, CONN_.dbMain, USER_.username, USER_.isSuperuser, USER_.T_USER_RIGHT, ADD_INFO_.newValues, ADD_INFO_.newFields, ADD_INFO_.updateString, USER_.company)
+        Dim frmMasterTarget As New FormMasterTarget.FormMasterTarget(CONN_.dbType, CONN_.schemaTmp, CONN_.schemaKomisi, CONN_.dbMain, CONN_.dbSQL, USER_.username, USER_.isSuperuser, USER_.T_USER_RIGHT, ADD_INFO_.newValues, ADD_INFO_.newFields, ADD_INFO_.updateString, USER_.company)
         Call myCFormManipulation.GoToForm(Me, frmMasterTarget)
     End Sub
 
@@ -144,5 +144,10 @@
     Private Sub mnMasterECEO_Click(sender As Object, e As EventArgs) Handles mnMasterECEO.Click
         Dim frmMasterECEO As New FormMasterECEO.FormMasterECEO(CONN_.dbType, CONN_.schemaTmp, CONN_.schemaKomisi, CONN_.dbMain, USER_.username, USER_.isSuperuser, USER_.T_USER_RIGHT, ADD_INFO_.newValues, ADD_INFO_.newFields, ADD_INFO_.updateString, USER_.company)
         Call myCFormManipulation.GoToForm(Me, frmMasterECEO)
+    End Sub
+
+    Private Sub mnMasterTOPKhusus_Click(sender As Object, e As EventArgs) Handles mnMasterTOPKhusus.Click
+        Dim masterTOPKhusus As New MasterTOPKhusus.FormMasterTOPKhusus(CONN_.dbType, CONN_.schemaTmp, CONN_.schemaKomisi, CONN_.dbMain, CONN_.dbSQL, USER_.username, USER_.isSuperuser, USER_.T_USER_RIGHT, ADD_INFO_.newValues, ADD_INFO_.newFields, ADD_INFO_.updateString)
+        Call myCFormManipulation.GoToForm(Me, masterTOPKhusus)
     End Sub
 End Class

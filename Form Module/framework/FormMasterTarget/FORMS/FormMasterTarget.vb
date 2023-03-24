@@ -16,6 +16,7 @@
     Private cekTambahButton(1) As Boolean
     Private arrDefValues(8) As String
     Private tableName(1) As String
+    Private isBinding As Boolean
 
     Private myDataTableCboPeriode As New DataTable
     Private myBindingPeriode As New BindingSource
@@ -40,7 +41,7 @@
 
     Private fileAttachment As fileTempel
 
-    Public Sub New(_dbType As String, _schemaTmp As String, _schemaKomisi As String, _ConnMain As Object, _username As String, _superuser As Boolean, _dtTableUserRights As DataTable, _addNewValues As String, _addNewFields As String, _addUpdateString As String, _company As String)
+    Public Sub New(_dbType As String, _schemaTmp As String, _schemaKomisi As String, _ConnMain As Object, _connSQL As Object, _username As String, _superuser As Boolean, _dtTableUserRights As DataTable, _addNewValues As String, _addNewFields As String, _addUpdateString As String, _company As String)
         Try
             ' This call is required by the designer.
             InitializeComponent()
@@ -50,6 +51,7 @@
             With CONN_
                 .dbType = _dbType
                 .dbMain = _ConnMain
+                .dbSQL = _connSQL
                 .schemaTmp = _schemaTmp
                 .schemaKomisi = _schemaKomisi
             End With
@@ -81,14 +83,19 @@
             cboKriteria.Items.AddRange(arrCbo)
             cboKriteria.SelectedIndex = 1
 
+            isDataPrepared = False
+
             Me.Cursor = Cursors.WaitCursor
             Call myCDBConnection.OpenConn(CONN_.dbMain)
+            Call myCDBConnection.OpenConn(CONN_.dbSQL)
 
             stSQL = "SELECT kodesales,namasales,area FROM " & CONN_.schemaKomisi & ".mssales WHERE company='" & USER_.company & "' ORDER BY namasales;"
             Call myCDBOperation.SetCbo_(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, myDataTableCboSales, myBindingSales, cboSales, "T_" & cboSales.Name, "kodesales", "namasales", isCboPrepared)
 
-            stSQL = "SELECT kodeitem,namaitem FROM " & CONN_.schemaKomisi & ".mstargetsales GROUP BY kodeitem,namaitem ORDER BY namaitem;"
-            Call myCDBOperation.SetCbo_(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, myDataTableCboItem, myBindingItem, cboItem, "T_" & cboItem.Name, "kodeitem", "namaitem", isCboPrepared)
+            'stSQL = "SELECT kodeitem,namaitem FROM " & CONN_.schemaKomisi & ".mstargetsales GROUP BY kodeitem,namaitem ORDER BY namaitem;"
+            'Call myCDBOperation.SetCbo_(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, myDataTableCboItem, myBindingItem, cboItem, "T_" & cboItem.Name, "kodeitem", "namaitem", isCboPrepared)
+            stSQL = "SELECT KodeBrg as kodeitem,NamaBrg as namaitem,SatuanUB,SatuanUK FROM MBarang GROUP BY KodeBrg,NamaBrg,SatuanUB,SatuanUK ORDER BY NamaBrg;"
+            Call myCDBOperation.SetCbo_(CONN_.dbSQL, CONN_.comm, CONN_.reader, stSQL, myDataTableCboItem, myBindingItem, cboItem, "T_" & cboItem.Name, "kodeitem", "namaitem", isCboPrepared)
 
             stSQL = "SELECT kode,keterangan FROM " & CONN_.schemaKomisi & ".msgeneral WHERE kategori='periode' ORDER BY kode;"
             Call myCDBOperation.SetCbo_(CONN_.dbMain, CONN_.comm, CONN_.reader, stSQL, myDataTableCboPeriode, myBindingPeriode, cboPeriode, "T_" & cboPeriode.Name, "keterangan", "keterangan", isCboPrepared)
@@ -106,10 +113,13 @@
             cboSortingType.SelectedIndex = 0
 
             tableName(0) = CONN_.schemaKomisi & ".mstargetsales"
+
+            isDataPrepared = True
         Catch ex As Exception
             Call myCShowMessage.ShowErrMsg("Pesan Error: " & ex.Message, "FormMasterTarget_Load Error")
         Finally
             Call myCDBConnection.CloseConn(CONN_.dbMain, -1)
+            Call myCDBConnection.CloseConn(CONN_.dbSQL, -1)
             Me.Cursor = Cursors.Default
         End Try
     End Sub
@@ -122,7 +132,7 @@
         End Try
     End Sub
 
-    Private Sub FormMasterTarget_KeyDown(sender As Object, e As KeyEventArgs) Handles cboSales.KeyDown, cboItem.KeyDown, tbSatuan.KeyDown, cboPeriode.KeyDown, tbQty.KeyDown, tbNominal.KeyDown, btnSimpan.KeyDown, btnKeluar.KeyDown, btnAddNew.KeyDown, tbCari.KeyDown, btnTampilkan.KeyDown
+    Private Sub FormMasterTarget_KeyDown(sender As Object, e As KeyEventArgs) Handles cboSales.KeyDown, cboItem.KeyDown, tbSatUB.KeyDown, cboPeriode.KeyDown, tbQty.KeyDown, tbNominal.KeyDown, btnSimpan.KeyDown, btnKeluar.KeyDown, btnAddNew.KeyDown, tbCari.KeyDown, btnTampilkan.KeyDown
         Try
             If (e.KeyCode = Keys.Enter) Then
                 Me.SelectNextControl(Me.ActiveControl, True, True, True, True)
@@ -530,7 +540,7 @@
                     End If
                     'Satuan
                     If Not IsDBNull(dgvView.CurrentRow.Cells("satuan").Value) Then
-                        tbSatuan.Text = dgvView.CurrentRow.Cells("satuan").Value
+                        tbSatUB.Text = dgvView.CurrentRow.Cells("satuan").Value
                         arrDefValues(5) = dgvView.CurrentRow.Cells("satuan").Value
                     End If
                     'Periode
@@ -569,9 +579,94 @@
 
     Private Sub btnSimpan_Click(sender As Object, e As EventArgs) Handles btnSimpan.Click
         Try
+            If (cboSales.SelectedIndex <> -1 And cboItem.SelectedIndex <> -1 And Trim(tbSatUB.Text).Length > 0 And cboPeriode.SelectedIndex <> -1 And Trim(tbQty.Text).Length > 0 And Trim(tbNominal.Text).Length > 0) Then
+                Me.Cursor = Cursors.WaitCursor
+                Call myCDBConnection.OpenConn(CONN_.dbMain)
+                If isNew Then
+                    'CREATE NEW
+                    isExist = myCDBOperation.IsExistRecords(CONN_.dbMain, CONN_.comm, CONN_.reader, "rid", tableName(0), "kodesales='" & myCStringManipulation.SafeSqlLiteral(cboSales.SelectedValue) & "' and kodeitem='" & myCStringManipulation.SafeSqlLiteral(cboItem.SelectedValue) & "' and periode='" & myCStringManipulation.SafeSqlLiteral(cboPeriode.SelectedValue) & "'")
+                    If Not isExist Then
+                        'CREATE NEW
+                        newValues = "'" & myCStringManipulation.SafeSqlLiteral(cboSales.SelectedValue) & "','" & myCStringManipulation.SafeSqlLiteral(DirectCast(cboSales.SelectedItem, DataRowView).Item("namasales")) & "','" & myCStringManipulation.SafeSqlLiteral(cboItem.SelectedValue) & "','" & myCStringManipulation.SafeSqlLiteral(DirectCast(cboItem.SelectedItem, DataRowView).Item("namaitem")) & "','" & myCStringManipulation.SafeSqlLiteral(tbSatUB.Text) & "','" & cboPeriode.SelectedValue & "'," & Double.Parse(tbQty.Text) & "," & Double.Parse(tbNominal.Text) & "," & ADD_INFO_.newValues
+                        newFields = "kodesales,namasales,kodeitem,namaitem,satuan,periode,qty,nominal," & ADD_INFO_.newFields
+                        Call myCDBOperation.InsertData(CONN_.dbMain, CONN_.comm, tableName(0), newValues, newFields)
+                        Call myCShowMessage.ShowSavedMsg("Data di master target untuk sales " & Trim(cboSales.SelectedValue) & " - " & Trim(DirectCast(cboSales.SelectedItem, DataRowView).Item("namasales")) & " untuk item " & Trim(DirectCast(cboItem.SelectedItem, DataRowView).Item("namaitem")) & " periode " & Trim(cboPeriode.SelectedValue))
+                        Call btnTampilkan_Click(sender, e)
 
+                        Call myCFormManipulation.ResetForm(gbDataEntry)
+                        Call btnCreateNew_Click(sender, e)
+                    Else
+                        Call myCShowMessage.ShowWarning("Sudah ada data di master target untuk sales " & Trim(cboSales.SelectedValue) & " - " & Trim(DirectCast(cboSales.SelectedItem, DataRowView).Item("namasales")) & " untuk item " & Trim(DirectCast(cboItem.SelectedItem, DataRowView).Item("namaitem")) & " periode " & Trim(cboPeriode.SelectedValue))
+                    End If
+                Else
+                    'UDPATE
+                    Dim foundRows() As DataRow
+                    updateString = Nothing
+                    foundRows = myDataTableDGV.Select("rid=" & arrDefValues(0))
+                    If (arrDefValues(1) <> Trim(cboSales.SelectedValue)) Then
+                        isExist = myCDBOperation.IsExistRecords(CONN_.dbMain, CONN_.comm, CONN_.reader, "rid", tableName(0), "kodesales='" & myCStringManipulation.SafeSqlLiteral(cboSales.SelectedValue) & "' and kodeitem='" & myCStringManipulation.SafeSqlLiteral(cboItem.SelectedValue) & "' and periode='" & myCStringManipulation.SafeSqlLiteral(cboPeriode.SelectedValue) & "'")
+                        If Not isExist Then
+                            updateString &= IIf(IsNothing(updateString), "", ",") & "kodesales=" & IIf(Trim(cboSales.SelectedValue).Length = 0, "Null", "'" & myCStringManipulation.SafeSqlLiteral(cboSales.SelectedValue) & "'") & ",namasales=" & IIf(Trim(DirectCast(cboSales.SelectedItem, DataRowView).Item("namasales")).Length = 0, "Null", "'" & myCStringManipulation.SafeSqlLiteral(DirectCast(cboSales.SelectedItem, DataRowView).Item("namasales")) & "'")
+                            If (foundRows.Length > 0) Then
+                                myDataTableDGV.Rows(myDataTableDGV.Rows.IndexOf(foundRows(0))).Item("kode_sales") = Trim(cboSales.SelectedValue)
+                                myDataTableDGV.Rows(myDataTableDGV.Rows.IndexOf(foundRows(0))).Item("nama_sales") = Trim(DirectCast(cboSales.SelectedItem, DataRowView).Item("namasales"))
+                            End If
+                        Else
+                            Call myCShowMessage.ShowWarning("sales, item, dan periode tidak boleh ada yang kembar!!")
+                        End If
+                    End If
+                    If (arrDefValues(3) <> Trim(cboItem.SelectedValue)) Then
+                        updateString &= IIf(IsNothing(updateString), "", ",") & "kodeitem='" & myCStringManipulation.SafeSqlLiteral(cboItem.SelectedValue) & "',namaitem='" & myCStringManipulation.SafeSqlLiteral(DirectCast(cboItem.SelectedItem, DataRowView).Item("namaitem")) & "'"
+                        If (foundRows.Length > 0) Then
+                            myDataTableDGV.Rows(myDataTableDGV.Rows.IndexOf(foundRows(0))).Item("kode_item") = Trim(cboItem.SelectedValue)
+                            myDataTableDGV.Rows(myDataTableDGV.Rows.IndexOf(foundRows(0))).Item("nama_item") = Trim(DirectCast(cboItem.SelectedItem, DataRowView).Item("namaitem"))
+                        End If
+                    End If
+                    If (arrDefValues(5) <> Trim(tbSatUB.Text)) Then
+                        updateString &= IIf(IsNothing(updateString), "", ",") & "satuan='" & myCStringManipulation.SafeSqlLiteral(tbSatUB.Text) & "'"
+                        If (foundRows.Length > 0) Then
+                            myDataTableDGV.Rows(myDataTableDGV.Rows.IndexOf(foundRows(0))).Item("satuan") = Trim(tbSatUB.Text)
+                        End If
+                    End If
+                    If (arrDefValues(6) <> cboPeriode.SelectedValue) Then
+                        updateString &= IIf(IsNothing(updateString), "", ",") & "periode='" & myCStringManipulation.SafeSqlLiteral(cboPeriode.SelectedValue) & "'"
+                        If (foundRows.Length > 0) Then
+                            myDataTableDGV.Rows(myDataTableDGV.Rows.IndexOf(foundRows(0))).Item("periode") = Trim(cboPeriode.SelectedValue)
+                        End If
+                    End If
+                    If (arrDefValues(7) <> Double.Parse(tbQty.Text)) Then
+                        updateString &= IIf(IsNothing(updateString), "", ",") & "qty=" & Double.Parse(tbQty.Text)
+                        If (foundRows.Length > 0) Then
+                            myDataTableDGV.Rows(myDataTableDGV.Rows.IndexOf(foundRows(0))).Item("qty") = Format(Double.Parse(tbQty.Text), "#,##0;(#,##0)")
+                        End If
+                    End If
+                    If (arrDefValues(8) <> Double.Parse(tbNominal.Text)) Then
+                        updateString &= IIf(IsNothing(updateString), "", ",") & "qty=" & Double.Parse(tbNominal.Text)
+                        If (foundRows.Length > 0) Then
+                            myDataTableDGV.Rows(myDataTableDGV.Rows.IndexOf(foundRows(0))).Item("nominal") = Format(Double.Parse(tbNominal.Text), "#,##0;(#,##0)")
+                        End If
+                    End If
+                    If Not IsNothing(updateString) Then
+                        updateString &= "," & ADD_INFO_.updateString
+                        Call myCDBOperation.UpdateData(CONN_.dbMain, CONN_.comm, tableName(0), updateString, "rid=" & arrDefValues(0))
+                        Call myCShowMessage.ShowUpdatedMsg("Data di master target untuk sales " & Trim(cboSales.SelectedValue) & " - " & Trim(DirectCast(cboSales.SelectedItem, DataRowView).Item("namasales")) & " untuk item " & Trim(DirectCast(cboItem.SelectedItem, DataRowView).Item("namaitem")) & " periode " & Trim(cboPeriode.SelectedValue))
+
+                        Call myCFormManipulation.ResetForm(gbDataEntry)
+                        Call btnCreateNew_Click(sender, e)
+                    Else
+                        Call myCShowMessage.ShowInfo("Tidak ada data yang dirubah dan perlu dilakukan update ke server")
+                    End If
+                End If
+                Call myCFormManipulation.SetButtonSimpanAvailabilty(btnSimpan, clbUserRight, "save")
+            Else
+                Call myCShowMessage.ShowWarning("Lengkapi dulu semua fields yang bertanda bintang (*) !")
+                cboSales.Focus()
+            End If
         Catch ex As Exception
             Call myCShowMessage.ShowErrMsg("Pesan Error: " & ex.Message, "btnSimpan_Click Error")
+        Finally
+            Me.Cursor = Cursors.Default
+            Call myCDBConnection.CloseConn(CONN_.dbMain, -1)
         End Try
     End Sub
 
@@ -691,6 +786,24 @@
             End If
         Catch ex As Exception
             Call myCShowMessage.ShowErrMsg("Pesan Error: " & ex.Message, "cboFields_Validated Error")
+        End Try
+    End Sub
+
+    Private Sub cboItem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboItem.SelectedIndexChanged
+        Try
+            If (isDataPrepared And cboItem.SelectedIndex <> -1) Then
+                'Buat binding data
+                If Not (isBinding) Then
+                    tbSatUB.DataBindings.Add(New Binding("text", myBindingItem, "SatuanUB"))
+                    tbSatUK.DataBindings.Add(New Binding("text", myBindingItem, "SatuanUK"))
+                    isBinding = True
+                End If
+            End If
+
+            'tbSatUB.Text = DirectCast(cboItem.SelectedItem, DataRowView).Item("SatuanUB")
+            'tbSatUK.Text = DirectCast(cboItem.SelectedItem, DataRowView).Item("SatuanUK")
+        Catch ex As Exception
+            Call myCShowMessage.ShowErrMsg("Pesan Error: " & ex.Message, "cboItem_SelectedIndexChanged Error")
         End Try
     End Sub
 End Class

@@ -101,6 +101,9 @@
     <Reference Include="FormOmzet">
       <HintPath>..\..\Form Module\framework\FormOmzet\bin\Debug\FormOmzet.dll</HintPath>
     </Reference>
+    <Reference Include="MasterTOPKhusus">
+      <HintPath>..\..\Form Module\framework\MasterTOPKhusus\bin\Debug\MasterTOPKhusus.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />

@@ -252,7 +252,6 @@
             ElseIf (mSelectedCriteria = "TGLNOTA") Then
                 mWhereString = "(tbl." & mSelectedCriteria & ">='" & Format(dtpAwal.Value.Date, "dd-MMM-yyyy") & "' and tbl." & mSelectedCriteria & "<='" & Format(dtpAkhir.Value.Date, "dd-MMM-yyyy") & "') "
             End If
-
             mWhereString &= " AND " & filterCompany
 
             If (gantiKriteria) Then
@@ -482,11 +481,11 @@
                 End With
             End If
 
-            tbSumJumlah.Text = mySumJumlah
+            tbSum1.Text = mySumJumlah
             If (rbCariPenjualanPerOutlet.Checked) Then
-                myCStringManipulation.ValidateTextBox(tbSumJumlah, tbSumJumlah.Name)
+                myCStringManipulation.ValidateTextBox(tbSum1, tbSum1.Name)
             ElseIf (rbCariPenjualanPerItem.Checked) Then
-                myCStringManipulation.ValidateTextBoxNumber(tbSumJumlah, tbSumJumlah.Name)
+                myCStringManipulation.ValidateTextBoxNumber(tbSum1, tbSum1.Name)
             End If
 
             'With cmbDgvEditButton
@@ -947,7 +946,7 @@
                                 Call myCShowMessage.ShowWarning("Tidak ada data target penjualan per item untuk periode " & cboPeriode.SelectedValue & " pada excel yang diimport tersebut")
                             End If
                         ElseIf (rbTOPKhususDalamKota.Checked) Or (rbTOPKhususLuarKota.Checked) Then
-                            stSQL = "SELECT KodeCust,NamaCust,[JT Tempo Khusus] as TopKhusus, '" & USER_.username & "' as userid FROM [" & myCStringManipulation.SafeSqlLiteral(tbNamaSheet.Text, 1) & "$] WHERE KodeCust is not null and [JT Tempo Khusus] is not null GROUP BY KodeCust,NamaCust,[JT Tempo Khusus];"
+                            stSQL = "SELECT KodeCust,NamaCust,[JT Tempo Khusus] as TopKhusus,'" & cboPeriode.SelectedValue & "' as periodemulaiberlaku, '" & USER_.username & "' as userid FROM [" & myCStringManipulation.SafeSqlLiteral(tbNamaSheet.Text, 1) & "$] WHERE KodeCust is not null and [JT Tempo Khusus] is not null GROUP BY KodeCust,NamaCust,[JT Tempo Khusus];"
                             myDataTableExcel = myCDBOperation.GetDataTableUsingReader(CONN_.dbExcel, CONN_.comm, CONN_.reader, stSQL, "tbl_top_" & cboPeriode.SelectedValue)
                             If (myDataTableExcel.Rows.Count > 0) Then
                                 Dim topKhusus As Short
@@ -963,8 +962,8 @@
                                         End If
                                     Else
                                         'Kalau belum ada langsung ditambahkan ke tabel mstopkhusus
-                                        newValues = "'" & myCStringManipulation.SafeSqlLiteral(myDataTableExcel.Rows(i).Item("KodeCust")) & "','" & myCStringManipulation.SafeSqlLiteral(myDataTableExcel.Rows(i).Item("NamaCust")) & "'," & myDataTableExcel.Rows(i).Item("TopKhusus") & ",'" & myCStringManipulation.SafeSqlLiteral(myDataTableExcel.Rows(i).Item("userid")) & "'"
-                                        newFields = "kodecustomer,namacustomer,topkhusus,userid"
+                                        newValues = "'" & myCStringManipulation.SafeSqlLiteral(myDataTableExcel.Rows(i).Item("KodeCust")) & "','" & myCStringManipulation.SafeSqlLiteral(myDataTableExcel.Rows(i).Item("NamaCust")) & "'," & myDataTableExcel.Rows(i).Item("TopKhusus") & ",'" & myDataTableExcel.Rows(i).Item("periodemulaiberlaku") & "','" & myCStringManipulation.SafeSqlLiteral(myDataTableExcel.Rows(i).Item("userid")) & "'"
+                                        newFields = "kodecustomer,namacustomer,topkhusus,periodemulaiberlaku,userid"
                                         Call myCDBOperation.InsertData(CONN_.dbMain, CONN_.comm, CONN_.schemaKomisi & ".mstopkhusus", newValues, newFields)
                                     End If
 
@@ -1018,7 +1017,7 @@
                                 Call myCShowMessage.ShowWarning("Tidak ada data pelunasan piutang pada excel yang diimport tersebut")
                             End If
                         ElseIf (rbTmpTopKhusus.Checked) Then
-                            stSQL = "SELECT NamaCust,[TOP KHUSUS] as topkhusus FROM [" & myCStringManipulation.SafeSqlLiteral(tbNamaSheet.Text, 1) & "$];"
+                            stSQL = "SELECT NamaCust,[TOP KHUSUS] as topkhusus FROM [" & myCStringManipulation.SafeSqlLiteral(tbNamaSheet.Text, 1) & "$] GROUP BY NamaCust,[TOP KHUSUS] ORDER BY NamaCust ASC;"
                             myDataTableExcel = myCDBOperation.GetDataTableUsingReader(CONN_.dbExcel, CONN_.comm, CONN_.reader, stSQL, "tbl_top_" & cboPeriode.SelectedValue)
                             If (myDataTableExcel.Rows.Count > 0) Then
                                 For i As Integer = 0 To myDataTableExcel.Rows.Count - 1
@@ -1096,7 +1095,8 @@
                 Me.Cursor = Cursors.WaitCursor
                 Call myCDBConnection.OpenConn(CONN_.dbMain)
 
-                stSQL = "UPDATE " & CONN_.schemaKomisi & ".trpenjualanperoutlet as penj set topkhusus=topk.topkhusus,updated_at=clock_timestamp() from " & CONN_.schemaKomisi & ".mstopkhusus as topk where penj.periode='" & cboPeriode.SelectedValue & "' and penj.kodecustomer=topk.kodecustomer and penj.company='" & USER_.company & "';"
+                'stSQL = "UPDATE " & CONN_.schemaKomisi & ".trpenjualanperoutlet as penj set topkhusus=topk.topkhusus,updated_at=clock_timestamp() from " & CONN_.schemaKomisi & ".mstopkhusus as topk where penj.periode='" & cboPeriode.SelectedValue & "' and penj.kodecustomer=topk.kodecustomer and penj.company='" & USER_.company & "';"
+                stSQL = "UPDATE " & CONN_.schemaKomisi & ".trpenjualanperoutlet as penj set topkhusus=topk.topkhusus,updated_at=clock_timestamp() from " & CONN_.schemaKomisi & ".mstopkhusus topk,komisi.msgeneral ge1,msgeneral ge2 where ge1.kategori='periode' and ge2.kategori='periode' and topk.periodemulaiberlaku=ge1.keterangan and penj.periode=ge2.keterangan and ge2.kode>=ge1.kode and penj.periode='" & cboPeriode.SelectedValue & "' and penj.kodecustomer=topk.kodecustomer and penj.company='" & USER_.company & "' and topk.discontinue='False';"
                 Call myCDBOperation.ExecuteCmd(CONN_.dbMain, CONN_.comm, stSQL)
 
                 Call myCShowMessage.ShowInfo("DONE!!")

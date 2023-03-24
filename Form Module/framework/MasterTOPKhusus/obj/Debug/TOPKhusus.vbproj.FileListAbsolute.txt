@@ -1,0 +1,12 @@
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\TOPKhusus\bin\Debug\TOPKhusus.dll.config
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\TOPKhusus\bin\Debug\TOPKhusus.dll
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\TOPKhusus\bin\Debug\TOPKhusus.pdb
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\TOPKhusus\bin\Debug\TOPKhusus.xml
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\TOPKhusus\obj\Debug\TOPKhusus.Resources.resources
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\TOPKhusus\obj\Debug\TOPKhusus.vbproj.GenerateResource.cache
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\TOPKhusus\obj\Debug\TOPKhusus.vbproj.CoreCompileInputs.cache
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\TOPKhusus\obj\Debug\TOPKhusus.dll
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\TOPKhusus\obj\Debug\TOPKhusus.xml
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\TOPKhusus\obj\Debug\TOPKhusus.pdb
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\TOPKhusus\obj\Debug\TOPKhusus.vbproj.AssemblyReference.cache
+G:\DESKTOP APPLICATION\KOMISI\Form Module\framework\TOPKhusus\obj\Debug\TOPKhusus.FormMasterTOPKhusus.resources

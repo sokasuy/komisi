@@ -14,7 +14,7 @@
     Private cmbDgvHapusButton As New DataGridViewButtonColumn()
     Private cmbDgvEditButton As New DataGridViewButtonColumn()
     Private cekTambahButton(1) As Boolean
-    Private arrDefValues(6) As String
+    Private arrDefValues(7) As String
     Private tableName(1) As String
 
     Private myDataTableCboWilayah As New DataTable
@@ -181,11 +181,11 @@
                 batas = 10
             End If
 
-            stSQL = "SELECT rid,kodesales as kode_sales,namasales as nama_sales,dalamkota as dalam_kota,luarkota as luar_kota,wilayah,company,created_at,updated_at " &
+            stSQL = "SELECT rid,kodesales as kode_sales,namasales as nama_sales,dalamkota as dalam_kota,luarkota as luar_kota, luarpulau as luar_pulau,wilayah,company,created_at,updated_at " &
                     "FROM ( " &
-                        "SELECT sub.rid,sub.kodesales,sub.namasales,sub.dalamkota,sub.luarkota,sub.wilayah,sub.company,sub.created_at,sub.updated_at " &
+                        "SELECT sub.rid,sub.kodesales,sub.namasales,sub.dalamkota,sub.luarkota,sub.luarpulau,sub.wilayah,sub.company,sub.created_at,sub.updated_at " &
                         "FROM ( " &
-                            "SELECT tbl.rid,tbl.kodesales,tbl.namasales,tbl.dalamkota,tbl.luarkota,tbl.wilayah,tbl.company,tbl.created_at,tbl.updated_at " &
+                            "SELECT tbl.rid,tbl.kodesales,tbl.namasales,tbl.dalamkota,tbl.luarkota,tbl.luarpulau,tbl.wilayah,tbl.company,tbl.created_at,tbl.updated_at " &
                             "FROM " & tableName(0) & " as tbl " &
                             "WHERE ((upper(tbl." & mSelectedCriteria & ") LIKE '%" & mKriteria.ToUpper & "%')) " & mGroupCriteria & " " &
                             "ORDER BY " & IIf(IsNothing(sortingCols), "(case when tbl.updated_at is null then tbl.created_at else tbl.updated_at end) DESC, tbl.rid DESC ", sortingCols & " " & sortingType) & " " &
@@ -203,7 +203,7 @@
                 .ReadOnly = True
 
                 .Columns("rid").Visible = False
-                .Columns("kode_sales").Visible = False
+                '.Columns("kode_sales").Visible = False
 
                 .Columns("rid").Frozen = True
                 .Columns("kode_sales").Frozen = True
@@ -219,6 +219,7 @@
                 .Columns("nama_sales").Width = 200
                 .Columns("dalam_kota").Width = 80
                 .Columns("luar_kota").Width = 80
+                .Columns("luar_pulau").Width = 80
                 .Columns("wilayah").Width = 120
                 .Columns("company").Width = 70
 
@@ -507,6 +508,11 @@
                         cbLuarKota.Checked = dgvView.CurrentRow.Cells("luar_kota").Value
                         arrDefValues(5) = dgvView.CurrentRow.Cells("luar_kota").Value
                     End If
+                    'Luar Pulau
+                    If Not IsDBNull(dgvView.CurrentRow.Cells("luar_pulau").Value) Then
+                        cbLuarPulau.Checked = dgvView.CurrentRow.Cells("luar_pulau").Value
+                        arrDefValues(7) = dgvView.CurrentRow.Cells("luar_pulau").Value
+                    End If
                     'Company
                     If Not IsDBNull(dgvView.CurrentRow.Cells("company").Value) Then
                         For i As Integer = 0 To cboPerusahaan.Items.Count - 1
@@ -534,16 +540,13 @@
             If (Trim(tbKode.Text).Length > 0 And Trim(tbNama.Text).Length > 0 And cboWilayah.SelectedIndex <> -1) Then
                 Me.Cursor = Cursors.WaitCursor
                 Call myCDBConnection.OpenConn(CONN_.dbMain)
-                'Dim created_at As Date
-                'created_at = Now
-                'ADD_INFO_.newValues = "'" & created_at & "','" & USER_.username & "'"
                 If isNew Then
                     'CREATE NEW
                     isExist = myCDBOperation.IsExistRecords(CONN_.dbMain, CONN_.comm, CONN_.reader, "rid", tableName(0), "kodesales='" & myCStringManipulation.SafeSqlLiteral(tbKode.Text) & "'")
                     If Not isExist Then
                         'CREATE NEW
-                        newValues = "'" & myCStringManipulation.SafeSqlLiteral(tbKode.Text) & "','" & myCStringManipulation.SafeSqlLiteral(tbNama.Text) & "','" & myCStringManipulation.SafeSqlLiteral(cboWilayah.SelectedValue) & "','" & myCStringManipulation.SafeSqlLiteral(DirectCast(cboWilayah.SelectedItem, DataRowView).Item("kode")) & "','" & cbDalamKota.Checked & "','" & cbLuarKota.Checked & "'," & ADD_INFO_.newValues
-                        newFields = "kodesales,namasales,wilayah,area,dalamkota,luarkota," & ADD_INFO_.newFields
+                        newValues = "'" & myCStringManipulation.SafeSqlLiteral(tbKode.Text) & "','" & myCStringManipulation.SafeSqlLiteral(tbNama.Text) & "','" & myCStringManipulation.SafeSqlLiteral(cboWilayah.SelectedValue) & "','" & myCStringManipulation.SafeSqlLiteral(DirectCast(cboWilayah.SelectedItem, DataRowView).Item("kode")) & "','" & cbDalamKota.Checked & "','" & cbLuarKota.Checked & "','" & cbLuarPulau.Checked & "'," & ADD_INFO_.newValues
+                        newFields = "kodesales,namasales,wilayah,area,dalamkota,luarkota,luarpulau," & ADD_INFO_.newFields
                         If (cboPerusahaan.SelectedIndex <> -1) Then
                             newValues &= ",'" & myCStringManipulation.SafeSqlLiteral(cboPerusahaan.SelectedValue) & "'"
                             newFields &= ",company"
@@ -580,7 +583,7 @@
                         End If
                     End If
                     If (arrDefValues(3) <> cboWilayah.SelectedValue) Then
-                        updateString = "wilayah='" & myCStringManipulation.SafeSqlLiteral(cboWilayah.SelectedValue) & "',area='" & myCStringManipulation.SafeSqlLiteral(DirectCast(cboWilayah.SelectedItem, DataRowView).Item("kode")) & "'"
+                        updateString &= IIf(IsNothing(updateString), "", ",") & "wilayah='" & myCStringManipulation.SafeSqlLiteral(cboWilayah.SelectedValue) & "',area='" & myCStringManipulation.SafeSqlLiteral(DirectCast(cboWilayah.SelectedItem, DataRowView).Item("kode")) & "'"
                         If (foundRows.Length > 0) Then
                             myDataTableDGV.Rows(myDataTableDGV.Rows.IndexOf(foundRows(0))).Item("wilayah") = Trim(cboWilayah.SelectedValue)
                         End If
@@ -610,6 +613,12 @@
                             If (foundRows.Length > 0) Then
                                 myDataTableDGV.Rows(myDataTableDGV.Rows.IndexOf(foundRows(0))).Item("company") = DBNull.Value
                             End If
+                        End If
+                    End If
+                    If (arrDefValues(7) <> cbLuarPulau.Checked) Then
+                        updateString &= IIf(IsNothing(updateString), "", ",") & "luarpulau='" & cbLuarPulau.Checked & "'"
+                        If (foundRows.Length > 0) Then
+                            myDataTableDGV.Rows(myDataTableDGV.Rows.IndexOf(foundRows(0))).Item("luar_pulau") = cbLuarPulau.Checked
                         End If
                     End If
                     If Not IsNothing(updateString) Then
