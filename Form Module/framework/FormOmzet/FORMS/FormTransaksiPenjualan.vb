@@ -1664,7 +1664,7 @@
                             reportType = "DetailPerItem"
                             reportCriteria = ""
                             stSQL = "SELECT mts.periode,mts.kodesales,mts.namasales,mss.wilayah,mts.kodeitem,mts.namaitem,mts.satuan,mts.qty targetjual,tpi.nettjual,tpi.persenjual,mts.grup,ge1.kode minimumtarget 
-                                    FROM (" & CONN_.schemaKomisi & ".mstargetsales mts inner join " & CONN_.schemaKomisi & ".mssales mss on mss.kodesales=mts.kodesales) LEFT JOIN " & tableName(1) & " tpi on tpi.kodeitem=mts.kodeitem and tpi.kodesales=mts.kodesales,msgeneral ge1 
+                                    FROM (" & CONN_.schemaKomisi & ".mstargetsales mts inner join " & CONN_.schemaKomisi & ".mssales mss on mss.kodesales=mts.kodesales) LEFT JOIN " & tableName(1) & " tpi on tpi.kodeitem=mts.kodeitem and tpi.kodesales=mts.kodesales," & CONN_.schemaKomisi & ".msgeneral ge1 
                                     WHERE mts.kodesales='" & myCStringManipulation.SafeSqlLiteral(cboSalesCetak.SelectedValue) & "' and mts.periode='" & myCStringManipulation.SafeSqlLiteral(cboPeriode.SelectedValue) & "' and mts.qty>0 and mts.kodeitem not in ('OJ0121','OJ0121A','XSTPRS24') and ge1.kategori= 'targetitem'
                                     ORDER BY mts.grup,mts.namaitem"
                             'stSQL = "SELECT tpi.periode,tpi.kodesales,tpi.namasales,mss.wilayah,tpi.kodeitem,tpi.namaitem,tpi.satuanub,tpi.targetjual,tpi.nettjual,tpi.persenjual,mts.grup 
