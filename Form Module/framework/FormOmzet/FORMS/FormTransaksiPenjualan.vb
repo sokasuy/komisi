@@ -1625,6 +1625,14 @@
                         stSQL = "SELECT kodesales,namasales,periode,targetomzet,omzetbruto,retur,omzetnett,persenpencapaianomzet,targetpimtrakol,pencapaianpimtrakol,persenpencapaianpimtrakol,hitomzet,ppn,perseninsentifpenjualan,perhitunganinsentifpenjualan,ec,eo,x,y,z,perhitungansetelaheceo,perseninsentifpimtrakol,perhitungansetelahpimtrakol,persenpencapaiantargetitem,persenklaiminsentif,perhitunganinsentifakhir,omzetnett90,omzetnett10,perseninsentifpenjualan90,perhitunganinsentifpenjualan90,totalperhitunganinsentifpenjualan,persenklaimperhitunganinsentifpenjualan,overdue,persenoverdue,jtpalinglama,note,finalperhitunganinsentifpenjualan 
                                 FROM " & CONN_.schemaKomisi & ".trperhitungankomisi 
                                 WHERE kodesales='" & myCStringManipulation.SafeSqlLiteral(cboSalesCetak.SelectedValue) & "' and periode='" & myCStringManipulation.SafeSqlLiteral(cboPeriode.SelectedValue) & "';"
+                    Case rbDetailPerOutlet.Checked
+                        reportType = "DetailPerOutlet"
+                        reportCriteria = ""
+                        stSQL = "SELECT periode,kodesales,namasales,kodecustomer,namacustomer,nonota,tglnota,tgljatuhtempo,jumlah,top,lunas,jmlharilunas,overdue,ignoreoverdue,topkhusus 
+                                FROM " & CONN_.schemaKomisi & ".trpenjualanperoutlet 
+                                WHERE kodesales='" & myCStringManipulation.SafeSqlLiteral(cboSalesCetak.SelectedValue) & "' AND periode='" & myCStringManipulation.SafeSqlLiteral(cboPeriode.SelectedValue) & "' 
+                                ORDER BY nonota;"
+                    Case rbDetailPerItem.Checked
                     Case Else
                         reportType = Nothing
                         reportCriteria = ""
