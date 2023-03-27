@@ -965,9 +965,13 @@
                         ElseIf (rbPenjualanPerItem.Checked) Then
                             Dim kodeSales As String = Nothing
                             Dim namaSales As String = Nothing
+                            Dim myDataTableSatuan As New DataTable
                             stSQL = "SELECT '' as KodeSales,NamaSales,KodeBrg as kodeitem,NamaBrg as namaitem,QtyUB,QtyUK,Bonus,Discount,Netto, '" & cboPeriode.SelectedValue & "' as PERIODE, '" & USER_.username & "' as userid FROM [" & myCStringManipulation.SafeSqlLiteral(tbNamaSheet.Text, 1) & "$] WHERE KodeBrg is not null ORDER BY NamaSales,NamaBrg;"
                             myDataTableExcel = myCDBOperation.GetDataTableUsingReader(CONN_.dbExcel, CONN_.comm, CONN_.reader, stSQL, "tbl_omzet_" & cboPeriode.SelectedValue)
                             myDataTableExcel.Columns("KodeSales").ReadOnly = False
+                            myDataTableExcel.Columns.Add("SatuanUB", GetType(String))
+                            myDataTableExcel.Columns.Add("SatuanUK", GetType(String))
+
                             If (myDataTableExcel.Rows.Count > 0) Then
                                 For i As Integer = 0 To myDataTableExcel.Rows.Count - 1
                                     If (namaSales <> myDataTableExcel.Rows(i).Item("NamaSales")) Then
@@ -975,6 +979,17 @@
                                         kodeSales = myCDBOperation.GetSpecificRecord(CONN_.dbMain, CONN_.comm, CONN_.reader, "kodesales", CONN_.schemaKomisi & ".mssales",, "namasales='" & myCStringManipulation.SafeSqlLiteral(namaSales) & "'", CONN_.dbType)
                                     End If
                                     myDataTableExcel.Rows(i).Item("KodeSales") = kodeSales
+
+                                    stSQL = "SELECT SatuanUB,SatuanUK FROM MBarang WHERE KodeBrg='" & myCStringManipulation.SafeSqlLiteral(myDataTableExcel.Rows(i).Item("kodeitem")) & "'"
+                                    myDataTableSatuan = myCDBOperation.GetDataTableUsingReader(CONN_.dbSQL, CONN_.comm, CONN_.reader, stSQL, "T_Satuan")
+                                    If (myDataTableSatuan.Rows.Count > 0) Then
+                                        If Not IsDBNull(myDataTableSatuan.Rows(0).Item("SatuanUB")) Then
+                                            myDataTableExcel.Rows(i).Item("SatuanUB") = myDataTableSatuan.Rows(0).Item("SatuanUB")
+                                        End If
+                                        If Not IsDBNull(myDataTableSatuan.Rows(0).Item("SatuanUK")) Then
+                                            myDataTableExcel.Rows(i).Item("SatuanUK") = myDataTableSatuan.Rows(0).Item("SatuanUK")
+                                        End If
+                                    End If
 
                                     If (i Mod 200 = 0) Then
                                         GC.Collect()
@@ -996,7 +1011,7 @@
 
                                 Call myCShowMessage.ShowInfo("IMPORT SELESAI!!")
                             Else
-                                Call myCShowMessage.ShowWarning("Tidak ada data target penjualan per item untuk periode " & cboPeriode.SelectedValue & " pada excel yang diimport tersebut")
+                                Call myCShowMessage.ShowWarning("Tidak ada data penjualan per item untuk periode " & cboPeriode.SelectedValue & " pada excel yang diimport tersebut")
                             End If
                         ElseIf (rbTOPKhususDalamKota.Checked) Or (rbTOPKhususLuarKota.Checked) Then
                             stSQL = "SELECT KodeCust,NamaCust,[JT Tempo Khusus] as TopKhusus,'" & cboPeriode.SelectedValue & "' as periodemulaiberlaku, '" & USER_.username & "' as userid FROM [" & myCStringManipulation.SafeSqlLiteral(tbNamaSheet.Text, 1) & "$] WHERE KodeCust is not null and [JT Tempo Khusus] is not null GROUP BY KodeCust,NamaCust,[JT Tempo Khusus];"
@@ -1149,7 +1164,7 @@
                 Call myCDBConnection.OpenConn(CONN_.dbMain)
 
                 'stSQL = "UPDATE " & CONN_.schemaKomisi & ".trpenjualanperoutlet as penj set topkhusus=topk.topkhusus,updated_at=clock_timestamp() from " & CONN_.schemaKomisi & ".mstopkhusus as topk where penj.periode='" & cboPeriode.SelectedValue & "' and penj.kodecustomer=topk.kodecustomer and penj.company='" & USER_.company & "';"
-                stSQL = "UPDATE " & CONN_.schemaKomisi & ".trpenjualanperoutlet as penj set topkhusus=topk.topkhusus,updated_at=clock_timestamp() from " & CONN_.schemaKomisi & ".mstopkhusus topk,komisi.msgeneral ge1,msgeneral ge2 where ge1.kategori='periode' and ge2.kategori='periode' and topk.periodemulaiberlaku=ge1.keterangan and penj.periode=ge2.keterangan and to_date(ge2.kode,'MM-YYYY')>=to_date(ge1.kode,'MM-YYYY') and penj.periode='" & cboPeriode.SelectedValue & "' and penj.kodecustomer=topk.kodecustomer and penj.company='" & USER_.company & "' and topk.discontinue='False';"
+                stSQL = "UPDATE " & tableName(0) & " as penj set topkhusus=topk.topkhusus,updated_at=clock_timestamp() from " & CONN_.schemaKomisi & ".mstopkhusus topk," & CONN_.schemaKomisi & ".msgeneral ge1," & CONN_.schemaKomisi & ".msgeneral ge2 where ge1.kategori='periode' and ge2.kategori='periode' and topk.periodemulaiberlaku=ge1.keterangan and penj.periode=ge2.keterangan and to_date(ge2.kode,'MM-YYYY')>=to_date(ge1.kode,'MM-YYYY') and penj.periode='" & cboPeriode.SelectedValue & "' and penj.kodecustomer=topk.kodecustomer and penj.company='" & USER_.company & "' and topk.discontinue='False';"
                 Call myCDBOperation.ExecuteCmd(CONN_.dbMain, CONN_.comm, stSQL)
 
                 Call myCShowMessage.ShowInfo("DONE!!")
@@ -1173,7 +1188,7 @@
                 Me.Cursor = Cursors.WaitCursor
                 Call myCDBConnection.OpenConn(CONN_.dbMain)
 
-                stSQL = "UPDATE " & CONN_.schemaKomisi & ".trpenjualanperoutlet set overdue=jmlharilunas-topkhusus,updated_at=clock_timestamp() where periode='" & cboPeriode.SelectedValue & "' and jmlharilunas is not null and topkhusus is not null and company='" & USER_.company & "';"
+                stSQL = "UPDATE " & tableName(0) & " set overdue=jmlharilunas-topkhusus,updated_at=clock_timestamp() where periode='" & cboPeriode.SelectedValue & "' and jmlharilunas is not null and topkhusus is not null and company='" & USER_.company & "';"
                 Call myCDBOperation.ExecuteCmd(CONN_.dbMain, CONN_.comm, stSQL)
 
                 Call myCShowMessage.ShowInfo("DONE!!")
@@ -1197,13 +1212,13 @@
                 Me.Cursor = Cursors.WaitCursor
                 Call myCDBConnection.OpenConn(CONN_.dbMain)
 
-                stSQL = "UPDATE " & CONN_.schemaKomisi & ".trpenjualanperitem as p set targetjual=t.qty,updated_at=clock_timestamp() from " & CONN_.schemaKomisi & ".mstargetsales as t where p.periode='" & cboPeriode.SelectedValue & "' and p.kodesales=t.kodesales and p.kodeitem=t.kodeitem and p.company='" & USER_.company & "';"
+                stSQL = "UPDATE " & tableName(1) & " as p set targetjual=t.qty,satuantarget=t.satuan,updated_at=clock_timestamp() from " & CONN_.schemaKomisi & ".mstargetsales as t where p.periode='" & cboPeriode.SelectedValue & "' and p.kodesales=t.kodesales and p.kodeitem=t.kodeitem and p.company='" & USER_.company & "';"
                 Call myCDBOperation.ExecuteCmd(CONN_.dbMain, CONN_.comm, stSQL)
 
-                stSQL = "UPDATE " & CONN_.schemaKomisi & ".trpenjualanperitem set nettjual=(case when qtyub is null then 0 else qtyub end) - (case when bonus is null then 0 else bonus end) ,updated_at=clock_timestamp() where periode='" & cboPeriode.SelectedValue & "' and company='" & USER_.company & "';"
+                stSQL = "UPDATE " & tableName(1) & " set nettjual=(case when qtyub is null or qtyub=0 then (case when qtyuk is null then 0 else qtyuk end) else qtyub end) - (case when bonus is null then 0 else bonus end) ,updated_at=clock_timestamp() where periode='" & cboPeriode.SelectedValue & "' and company='" & USER_.company & "';"
                 Call myCDBOperation.ExecuteCmd(CONN_.dbMain, CONN_.comm, stSQL)
 
-                stSQL = "UPDATE " & CONN_.schemaKomisi & ".trpenjualanperitem set persenjual=(nettjual/targetjual)*100, updated_at=clock_timestamp() where targetjual is not null and nettjual is not null and targetjual>0 and periode='" & cboPeriode.SelectedValue & "' and company='" & USER_.company & "';"
+                stSQL = "UPDATE " & tableName(1) & " set persenjual=(nettjual/targetjual)*100, updated_at=clock_timestamp() where targetjual is not null and nettjual is not null and targetjual>0 and periode='" & cboPeriode.SelectedValue & "' and company='" & USER_.company & "';"
                 Call myCDBOperation.ExecuteCmd(CONN_.dbMain, CONN_.comm, stSQL)
 
                 Call myCShowMessage.ShowInfo("DONE!!")
@@ -1616,23 +1631,51 @@
                         reportCriteria = ""
                         stSQL = "SELECT kodesales,namasales,periode,target,omzet,omzetlm,omzetbr,persenpencapaiansales,sppending,persensppending,overdue,hitomzet,totalpersen,komisireg,targetpimt,realpimt,persenpimt,kmspimt,totalkms,(case when dalamkota=True then '1. Dalam Kota' when luarkota=True then '2. Luar Kota' else 'Lainnya' end) as cakupan FROM " & CONN_.schemaKomisi & ".trrekapsales WHERE periode='" & cboPeriode.SelectedValue & "' ORDER BY namasales;"
                     Case rbPerhitunganKomisi.Checked
-                        reportType = "PerhitunganKomisi"
-                        If (DirectCast(cboSalesCetak.SelectedItem, DataRowView).Item("luarpulau")) Then
-                            reportCriteria = "LuarPulau"
+                        If (cboSalesCetak.SelectedIndex <> -1) Then
+                            reportType = "PerhitunganKomisi"
+                            If (DirectCast(cboSalesCetak.SelectedItem, DataRowView).Item("luarpulau")) Then
+                                reportCriteria = "LuarPulau"
+                            Else
+                                reportCriteria = ""
+                            End If
+                            stSQL = "SELECT kodesales,namasales,periode,targetomzet,omzetbruto,retur,omzetnett,persenpencapaianomzet,targetpimtrakol,pencapaianpimtrakol,persenpencapaianpimtrakol,hitomzet,ppn,perseninsentifpenjualan,perhitunganinsentifpenjualan,ec,eo,x,y,z,perhitungansetelaheceo,perseninsentifpimtrakol,perhitungansetelahpimtrakol,persenpencapaiantargetitem,persenklaiminsentif,perhitunganinsentifakhir,omzetnett90,omzetnett10,perseninsentifpenjualan90,perhitunganinsentifpenjualan90,totalperhitunganinsentifpenjualan,persenklaimperhitunganinsentifpenjualan,overdue,persenoverdue,jtpalinglama,note,finalperhitunganinsentifpenjualan 
+                                    FROM " & CONN_.schemaKomisi & ".trperhitungankomisi 
+                                    WHERE kodesales='" & myCStringManipulation.SafeSqlLiteral(cboSalesCetak.SelectedValue) & "' and periode='" & myCStringManipulation.SafeSqlLiteral(cboPeriode.SelectedValue) & "';"
                         Else
-                            reportCriteria = ""
+                            reportType = Nothing
+                            Call myCShowMessage.ShowWarning("Tentukan dulu salesnya!")
+                            cboSalesCetak.Focus()
                         End If
-                        stSQL = "SELECT kodesales,namasales,periode,targetomzet,omzetbruto,retur,omzetnett,persenpencapaianomzet,targetpimtrakol,pencapaianpimtrakol,persenpencapaianpimtrakol,hitomzet,ppn,perseninsentifpenjualan,perhitunganinsentifpenjualan,ec,eo,x,y,z,perhitungansetelaheceo,perseninsentifpimtrakol,perhitungansetelahpimtrakol,persenpencapaiantargetitem,persenklaiminsentif,perhitunganinsentifakhir,omzetnett90,omzetnett10,perseninsentifpenjualan90,perhitunganinsentifpenjualan90,totalperhitunganinsentifpenjualan,persenklaimperhitunganinsentifpenjualan,overdue,persenoverdue,jtpalinglama,note,finalperhitunganinsentifpenjualan 
-                                FROM " & CONN_.schemaKomisi & ".trperhitungankomisi 
-                                WHERE kodesales='" & myCStringManipulation.SafeSqlLiteral(cboSalesCetak.SelectedValue) & "' and periode='" & myCStringManipulation.SafeSqlLiteral(cboPeriode.SelectedValue) & "';"
                     Case rbDetailPerOutlet.Checked
-                        reportType = "DetailPerOutlet"
-                        reportCriteria = ""
-                        stSQL = "SELECT periode,kodesales,namasales,kodecustomer,namacustomer,nonota,tglnota,tgljatuhtempo,jumlah,top,lunas,jmlharilunas,overdue,ignoreoverdue,topkhusus 
-                                FROM " & CONN_.schemaKomisi & ".trpenjualanperoutlet 
-                                WHERE kodesales='" & myCStringManipulation.SafeSqlLiteral(cboSalesCetak.SelectedValue) & "' AND periode='" & myCStringManipulation.SafeSqlLiteral(cboPeriode.SelectedValue) & "' 
-                                ORDER BY nonota;"
+                        If (cboSalesCetak.SelectedIndex <> -1) Then
+                            reportType = "DetailPerOutlet"
+                            reportCriteria = ""
+                            stSQL = "SELECT periode,kodesales,namasales,kodecustomer,namacustomer,nonota,tglnota,tgljatuhtempo,jumlah,top,lunas,jmlharilunas,overdue,ignoreoverdue,topkhusus 
+                                    FROM " & tableName(0) & "
+                                    WHERE kodesales='" & myCStringManipulation.SafeSqlLiteral(cboSalesCetak.SelectedValue) & "' AND periode='" & myCStringManipulation.SafeSqlLiteral(cboPeriode.SelectedValue) & "' 
+                                    ORDER BY nonota;"
+                        Else
+                            reportType = Nothing
+                            Call myCShowMessage.ShowWarning("Tentukan dulu salesnya!")
+                            cboSalesCetak.Focus()
+                        End If
                     Case rbDetailPerItem.Checked
+                        If (cboSalesCetak.SelectedIndex <> -1) Then
+                            reportType = "DetailPerItem"
+                            reportCriteria = ""
+                            stSQL = "SELECT mts.periode,mts.kodesales,mts.namasales,mss.wilayah,mts.kodeitem,mts.namaitem,mts.satuan,mts.qty targetjual,tpi.nettjual,tpi.persenjual,mts.grup,ge1.kode minimumtarget 
+                                    FROM (" & CONN_.schemaKomisi & ".mstargetsales mts inner join " & CONN_.schemaKomisi & ".mssales mss on mss.kodesales=mts.kodesales) LEFT JOIN " & tableName(1) & " tpi on tpi.kodeitem=mts.kodeitem and tpi.kodesales=mts.kodesales,msgeneral ge1 
+                                    WHERE mts.kodesales='" & myCStringManipulation.SafeSqlLiteral(cboSalesCetak.SelectedValue) & "' and mts.periode='" & myCStringManipulation.SafeSqlLiteral(cboPeriode.SelectedValue) & "' and mts.qty>0 and mts.kodeitem not in ('OJ0121','OJ0121A','XSTPRS24') and ge1.kategori= 'targetitem'
+                                    ORDER BY mts.grup,mts.namaitem"
+                            'stSQL = "SELECT tpi.periode,tpi.kodesales,tpi.namasales,mss.wilayah,tpi.kodeitem,tpi.namaitem,tpi.satuanub,tpi.targetjual,tpi.nettjual,tpi.persenjual,mts.grup 
+                            '        FROM " & tableName(1) & " tpi," & CONN_.schemaKomisi & ".mstargetsales mts," & CONN_.schemaKomisi & ".mssales mss
+                            '        WHERE tpi.kodeitem=mts.kodeitem and tpi.kodesales=mts.kodesales and tpi.kodesales=mss.kodesales and tpi.kodesales='" & myCStringManipulation.SafeSqlLiteral(cboSalesCetak.SelectedValue) & "' and tpi.periode='" & myCStringManipulation.SafeSqlLiteral(cboPeriode.SelectedValue) & "' 
+                            '        ORDER BY mts.grup,tpi.namaitem;"
+                        Else
+                            reportType = Nothing
+                            Call myCShowMessage.ShowWarning("Tentukan dulu salesnya!")
+                            cboSalesCetak.Focus()
+                        End If
                     Case Else
                         reportType = Nothing
                         reportCriteria = ""

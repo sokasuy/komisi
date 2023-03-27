@@ -122,6 +122,9 @@
     <Compile Include="DATASET\PerhitunganKomisi\CDtSetPrintOutPerhitunganKomisi.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="DATASET\Rekap\CDtSetPrintOutDetailPerItem.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DATASET\Rekap\CDtSetPrintOutDetailPerOutlet.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -165,6 +168,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="REPORTS\PerhitunganKomisi\rptPrintOutPerhitunganKomisi.rdlc" />
     <EmbeddedResource Include="REPORTS\PerhitunganKomisi\rptPrintOutPerhitunganKomisiLuarPulau.rdlc" />
+    <EmbeddedResource Include="REPORTS\Rekap\rptPrintOutDetailPerItem.rdlc" />
     <EmbeddedResource Include="REPORTS\Rekap\rptPrintOutDetailPerOutlet.rdlc" />
     <EmbeddedResource Include="REPORTS\Rekap\rptPrintOutRekapKomisi.rdlc" />
   </ItemGroup>
@@ -176,6 +180,7 @@
     <None Include="My Project\DataSources\CDtSetDataMentah.datasource" />
     <None Include="My Project\DataSources\CDtSetPrintOutDataMentah.datasource" />
     <None Include="My Project\DataSources\CDtSetPrintOutDataPresensi.datasource" />
+    <None Include="My Project\DataSources\CDtSetPrintOutDetailPerItem.datasource" />
     <None Include="My Project\DataSources\CDtSetPrintOutDetailPerOutlet.datasource" />
     <None Include="My Project\DataSources\CDtSetPrintOutIjinAbsen.datasource" />
     <None Include="My Project\DataSources\CDtSetPrintOutJadwalPresensi.datasource" />
