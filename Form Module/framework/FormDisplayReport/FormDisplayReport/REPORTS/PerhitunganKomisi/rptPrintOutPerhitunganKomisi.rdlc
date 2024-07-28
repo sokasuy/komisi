@@ -10,8 +10,9 @@
               <TextRun>
                 <Value>PERHITUNGAN KOMISI</Value>
                 <Style>
-                  <FontFamily>calibri</FontFamily>
-                  <FontSize>8pt</FontSize>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -22,7 +23,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>0.02326cm</Top>
-        <Left>4.80545cm</Left>
+        <Left>7.96281cm</Left>
         <Height>0.54708cm</Height>
         <Width>3.94198cm</Width>
         <Style>
@@ -44,8 +45,8 @@
               <TextRun>
                 <Value>NAMA</Value>
                 <Style>
-                  <FontFamily>calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -55,7 +56,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>0.60562cm</Top>
+        <Top>0.74673cm</Top>
         <Left>0.04454cm</Left>
         <Height>0.5cm</Height>
         <Width>1.1cm</Width>
@@ -78,8 +79,8 @@
               <TextRun>
                 <Value>=First(Fields!namasales.Value, "dtSetPrintOutPerhitunganKomisi")</Value>
                 <Style>
-                  <FontFamily>calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -87,10 +88,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>0.60562cm</Top>
+        <Top>0.74673cm</Top>
         <Left>1.34454cm</Left>
         <Height>0.5cm</Height>
-        <Width>2.1cm</Width>
+        <Width>4.81639cm</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -111,8 +112,8 @@
               <TextRun>
                 <Value>BULAN</Value>
                 <Style>
-                  <FontFamily>calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -122,7 +123,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox4</rd:DefaultName>
-        <Top>1.11302cm</Top>
+        <Top>1.25413cm</Top>
         <Left>0.04454cm</Left>
         <Height>0.5cm</Height>
         <Width>1.1cm</Width>
@@ -145,8 +146,8 @@
               <TextRun>
                 <Value>=First(Fields!periode.Value, "dtSetPrintOutPerhitunganKomisi")</Value>
                 <Style>
-                  <FontFamily>calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -154,10 +155,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>1.11302cm</Top>
+        <Top>1.25413cm</Top>
         <Left>1.34454cm</Left>
         <Height>0.5cm</Height>
-        <Width>2.1cm</Width>
+        <Width>3.52833cm</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
@@ -179,7 +180,7 @@
                 <Value>TARGET RP</Value>
                 <Style>
                   <FontFamily>calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -187,10 +188,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox6</rd:DefaultName>
-        <Top>0.60562cm</Top>
-        <Left>4.19691cm</Left>
+        <Top>0.74673cm</Top>
+        <Left>7.5042cm</Left>
         <Height>0.5cm</Height>
-        <Width>1.56927cm</Width>
+        <Width>2.02788cm</Width>
         <ZIndex>5</ZIndex>
         <Style>
           <Border>
@@ -211,19 +212,21 @@
                 <Value>=First(Fields!targetomzet.Value, "dtSetPrintOutPerhitunganKomisi")</Value>
                 <Style>
                   <FontFamily>calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontSize>9pt</FontSize>
                   <Format>#,0;(#,0)</Format>
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox7</rd:DefaultName>
-        <Top>0.60562cm</Top>
-        <Left>5.96618cm</Left>
+        <Top>0.74673cm</Top>
+        <Left>9.73208cm</Left>
         <Height>0.5cm</Height>
-        <Width>2.61906cm</Width>
+        <Width>3.21878cm</Width>
         <ZIndex>6</ZIndex>
         <Style>
           <Border>
@@ -245,7 +248,7 @@
                 <Value>PENCAPAIAN</Value>
                 <Style>
                   <FontFamily>calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -253,10 +256,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox6</rd:DefaultName>
-        <Top>1.10562cm</Top>
-        <Left>4.19691cm</Left>
+        <Top>1.24673cm</Top>
+        <Left>7.5042cm</Left>
         <Height>0.5cm</Height>
-        <Width>1.56927cm</Width>
+        <Width>2.02788cm</Width>
         <ZIndex>7</ZIndex>
         <Style>
           <Border>
@@ -277,8 +280,8 @@
               <TextRun>
                 <Value>:</Value>
                 <Style>
-                  <FontFamily>calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -288,7 +291,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>0.60562cm</Top>
+        <Top>0.74673cm</Top>
         <Left>1.14454cm</Left>
         <Height>0.5cm</Height>
         <Width>0.2cm</Width>
@@ -312,8 +315,8 @@
               <TextRun>
                 <Value>:</Value>
                 <Style>
-                  <FontFamily>calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -323,7 +326,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>1.11302cm</Top>
+        <Top>1.25413cm</Top>
         <Left>1.14454cm</Left>
         <Height>0.5cm</Height>
         <Width>0.2cm</Width>
@@ -348,7 +351,7 @@
                 <Value>:</Value>
                 <Style>
                   <FontFamily>calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -358,8 +361,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>0.60562cm</Top>
-        <Left>5.76618cm</Left>
+        <Top>0.74673cm</Top>
+        <Left>9.53208cm</Left>
         <Height>0.5cm</Height>
         <Width>0.2cm</Width>
         <ZIndex>10</ZIndex>
@@ -383,7 +386,7 @@
                 <Value>:</Value>
                 <Style>
                   <FontFamily>calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -393,8 +396,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>1.11302cm</Top>
-        <Left>5.76618cm</Left>
+        <Top>1.25413cm</Top>
+        <Left>9.53208cm</Left>
         <Height>0.5cm</Height>
         <Width>0.2cm</Width>
         <ZIndex>11</ZIndex>
@@ -414,22 +417,24 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!persenpencapaianomzet.Value, "dtSetPrintOutPerhitunganKomisi") &amp; " %"</Value>
+                <Value>=Format(First(Fields!persenpencapaianomzet.Value, "dtSetPrintOutPerhitunganKomisi"),"#,##0.00;(#,##0.00)") &amp; "%"</Value>
                 <Style>
                   <FontFamily>calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontSize>9pt</FontSize>
                   <Format>#,0.00;(#,0.00)</Format>
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox7</rd:DefaultName>
-        <Top>1.10562cm</Top>
-        <Left>5.96618cm</Left>
+        <Top>1.24673cm</Top>
+        <Left>9.73208cm</Left>
         <Height>0.5cm</Height>
-        <Width>2.61906cm</Width>
+        <Width>3.21878cm</Width>
         <ZIndex>12</ZIndex>
         <Style>
           <Border>
@@ -450,8 +455,8 @@
               <TextRun>
                 <Value>TARGET PIMTRAKOL</Value>
                 <Style>
-                  <FontFamily>calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -459,10 +464,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox6</rd:DefaultName>
-        <Top>0.61302cm</Top>
-        <Left>9.07709cm</Left>
+        <Top>0.56777cm</Top>
+        <Left>14.34166cm</Left>
         <Height>0.5cm</Height>
-        <Width>2.44239cm</Width>
+        <Width>3.20086cm</Width>
         <ZIndex>13</ZIndex>
         <Style>
           <Border>
@@ -482,20 +487,22 @@
               <TextRun>
                 <Value>=First(Fields!targetpimtrakol.Value, "dtSetPrintOutPerhitunganKomisi")</Value>
                 <Style>
-                  <FontFamily>calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
                   <Format>#,0;(#,0)</Format>
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox7</rd:DefaultName>
-        <Top>0.61302cm</Top>
-        <Left>11.71949cm</Left>
+        <Top>0.56037cm</Top>
+        <Left>17.74253cm</Left>
         <Height>0.5cm</Height>
-        <Width>2.16927cm</Width>
+        <Width>2.80427cm</Width>
         <ZIndex>14</ZIndex>
         <Style>
           <Border>
@@ -516,8 +523,8 @@
               <TextRun>
                 <Value>PENCAPAIAN</Value>
                 <Style>
-                  <FontFamily>calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -525,10 +532,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox6</rd:DefaultName>
-        <Top>1.11302cm</Top>
-        <Left>9.07709cm</Left>
+        <Top>1.06777cm</Top>
+        <Left>14.34166cm</Left>
         <Height>0.5cm</Height>
-        <Width>2.44239cm</Width>
+        <Width>3.20086cm</Width>
         <ZIndex>15</ZIndex>
         <Style>
           <Border>
@@ -549,8 +556,8 @@
               <TextRun>
                 <Value>:</Value>
                 <Style>
-                  <FontFamily>calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -560,8 +567,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>0.61302cm</Top>
-        <Left>11.51949cm</Left>
+        <Top>0.56037cm</Top>
+        <Left>17.54253cm</Left>
         <Height>0.5cm</Height>
         <Width>0.2cm</Width>
         <ZIndex>16</ZIndex>
@@ -584,8 +591,8 @@
               <TextRun>
                 <Value>:</Value>
                 <Style>
-                  <FontFamily>calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -595,8 +602,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>1.12042cm</Top>
-        <Left>11.51949cm</Left>
+        <Top>1.06777cm</Top>
+        <Left>17.54253cm</Left>
         <Height>0.5cm</Height>
         <Width>0.2cm</Width>
         <ZIndex>17</ZIndex>
@@ -618,20 +625,22 @@
               <TextRun>
                 <Value>=First(Fields!pencapaianpimtrakol.Value, "dtSetPrintOutPerhitunganKomisi")</Value>
                 <Style>
-                  <FontFamily>calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
                   <Format>#,0;(#,0)</Format>
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox7</rd:DefaultName>
-        <Top>1.11302cm</Top>
-        <Left>11.71949cm</Left>
+        <Top>1.06037cm</Top>
+        <Left>17.74253cm</Left>
         <Height>0.5cm</Height>
-        <Width>2.16927cm</Width>
+        <Width>2.80427cm</Width>
         <ZIndex>18</ZIndex>
         <Style>
           <Border>
@@ -652,8 +661,8 @@
               <TextRun>
                 <Value>% PENCAPAIAN</Value>
                 <Style>
-                  <FontFamily>calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -661,10 +670,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox6</rd:DefaultName>
-        <Top>1.60562cm</Top>
-        <Left>9.07709cm</Left>
+        <Top>1.56777cm</Top>
+        <Left>14.34166cm</Left>
         <Height>0.5cm</Height>
-        <Width>2.44239cm</Width>
+        <Width>3.20086cm</Width>
         <ZIndex>19</ZIndex>
         <Style>
           <Border>
@@ -685,8 +694,8 @@
               <TextRun>
                 <Value>:</Value>
                 <Style>
-                  <FontFamily>calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -696,8 +705,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>1.61302cm</Top>
-        <Left>11.51949cm</Left>
+        <Top>1.56777cm</Top>
+        <Left>17.54253cm</Left>
         <Height>0.5cm</Height>
         <Width>0.2cm</Width>
         <ZIndex>20</ZIndex>
@@ -717,22 +726,24 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!persenpencapaianpimtrakol.Value, "dtSetPrintOutPerhitunganKomisi")</Value>
+                <Value>=Format(First(Fields!persenpencapaianpimtrakol.Value, "dtSetPrintOutPerhitunganKomisi"),"#,##0.00;(#,##0.00)")  &amp; "%"</Value>
                 <Style>
-                  <FontFamily>calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
                   <Format>#,0.00;(#,0.00)</Format>
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox7</rd:DefaultName>
-        <Top>1.60562cm</Top>
-        <Left>11.71949cm</Left>
+        <Top>1.56037cm</Top>
+        <Left>17.74253cm</Left>
         <Height>0.5cm</Height>
-        <Width>2.16927cm</Width>
+        <Width>2.80427cm</Width>
         <ZIndex>21</ZIndex>
         <Style>
           <Border>
@@ -748,27 +759,27 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.92089cm</Width>
+              <Width>3.15727cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.52233cm</Width>
+              <Width>0.99844cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.56368cm</Width>
+              <Width>3.80006cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.91925cm</Width>
+              <Width>7.15563cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.68514cm</Width>
+              <Width>1.92152cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.23295cm</Width>
+              <Width>3.46933cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.5cm</Height>
+              <Height>0.94543cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -781,7 +792,7 @@
                               <Value>OMZET</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -816,7 +827,7 @@
                               <Value>:</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -856,7 +867,7 @@
                               <Value>=Fields!omzetbruto.Value</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <Format>#,0;(#,0)</Format>
                               </Style>
                             </TextRun>
@@ -895,7 +906,7 @@
                               <Value>="(" &amp; Format(Fields!hitomzet.Value,"#,##0;(#,##0)") &amp; ":" &amp; Format(((100+Fields!ppn.Value)/100),"#,##0.00;(#,##0.00)") &amp; ") x " &amp; Format(Fields!perseninsentifpenjualan.Value,"#,##0.00;(#,##0.00)") &amp; "%"</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -930,7 +941,7 @@
                               <Value>=Trim("=")</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -970,7 +981,7 @@
                               <Value>=Fields!perhitunganinsentifpenjualan.Value</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <Format>#,0;(#,0)</Format>
                               </Style>
                             </TextRun>
@@ -998,7 +1009,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.5cm</Height>
+              <Height>0.94543cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1011,7 +1022,7 @@
                               <Value>CN / RETUR</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1046,7 +1057,7 @@
                               <Value>:</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1086,7 +1097,7 @@
                               <Value>=Fields!retur.Value</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <Format>#,0;(#,0)</Format>
                               </Style>
                             </TextRun>
@@ -1125,7 +1136,7 @@
                               <Value>=Format(Fields!perhitunganinsentifpenjualan.Value,"#,##0;(#,##0)") &amp; iif(Fields!z.Value&lt;0,"","+") &amp; Format(Fields!z.Value,"#,##0.00;-#,##0.00") &amp; "%"</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1160,7 +1171,7 @@
                               <Value>=Trim("=")</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1200,7 +1211,7 @@
                               <Value>=Fields!perhitungansetelaheceo.Value</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <Format>#,0;(#,0)</Format>
                               </Style>
                             </TextRun>
@@ -1228,7 +1239,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.5cm</Height>
+              <Height>0.94543cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1241,7 +1252,7 @@
                               <Value>NETT</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1276,7 +1287,7 @@
                               <Value>:</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1316,7 +1327,7 @@
                               <Value>=Fields!omzetnett.Value</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <Format>#,0;(#,0)</Format>
                               </Style>
                             </TextRun>
@@ -1452,7 +1463,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.5cm</Height>
+              <Height>0.94543cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1637,7 +1648,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.5cm</Height>
+              <Height>0.94543cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1650,7 +1661,7 @@
                               <Value>="EC: " &amp; Format(Fields!ec.Value,"#,##0.00;(#,##0.00)") &amp; "%"</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1684,7 +1695,7 @@
                               <Value>="X: " &amp; Format(Fields!x.Value,"#,##0.00;(#,##0.00)") &amp; "% ; Z: " &amp; Format(Fields!z.Value,"#,##0.00;(#,##0.00)") &amp; "%"</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1716,7 +1727,7 @@
                               <Value>="+ PIMTRAKOL " &amp; Format(Fields!perseninsentifpimtrakol.Value,"#,##0;(#,##0)") &amp; "% + " &amp; Format(Fields!perhitungansetelaheceo.Value,"#,##0;(#,##0)")</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1751,7 +1762,7 @@
                               <Value>=Trim("=")</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1791,7 +1802,7 @@
                               <Value>=Fields!perhitungansetelahpimtrakol.Value</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <Format>#,0;(#,0)</Format>
                               </Style>
                             </TextRun>
@@ -1819,7 +1830,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.5cm</Height>
+              <Height>0.94543cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1832,7 +1843,7 @@
                               <Value>="EO: " &amp; Format(Fields!eo.Value,"#,##0.00;(#,##0.00)") &amp; "%"</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1866,7 +1877,7 @@
                               <Value>="Y: " &amp; Format(Fields!y.Value,"#,##0.00;(#,##0.00)") &amp; "%"</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1898,7 +1909,7 @@
                               <Value>="Target Item " &amp; Format(Fields!persenpencapaiantargetitem.Value,"#,##0.00;(#,##0.00)") &amp; "% =&gt; KLAIM " &amp; Format(Fields!persenklaiminsentif.Value,"#,##0;(#,##0)") &amp; "% x " &amp; Format(Fields!perhitungansetelahpimtrakol.Value,"#,##0;(#,##0)")</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1933,7 +1944,7 @@
                               <Value>=Trim("=")</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1973,7 +1984,7 @@
                               <Value>=Fields!perhitunganinsentifakhir.Value</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>#,0;(#,0)</Format>
                               </Style>
@@ -2002,7 +2013,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.5cm</Height>
+              <Height>0.94543cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2015,7 +2026,7 @@
                               <Value>OVERDUE</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2050,7 +2061,7 @@
                               <Value>:</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2090,7 +2101,7 @@
                               <Value>=Fields!overdue.Value</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <Format>#,0;(#,0)</Format>
                               </Style>
                             </TextRun>
@@ -2234,7 +2245,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.5cm</Height>
+              <Height>0.94543cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2322,7 +2333,7 @@
                               <Value>=Format(Fields!persenoverdue.Value,"#,##0.00;(#,##0.00)") &amp; "%"</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <Format>#,0.00;(#,0.00)</Format>
                               </Style>
                             </TextRun>
@@ -2468,7 +2479,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.5cm</Height>
+              <Height>0.94543cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2481,7 +2492,7 @@
                               <Value>JT PALING LAMA</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2516,7 +2527,7 @@
                               <Value>:</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2556,7 +2567,7 @@
                               <Value>=Fields!jtpalinglama.Value</Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2690,8 +2701,8 @@
         <DataSetName>dtSetPrintOutPerhitunganKomisi</DataSetName>
         <Top>2.13833cm</Top>
         <Left>0.04454cm</Left>
-        <Height>4.5cm</Height>
-        <Width>13.84424cm</Width>
+        <Height>8.50889cm</Height>
+        <Width>20.50226cm</Width>
         <ZIndex>22</ZIndex>
         <Style>
           <Border>
@@ -2709,7 +2720,7 @@
                 <Value>NOTE:</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -2717,15 +2728,13 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox100</rd:DefaultName>
-        <Top>6.67361cm</Top>
-        <Left>0.04454cm</Left>
+        <Top>10.85889cm</Top>
+        <Left>0.06815cm</Left>
         <Height>0.5cm</Height>
-        <Width>0.837cm</Width>
+        <Width>1.1cm</Width>
         <ZIndex>23</ZIndex>
         <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
+          <Border />
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
@@ -2742,7 +2751,7 @@
                 <Value>=First(Fields!note.Value, "dtSetPrintOutPerhitunganKomisi")</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -2750,10 +2759,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox101</rd:DefaultName>
-        <Top>6.67361cm</Top>
-        <Left>0.88154cm</Left>
-        <Height>1.5cm</Height>
-        <Width>5.21177cm</Width>
+        <Top>10.82361cm</Top>
+        <Left>1.34454cm</Left>
+        <Height>2.53528cm</Height>
+        <Width>10cm</Width>
         <ZIndex>24</ZIndex>
         <Style>
           <Border>
@@ -2769,13 +2778,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.5cm</Width>
+              <Width>2cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.5cm</Width>
+              <Width>2cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2cm</Width>
@@ -2899,6 +2908,127 @@
                 </TablixCell>
               </TablixCells>
             </TablixRow>
+            <TablixRow>
+              <Height>1cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox28">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox28</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox29">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox29</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox30">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox30</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox31">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox31</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
           </TablixRows>
         </TablixBody>
         <TablixColumnHierarchy>
@@ -2912,12 +3042,13 @@
         <TablixRowHierarchy>
           <TablixMembers>
             <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixRowHierarchy>
-        <Top>7.17361cm</Top>
-        <Left>6.38876cm</Left>
-        <Height>1cm</Height>
-        <Width>7.5cm</Width>
+        <Top>11.35889cm</Top>
+        <Left>12.5468cm</Left>
+        <Height>2cm</Height>
+        <Width>8cm</Width>
         <ZIndex>25</ZIndex>
         <Style>
           <Border>
@@ -2934,7 +3065,7 @@
                 <Value>CHECKER</Value>
                 <Style>
                   <FontFamily>calibri</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -2942,9 +3073,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox114</rd:DefaultName>
-        <Top>6.67361cm</Top>
-        <Left>6.38876cm</Left>
-        <Height>0.5cm</Height>
+        <Top>10.82361cm</Top>
+        <Left>12.5468cm</Left>
+        <Height>0.53528cm</Height>
         <Width>2.5cm</Width>
         <ZIndex>26</ZIndex>
         <Style>
@@ -2959,10 +3090,10 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>8.25cm</Height>
+    <Height>13.5cm</Height>
     <Style />
   </Body>
-  <Width>14cm</Width>
+  <Width>20.6cm</Width>
   <Page>
     <PageFooter>
       <Height>0.6cm</Height>
@@ -2978,7 +3109,7 @@
                   <Value>=Globals!ExecutionTime</Value>
                   <Style>
                     <FontFamily>calibri</FontFamily>
-                    <FontSize>7pt</FontSize>
+                    <FontSize>9pt</FontSize>
                     <Format>MMMM d, yyyy HH:mm:ss</Format>
                   </Style>
                 </TextRun>
@@ -3012,7 +3143,7 @@
                   <Value>="Page" &amp; Globals!OverallPageNumber &amp; " of " &amp; Globals!OverallTotalPages</Value>
                   <Style>
                     <FontFamily>Calibri</FontFamily>
-                    <FontSize>7pt</FontSize>
+                    <FontSize>9pt</FontSize>
                   </Style>
                 </TextRun>
               </TextRuns>
@@ -3023,9 +3154,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox53</rd:DefaultName>
           <Top>0.03528cm</Top>
-          <Left>11.38876cm</Left>
+          <Left>17.39417cm</Left>
           <Height>0.5cm</Height>
-          <Width>2.5cm</Width>
+          <Width>3.01153cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -3044,8 +3175,8 @@
         </Border>
       </Style>
     </PageFooter>
-    <PageHeight>10.5cm</PageHeight>
-    <PageWidth>14.8cm</PageWidth>
+    <PageHeight>14.8cm</PageHeight>
+    <PageWidth>21cm</PageWidth>
     <LeftMargin>0.2cm</LeftMargin>
     <RightMargin>0.2cm</RightMargin>
     <TopMargin>0.2cm</TopMargin>
