@@ -85,7 +85,6 @@ G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\Form
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\MasterTOPKhusus.pdb
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\MasterTOPKhusus.dll.config
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\Npgsql.xml
-G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\MySql.Data.xml
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\System.ValueTuple.xml
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\System.Threading.Tasks.Extensions.xml
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
@@ -137,3 +136,11 @@ G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\Perh
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.xml
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\obj\Debug\PerhitunganKomisi.pdb
 G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\MasterTOPKhusus.xml
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\Oracle.ManagedDataAccess.dll
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\BCrypt.Net-Next.dll
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\System.Formats.Asn1.dll
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\Npgsql.pdb
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\BCrypt.Net-Next.xml
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\System.Formats.Asn1.xml
+G:\DESKTOP APPLICATION\KOMISI\PerhitunganKomisi\PerhitunganKomisi\bin\Debug\System.Diagnostics.DiagnosticSource.xml
